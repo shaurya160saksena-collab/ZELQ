@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zelq | Next-Gen Growth Agency</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        /* --- THEME VARIABLES --- */
+        :root {
+            --bg: #ffffff;
+            --surface: rgba(248, 250, 252, 0.7);
+            --text-main: #0f172a;
+            --text-light: #64748b;
+            --accent: #4f46e5; 
+            --accent-glow: rgba(79, 70, 229, 0.2);
+            --border: rgba(226, 232, 240, 0.8);
+            --nav-bg: rgba(255, 255, 255, 0.7);
+            --star: #fbbf24;
+            --orb-1: rgba(79, 70, 229, 0.3);
+            --orb-2: rgba(56, 189, 248, 0.3);
+            --orb-3: rgba(168, 85, 247, 0.3);
+            --number-watermark: rgba(15, 23, 42, 0.03);
+        }
+
+        [data-theme="dark"] {
+            --bg: #020617;
+            --surface: rgba(15, 23, 42, 0.7);
+            --text-main: #f8fafc;
+            --text-light: #94a3b8;
+            --accent: #38bdf8; 
+            --accent-glow: rgba(56, 189, 248, 0.2);
+            --border: rgba(30, 41, 59, 0.8);
+            --nav-bg: rgba(2, 6, 23, 0.7);
+            --star: #fcd34d;
+            --orb-1: rgba(56, 189, 248, 0.2);
+            --orb-2: rgba(79, 70, 229, 0.2);
+            --orb-3: rgba(139, 92, 246, 0.2);
+            --number-watermark: rgba(248, 250, 252, 0.03);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', system-ui, sans-serif; }
+        html { scroll-behavior: smooth; }
+        body { background-color: var(--bg); color: var(--text-main); transition: 0.3s; overflow-x: hidden; width: 100%; position: relative; }
+
+        /* --- BACKGROUND --- */
+        .bg-grid { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -2; background-image: linear-gradient(to right, var(--border) 1px, transparent 1px), linear-gradient(to bottom, var(--border) 1px, transparent 1px); background-size: 50px 50px; opacity: 0.4; }
+        .bg-aurora { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; overflow: hidden; }
+        .orb { position: absolute; border-radius: 50%; filter: blur(80px); }
+        .orb-1 { width: 50vw; height: 50vw; background: var(--orb-1); top: -10%; left: -10%; animation: float1 18s infinite alternate; }
+        .orb-2 { width: 40vw; height: 40vw; background: var(--orb-2); bottom: -10%; right: -10%; animation: float2 22s infinite alternate; }
+        
+        @keyframes float1 { 0% { transform: translate(0, 0); } 100% { transform: translate(10vw, 15vh); } }
+        @keyframes float2 { 0% { transform: translate(0, 0); } 100% { transform: translate(-10vw, -10vh); } }
+
+        /* --- NAV --- */
+        nav { position: fixed; top: 0; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 1rem 5%; background: var(--nav-bg); backdrop-filter: blur(16px); z-index: 1000; border-bottom: 1px solid var(--border); }
+        .logo { font-size: 1.5rem; font-weight: 800; text-transform: uppercase; }
+        .logo span { color: var(--accent); }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a { text-decoration: none; color: var(--text-main); font-weight: 500; }
+
+        /* --- UI COMPONENTS --- */
+        .btn { padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.3s; text-decoration: none; display: inline-block; border: none; }
+        .btn-primary { background: var(--accent); color: #fff; }
+        .btn-outline { border: 2px solid var(--border); color: var(--text-main); background: transparent; }
+        .badge { background: var(--accent-glow); color: var(--accent); padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; margin-bottom: 1rem; display: inline-block; }
+
+        /* --- SECTIONS --- */
+        section { padding: 100px 5%; max-width: 1200px; margin: 0 auto; }
+        .section-header { text-align: center; margin-bottom: 3rem; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .card { background: var(--surface); backdrop-filter: blur(16px); padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border); transition: 0.3s; height: 100%; position: relative; }
+        .card:hover { transform: translateY(-5px); border-color: var(--accent); }
+
+        /* --- PRICING SPECIFIC --- */
+        .pricing-card.premium { border: 2px solid var(--accent); transform: scale(1.05); z-index: 2; box-shadow: 0 20px 40px var(--accent-glow); }
+        .price-tag { font-size: 2.5rem; font-weight: 900; margin: 1rem 0; }
+        .price-tag span { font-size: 1rem; color: var(--text-light); }
+        .pricing-features { list-style: none; margin: 1.5rem 0; text-align: left; }
+        .pricing-features li { margin-bottom: 0.75rem; color: var(--text-light); }
+        .offer-banner { background: var(--accent); color: white; text-align: center; padding: 10px; font-weight: 700; border-radius: 8px; margin-bottom: 2rem; }
+
+        @media (max-width: 768px) { .nav-links { display: none; } .pricing-card.premium { transform: scale(1); } }
+    </style>
+</head>
+<body>
+
+    <div class="bg-grid"></div>
+    <div class="bg-aurora"><div class="orb orb-1"></div><div class="orb orb-2"></div></div>
+
+    <nav>
+        <div class="logo">Zelq<span>.</span></div>
+        <ul class="nav-links">
+            <li><a href="#leadership">Founders</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" onclick="toggleTheme()" style="background:none; border:none; cursor:pointer; font-size:1.2rem;">🌓</button>
+    </nav>
+
+    <section id="hero" style="min-height: 80vh; display: flex; align-items: center; padding-top: 100px;">
+        <div data-aos="fade-up">
+            <span class="badge">Next-Gen Youth-Led Agency</span>
+            <h1 style="font-size: 4rem; font-weight: 900; line-height: 1.1; margin-bottom: 1.5rem;">We don't just manage. <br><span style="color: var(--accent);">We scale.</span></h1>
+            <p style="font-size: 1.2rem; color: var(--text-light); margin-bottom: 2rem; max-width: 600px;">High-end tech, VFX, and operations. We handle the heavy lifting while you focus on the vision.</p>
+            <a href="#pricing" class="btn btn-primary">Claim Your Free Trial</a>
+        </div>
+    </section>
+
+    <section id="leadership">
+        <div class="section-header" data-aos="fade-up">
+            <h2>The <span>Founders</span></h2>
+        </div>
+        <div class="grid">
+            <div class="card" data-aos="fade-right">
+                <div class="badge">Strategy & Systems</div>
+                <h3>Vrishmanyu Pratap Singh</h3>
+                <p style="color: var(--accent); font-weight: 600;">Head of Operations</p>
+                <ul class="pricing-features">
+                    <li>⚡ CRM Architecture & Automation</li>
+                    <li>🐍 Python Development & Tools</li>
+                    <li>📊 Financial & Cashflow Optimization</li>
+                    <li>📅 Strategic Future Planning</li>
+                </ul>
+            </div>
+            <div class="card" data-aos="fade-left">
+                <div class="badge">Tech & Creative</div>
+                <h3>Shaurya Saksena</h3>
+                <p style="color: var(--accent); font-weight: 600;">Head of Tech & Media</p>
+                <ul class="pricing-features">
+                    <li>💻 Full-Stack Web & App Dev</li>
+                    <li>🎬 Cinematic VFX & Color Grading</li>
+                    <li>🎨 High-Conversion UI/UX Design</li>
+                    <li>🚀 Growth Marketing & Brand Scaling</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing">
+        <div class="section-header" data-aos="fade-up">
+            <h2>Flexible <span>Plans</span></h2>
+            <p>Built for companies ready to dominate their market.</p>
+        </div>
+
+        <div class="offer-banner" data-aos="zoom-in">
+            🔥 LIMITED OFFER: First 10 Companies get 1 WEEK FREE TRIAL on any plan!
+        </div>
+
+        <div class="grid">
+            <div class="card pricing-card" data-aos="fade-up">
+                <h3>Basic</h3>
+                <div class="price-tag">₹1,500<span>/wk</span></div>
+                <ul class="pricing-features">
+                    <li>✓ Social Media Management</li>
+                    <li>✓ Basic CRM Setup</li>
+                    <li>✓ Weekly Data Reports</li>
+                    <li>✓ Email Support</li>
+                </ul>
+                <a href="#contact" class="btn btn-outline" style="width:100%">Choose Basic</a>
+            </div>
+
+            <div class="card pricing-card" data-aos="fade-up" data-aos-delay="100">
+                <h3>Pro</h3>
+                <div class="price-tag">₹2,750<span>/wk</span></div>
+                <ul class="pricing-features">
+                    <li>✓ Full Operations Management</li>
+                    <li>✓ Custom Python Automations</li>
+                    <li>✓ Advanced UI/UX Tweaks</li>
+                    <li>✓ Priority WhatsApp Support</li>
+                </ul>
+                <a href="#contact" class="btn btn-outline" style="width:100%">Choose Pro</a>
+            </div>
+
+            <div class="card pricing-card premium" data-aos="fade-up" data-aos-delay="200">
+                <div class="badge" style="background:var(--accent); color:white;">BEST VALUE</div>
+                <h3>Premium</h3>
+                <div class="price-tag">₹4,000<span>/wk</span></div>
+                <ul class="pricing-features">
+                    <li>✓ <strong>Full-Stack App/Web Support</strong></li>
+                    <li>✓ <strong>High-End VFX & Video Editing</strong></li>
+                    <li>✓ Advanced CRM Architecture</li>
+                    <li>✓ Financial Strategy Planning</li>
+                    <li>✓ 24/7 Founder Access</li>
+                </ul>
+                <a href="#contact" class="btn btn-primary" style="width:100%">Go Premium</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="contact-grid">
+            <div data-aos="fade-right">
+                <h2>Let's talk <span>growth.</span></h2>
+                <p><strong>✉️ Email:</strong> contact.zelq@gmail.com</p>
+                <p><strong>📞 WhatsApp:</strong> +91 7880032340</p>
+            </div>
+            <div class="contact-form" data-aos="fade-left">
+                <form action="https://formspree.io/f/xwvnneer" method="POST">
+                    <div class="form-group" style="margin-bottom:1rem;"><input type="text" name="name" class="form-control" placeholder="Your Name" style="width:100%; padding:0.8rem;" required></div>
+                    <div class="form-group" style="margin-bottom:1rem;"><input type="email" name="email" class="form-control" placeholder="Your Email" style="width:100%; padding:0.8rem;" required></div>
+                    <div class="form-group" style="margin-bottom:1rem;"><textarea name="message" class="form-control" placeholder="Which plan are you interested in?" style="width:100%; padding:0.8rem; height:100px;" required></textarea></div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Claim Free Trial</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer style="padding: 40px 5%; text-align: center; border-top: 1px solid var(--border);">
+        <div class="logo">Zelq<span>.</span></div>
+        <p style="font-size: 0.85rem; color: var(--text-light); margin-top: 1rem;">&copy; 2026 Zelq Agency. Shaurya Saksena & Vrishmanyu Pratap Singh.</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 800, once: true });
+        function toggleTheme() {
+            const html = document.documentElement;
+            html.setAttribute('data-theme', html.getAttribute('data-theme') === 'light' ? 'dark' : 'light');
+        }
+    </script>
+</body>
+</html>

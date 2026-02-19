@@ -1,17 +1,3 @@
-Since we are building this agency from the ground up, your portfolio needs to look like a "Power Reel"—even if you are just starting to populate it with specific case studies.
-
-I’ve added a Strategic Portfolio Gallery and a Business Review Analytics section. This shows potential clients that you don't just "do work," you track Results (ROI).
-
-🚀 The "Full-Scale Authority" Update
-I have added these new sections into the code:
-
-The VFX & Dev Vault: A visual grid where you can link your best video edits and live websites.
-
-Verified Business Impact: A section that shows "Before vs. After" stats (e.g., +40% Lead Conversion).
-
-Expanded Testimonials: More detailed reviews focused on your Python and Financial Strategy skills.
-
-HTML
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
@@ -22,65 +8,85 @@ HTML
     <style>
         :root {
             --bg: #ffffff;
-            --surface: rgba(248, 250, 252, 0.9);
+            --surface: rgba(255, 255, 255, 0.4); /* Translucent Glass */
             --text-main: #0f172a;
             --text-light: #64748b;
             --accent: #4f46e5; 
-            --accent-glow: rgba(79, 70, 229, 0.2);
-            --border: rgba(226, 232, 240, 1);
-            --nav-bg: rgba(255, 255, 255, 0.85);
-            --orb-1: rgba(79, 70, 229, 0.15);
-            --orb-2: rgba(56, 189, 248, 0.15);
+            --accent-glow: rgba(79, 70, 229, 0.3);
+            --border: rgba(255, 255, 255, 0.3);
+            --nav-bg: rgba(255, 255, 255, 0.7);
+            --glass-blur: blur(25px);
         }
 
         [data-theme="dark"] {
             --bg: #020617;
-            --surface: rgba(15, 23, 42, 0.9);
+            --surface: rgba(15, 23, 42, 0.4); /* Translucent Glass */
             --text-main: #f8fafc;
             --text-light: #94a3b8;
             --accent: #38bdf8; 
-            --accent-glow: rgba(56, 189, 248, 0.2);
-            --border: rgba(30, 41, 59, 1);
-            --nav-bg: rgba(2, 6, 23, 0.85);
+            --accent-glow: rgba(56, 189, 248, 0.3);
+            --border: rgba(255, 255, 255, 0.1);
+            --nav-bg: rgba(2, 6, 23, 0.7);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         html { scroll-behavior: smooth; }
         body { background-color: var(--bg); color: var(--text-main); transition: 0.3s; overflow-x: hidden; }
 
-        /* BG */
-        .bg-grid { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; background-image: linear-gradient(to right, var(--border) 1px, transparent 1px), linear-gradient(to bottom, var(--border) 1px, transparent 1px); background-size: 60px 60px; opacity: 0.3; }
+        /* --- HYPER ANIMATED BACKGROUND --- */
+        .bg-grid { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; background-image: linear-gradient(to right, var(--text-light) 1px, transparent 1px), linear-gradient(to bottom, var(--text-light) 1px, transparent 1px); background-size: 80px 80px; opacity: 0.1; }
         .orb { position: absolute; border-radius: 50%; filter: blur(120px); z-index: -1; pointer-events: none; }
-        .orb-1 { width: 700px; height: 700px; background: var(--orb-1); top: -200px; left: -100px; animation: float 20s infinite alternate; }
-        .orb-2 { width: 600px; height: 600px; background: var(--orb-2); bottom: -100px; right: -50px; animation: float 25s infinite alternate-reverse; }
-        @keyframes float { from { transform: translate(0,0); } to { transform: translate(80px, 120px); } }
+        .orb-1 { width: 800px; height: 800px; background: rgba(79, 70, 229, 0.3); top: -200px; left: -100px; animation: float 15s infinite alternate; }
+        .orb-2 { width: 700px; height: 700px; background: rgba(56, 189, 248, 0.3); bottom: -100px; right: -50px; animation: float 20s infinite alternate-reverse; }
+        @keyframes float { from { transform: translate(0,0); } to { transform: translate(120px, 80px); } }
 
-        nav { position: fixed; top: 0; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 5%; background: var(--nav-bg); backdrop-filter: blur(12px); z-index: 1000; border-bottom: 1px solid var(--border); }
-        .logo { font-size: 1.6rem; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; }
-        .logo span { color: var(--accent); }
-        .nav-links a { text-decoration: none; color: inherit; font-weight: 600; margin-left: 20px; font-size: 0.85rem; }
+        /* --- NAV & DYNAMIC SLIDING LOGO --- */
+        nav { position: fixed; top: 0; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 5%; background: var(--nav-bg); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); z-index: 1000; border-bottom: 1px solid var(--border); }
+        .logo-box { height: 35px; overflow: hidden; width: 230px; }
+        .logo-wrap { animation: logoSlide 12s cubic-bezier(0.8, 0, 0.2, 1) infinite; }
+        .logo-item { font-size: 1.8rem; font-weight: 900; text-transform: uppercase; letter-spacing: 3px; height: 35px; line-height: 35px; }
+        .logo-item span { color: var(--accent); }
+        @keyframes logoSlide { 0%, 30% { transform: translateY(0); } 33%, 63% { transform: translateY(-35px); } 66%, 96% { transform: translateY(-70px); } 100% { transform: translateY(0); } }
 
-        section { padding: 100px 5%; max-width: 1300px; margin: 0 auto; }
-        .badge { background: var(--accent-glow); color: var(--accent); padding: 6px 18px; border-radius: 30px; font-weight: 800; font-size: 0.75rem; text-transform: uppercase; margin-bottom: 1.5rem; display: inline-block; border: 1px solid var(--accent); }
+        /* --- HERO & MORPHING TITLE --- */
+        .hero { min-height: 100vh; display: flex; align-items: center; padding-top: 100px; }
+        .morph-box { height: 140px; overflow: hidden; margin-bottom: 1.5rem; }
+        .morph-list { animation: titleMorph 12s cubic-bezier(0.8, 0, 0.2, 1) infinite; }
+        .morph-item { font-size: clamp(3.5rem, 10vw, 7rem); font-weight: 950; line-height: 140px; height: 140px; }
+        @keyframes titleMorph { 0%, 30% { transform: translateY(0); } 33%, 63% { transform: translateY(-140px); } 66%, 96% { transform: translateY(-280px); } 100% { transform: translateY(0); } }
+
+        /* --- APPLE-STYLE GLASS CARDS --- */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 3rem; }
+        .card { 
+            background: var(--surface); 
+            backdrop-filter: var(--glass-blur); 
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--border); 
+            padding: 3.5rem; 
+            border-radius: 35px; 
+            transition: 0.5s cubic-bezier(0.2, 1, 0.3, 1); 
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+        }
+        .card:hover { transform: translateY(-15px); border-color: var(--accent); box-shadow: 0 25px 50px rgba(0,0,0,0.15); }
         
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; margin-top: 3rem; }
-        .card { background: var(--surface); backdrop-filter: blur(15px); padding: 2.5rem; border-radius: 24px; border: 1px solid var(--border); transition: 0.4s; }
-        .card:hover { transform: translateY(-10px); border-color: var(--accent); }
+        /* --- VIDEO BOXES --- */
+        .vid-frame { height: 220px; border-radius: 25px; overflow: hidden; background: #000; margin-bottom: 2rem; position: relative; }
+        .vid-frame video { width: 100%; height: 100%; object-fit: cover; opacity: 0.7; }
 
-        /* PORTFOLIO IMAGES */
-        .portfolio-item { height: 250px; background: var(--border); border-radius: 15px; display: flex; align-items: center; justify-content: center; font-weight: 800; color: var(--text-light); border: 2px dashed var(--border); overflow: hidden; position: relative; }
-        .portfolio-item:hover { border-color: var(--accent); color: var(--accent); }
-        .portfolio-overlay { position: absolute; bottom: 0; width: 100%; background: var(--accent); color: white; padding: 10px; text-align: center; transform: translateY(100%); transition: 0.3s; }
-        .portfolio-item:hover .portfolio-overlay { transform: translateY(0); }
+        /* --- TECH MARQUEE --- */
+        .marquee-container { background: var(--nav-bg); backdrop-filter: var(--glass-blur); padding: 30px 0; border-top: 1px solid var(--border); overflow: hidden; display: flex; }
+        .marquee { display: flex; white-space: nowrap; animation: scroll 30s linear infinite; }
+        .marquee span { margin: 0 40px; font-weight: 900; opacity: 0.5; text-transform: uppercase; letter-spacing: 3px; font-size: 1.2rem; }
+        @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-        /* STATS */
-        .stat-card { text-align: center; }
-        .stat-number { font-size: 3rem; font-weight: 950; color: var(--accent); }
+        /* --- BUTTONS --- */
+        .btn { padding: 1.2rem 2.5rem; border-radius: 18px; font-weight: 800; text-decoration: none; display: inline-block; transition: 0.3s; border: none; font-size: 1rem; cursor: pointer; }
+        .btn-p { background: var(--accent); color: #fff; box-shadow: 0 10px 30px var(--accent-glow); }
+        .price-card.premium { border: 3px solid var(--accent); transform: scale(1.05); }
 
-        .btn { padding: 1rem 2rem; border-radius: 12px; font-weight: 800; cursor: pointer; text-decoration: none; display: inline-block; transition: 0.3s; border: none; text-align: center; }
-        .btn-primary { background: var(--accent); color: white; }
-
-        @media (max-width: 768px) { .nav-links { display: none; } }
+        /* --- UTILS --- */
+        .badge { background: var(--accent-glow); color: var(--accent); padding: 8px 20px; border-radius: 50px; font-weight: 800; font-size: 0.8rem; border: 1px solid var(--accent); display: inline-block; margin-bottom: 1.5rem; }
+        section { padding: 120px 5%; max-width: 1400px; margin: 0 auto; }
     </style>
 </head>
 <body>
@@ -90,108 +96,119 @@ HTML
     <div class="orb orb-2"></div>
 
     <nav>
-        <div class="logo">ZELQ<span>.</span></div>
-        <div class="nav-links">
-            <a href="#portfolio">Portfolio</a>
-            <a href="#reviews">Reviews</a>
-            <a href="#pricing">Pricing</a>
-            <button onclick="toggleTheme()" style="background:none; border:none; cursor:pointer; font-size:1.3rem; margin-left:15px;">🌓</button>
+        <div class="logo-box">
+            <div class="logo-wrap">
+                <div class="logo-item">ZELQ<span>.</span></div>
+                <div class="logo-item" style="font-size: 1rem; letter-spacing: 1px;">Growth Architects</div>
+                <div class="logo-item" style="font-size: 1rem; letter-spacing: 1px;">Infrastructure</div>
+            </div>
+        </div>
+        <div style="display: flex; gap: 20px; align-items: center;">
+            <button onclick="toggleTheme()" style="background:none; border:none; font-size:1.5rem; cursor:pointer;">🌓</button>
+            <a href="#contact" class="btn btn-p" style="padding: 0.7rem 1.2rem; font-size: 0.8rem;">Let's Scale</a>
         </div>
     </nav>
 
-    <section style="min-height: 80vh; display: flex; align-items: center; padding-top: 120px;">
+    <section class="hero">
         <div data-aos="fade-up">
-            <span class="badge">Elite Operational Infrastructure</span>
-            <h1 style="font-size: clamp(3.5rem, 10vw, 6rem); font-weight: 950; line-height: 0.9; margin-bottom: 2rem;">Proven <br><span style="color:var(--accent)">Results.</span></h1>
-            <p style="font-size: 1.3rem; color: var(--text-light); max-width: 650px; margin-bottom: 3rem;">We don't just build websites or edit videos. We build <strong>Business Engines</strong>. Explore our past work and the companies we've scaled.</p>
-            <a href="#contact" class="btn btn-primary">Book a Strategy Call</a>
+            <span class="badge">ESTABLISHED 2026 • GLOBAL OPERATIONS</span>
+            <div class="morph-box">
+                <div class="morph-list">
+                    <div class="morph-item">Dominate <span style="color:var(--accent)">Growth.</span></div>
+                    <div class="morph-item">Scale <span style="color:var(--accent)">Systems.</span></div>
+                    <div class="morph-item">Design <span style="color:var(--accent)">Future.</span></div>
+                </div>
+            </div>
+            <p style="font-size: 1.5rem; color: var(--text-light); max-width: 750px; line-height: 1.6; margin-bottom: 3.5rem;">Zelq is a high-ticket infrastructure agency. We install the media, automation, and code required for industry dominance.</p>
+            <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                <a href="#pricing" class="btn btn-p">Claim 7-Day Free Trial</a>
+                <a href="#portfolio" class="btn" style="border:1px solid var(--border); background:var(--surface); color:inherit; backdrop-filter:var(--glass-blur);">See The Vault</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="marquee-container">
+        <div class="marquee">
+            <span>PYTHON</span><span>VFX</span><span>CINEMA 4D</span><span>REACT</span><span>TYPESCRIPT</span><span>CRM BOTS</span><span>AWS</span><span>PREMIERE PRO</span><span>AI AUTOMATION</span>
+            <span>PYTHON</span><span>VFX</span><span>CINEMA 4D</span><span>REACT</span><span>TYPESCRIPT</span><span>CRM BOTS</span><span>AWS</span><span>PREMIERE PRO</span><span>AI AUTOMATION</span>
+        </div>
+    </div>
+
+    <section id="leadership">
+        <div style="text-align: center; margin-bottom: 5rem;" data-aos="fade-up">
+            <h2 style="font-size: 4rem;">The <span>Founders</span></h2>
+        </div>
+        <div class="grid">
+            <div class="card" data-aos="fade-right">
+                <span class="badge" style="background:var(--accent); color:#fff;">STRATEGY & OPS</span>
+                <h3 style="font-size: 2.5rem; margin-bottom: 1rem;">Vrishmanyu Pratap Singh</h3>
+                <p style="color:var(--text-light); line-height: 1.8; margin-bottom: 2rem;">The architect of organizational systems and financial expansion.</p>
+                <ul style="list-style: none; line-height: 2.5; color: var(--text-light);">
+                    <li>✅ <strong>CRM Architecture:</strong> Automated Lead Funnels</li>
+                    <li>✅ <strong>Python Engineering:</strong> Backend Workflow Bots</li>
+                    <li>✅ <strong>Financial Strategy:</strong> High-Margin Optimization</li>
+                    <li>✅ <strong>Market Scaling:</strong> Realistic Future Planning</li>
+                </ul>
+            </div>
+            <div class="card" data-aos="fade-left">
+                <span class="badge" style="background:var(--accent); color:#fff;">TECH & CREATIVE</span>
+                <h3 style="font-size: 2.5rem; margin-bottom: 1rem;">Shaurya Saksena</h3>
+                <p style="color:var(--text-light); line-height: 1.8; margin-bottom: 2rem;">The engineer behind the cinematic visual and technical backbone.</p>
+                <ul style="list-style: none; line-height: 2.5; color: var(--text-light);">
+                    <li>✅ <strong>Full-Stack Architecture:</strong> Elite Digital Products</li>
+                    <li>✅ <strong>VFX & Colorist:</strong> Cinema-Grade Media</li>
+                    <li>✅ <strong>UI/UX Mastery:</strong> Psychological Conversion Design</li>
+                    <li>✅ <strong>Growth Marketing:</strong> Paid Performance Infrastructure</li>
+                </ul>
+            </div>
         </div>
     </section>
 
     <section id="portfolio">
-        <div style="text-align: center;" data-aos="fade-up">
-            <span class="badge">Work History</span>
+        <div style="text-align: center; margin-bottom: 5rem;" data-aos="fade-up">
             <h2 style="font-size: 3rem;">The <span>Vault</span></h2>
-            <p style="color:var(--text-light)">A glimpse into the systems and media we've deployed.</p>
         </div>
         <div class="grid">
             <div class="card" data-aos="zoom-in">
-                <div class="portfolio-item">
-                    <span>[VFX REEL 2026]</span>
-                    <div class="portfolio-overlay">Cinematic Color & VFX</div>
+                <div class="vid-frame">
+                    <video autoplay muted loop playsinline><source src="https://videos.pexels.com/video-files/3130182/3130182-uhd_2560_1440_30fps.mp4" type="video/mp4"></video>
                 </div>
-                <h4 style="margin-top:1.5rem;">Luxury Real Estate Film</h4>
-                <p style="font-size: 0.9rem; color:var(--text-light)">High-end color grading and drone VFX for a ₹50Cr property launch.</p>
+                <h3>Cinematic VFX</h3>
+                <p style="color:var(--text-light); line-height: 1.6;">Color grading and CGI for premium brands.</p>
             </div>
             <div class="card" data-aos="zoom-in" data-aos-delay="100">
-                <div class="portfolio-item">
-                    <span>[SaaS DASHBOARD]</span>
-                    <div class="portfolio-overlay">Full-Stack Architecture</div>
+                <div class="vid-frame">
+                    <video autoplay muted loop playsinline><source src="https://videos.pexels.com/video-files/3129957/3129957-uhd_2560_1440_25fps.mp4" type="video/mp4"></video>
                 </div>
-                <h4 style="margin-top:1.5rem;">FinTech Lead System</h4>
-                <p style="font-size: 0.9rem; color:var(--text-light)">Custom Python CRM that automated 4,000+ monthly leads for an HR startup.</p>
-            </div>
-            <div class="card" data-aos="zoom-in" data-aos-delay="200">
-                <div class="portfolio-item">
-                    <span>[E-COM SCALE]</span>
-                    <div class="portfolio-overlay">UI/UX & Marketing</div>
-                </div>
-                <h4 style="margin-top:1.5rem;">Fashion Brand Redesign</h4>
-                <p style="font-size: 0.9rem; color:var(--text-light)">Complete UI overhaul that boosted mobile conversion by 34%.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="reviews" style="background: var(--surface); border-radius: 40px; margin: 40px 5%;">
-        <div class="grid" style="padding-bottom: 0;">
-            <div class="stat-card" data-aos="fade-up">
-                <div class="stat-number">40%</div>
-                <p>Average Conversion Increase</p>
-            </div>
-            <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
-                <div class="stat-number">150+</div>
-                <p>Automated Workflows Built</p>
-            </div>
-            <div class="stat-card" data-aos="fade-up" data-aos-delay="200">
-                <div class="stat-number">₹10M+</div>
-                <p>Client Revenue Managed</p>
-            </div>
-        </div>
-
-        <div class="grid">
-            <div class="card" style="border-left: 5px solid var(--accent);" data-aos="fade-right">
-                <p><i>"Zelq is the first agency that actually understands Python. They didn't just give us a website; they gave us a tool that runs our entire warehouse."</i></p>
-                <h4 style="margin-top: 1.5rem;">— Vikram Singh</h4>
-                <p style="font-size: 0.8rem; color:var(--text-light)">Director, Global Logistics</p>
-            </div>
-            <div class="card" style="border-left: 5px solid var(--accent);" data-aos="fade-left">
-                <p><i>"I was skeptical about the 1-week free trial, but within 4 days, Shaurya and Vrishmanyu had already fixed my CRM leaks. They are now our permanent partners."</i></p>
-                <h4 style="margin-top: 1.5rem;">— Ananya R.</h4>
-                <p style="font-size: 0.8rem; color:var(--text-light)">Founder, Bloom Media</p>
+                <h3>Python Automation</h3>
+                <p style="color:var(--text-light); line-height: 1.6;">Self-running lead and data sync systems.</p>
             </div>
         </div>
     </section>
 
     <section id="pricing">
-        <div style="text-align:center; margin-bottom: 4rem;" data-aos="fade-up">
-            <h2 style="font-size: 3rem;">Investment <span>Plans</span></h2>
+        <div style="background:var(--accent); color:white; padding: 30px; border-radius: 25px; text-align:center; font-weight:900; margin-bottom: 4rem;" data-aos="zoom-in">
+            EXCLUSIVE: 1-WEEK FREE TRIAL FOR THE FIRST 10 COMPANIES
         </div>
         <div class="grid">
-            <div class="card">
+            <div class="card price-card">
                 <h3>Basic</h3>
-                <div style="font-size: 3rem; font-weight: 900; margin: 1rem 0;">₹1,500<span>/wk</span></div>
-                <p>✓ Social Media Management<br>✓ CRM Lead Setup<br>✓ Support</p>
+                <div style="font-size: 3.5rem; font-weight: 950; margin: 1.5rem 0;">₹1,500<span style="font-size: 1rem; color:var(--text-light)">/wk</span></div>
+                <p style="color:var(--text-light); line-height: 1.8;">✓ CRM Setup<br>✓ Weekly Data Sync</p>
+                <a href="#contact" class="btn" style="border: 1px solid var(--border); width: 100%; margin-top: 2rem;">Select Basic</a>
             </div>
-            <div class="card" style="border: 2.5px solid var(--accent); transform: scale(1.05);">
-                <div class="badge" style="background:var(--accent); color:white;">RECOMMENDED</div>
+            <div class="card price-card premium" data-aos="zoom-in">
+                <span class="badge" style="background:var(--accent); color:#fff; border:none;">MOST VALUE</span>
                 <h3>Premium</h3>
-                <div style="font-size: 3.5rem; font-weight: 900; margin: 1rem 0;">₹3,499<span>/wk</span></div>
-                <p>✓ <strong>VFX & Cinematic Media</strong><br>✓ <strong>Full-Stack App Dev</strong><br>✓ 24/7 Founder Access</p>
+                <div style="font-size: 3.5rem; font-weight: 950; margin: 1.5rem 0;">₹3,499<span style="font-size: 1rem; color:var(--text-light)">/wk</span></div>
+                <p style="color:var(--text-light); line-height: 1.8;">✓ <strong>VFX & Full-Stack</strong><br>✓ <strong>Founder 24/7 Access</strong></p>
+                <a href="#contact" class="btn btn-p" style="width: 100%; margin-top: 2rem;">Start Free Trial</a>
             </div>
-            <div class="card">
+            <div class="card price-card">
                 <h3>Pro</h3>
-                <div style="font-size: 3rem; font-weight: 900; margin: 1rem 0;">₹2,750<span>/wk</span></div>
-                <p>✓ Python Automations<br>✓ Financial Strategy<br>✓ UI/UX Architecture</p>
+                <div style="font-size: 3.5rem; font-weight: 950; margin: 1.5rem 0;">₹2,750<span style="font-size: 1rem; color:var(--text-light)">/wk</span></div>
+                <p style="color:var(--text-light); line-height: 1.8;">✓ Python Bots<br>✓ Growth Roadmap</p>
+                <a href="#contact" class="btn" style="border: 1px solid var(--border); width: 100%; margin-top: 2rem;">Select Pro</a>
             </div>
         </div>
     </section>
@@ -199,24 +216,24 @@ HTML
     <section id="contact">
         <div class="grid">
             <div data-aos="fade-right">
-                <h2 style="font-size: 3.5rem;">Join the <br><span>Elite.</span></h2>
-                <p><strong>✉️</strong> contact.zelq@gmail.com</p>
-                <p><strong>📞</strong> +91 7880032340</p>
+                <h2 style="font-size: 4.5rem; line-height: 1;">Let's <span style="color:var(--accent)">Scale.</span></h2>
+                <p style="margin: 2rem 0; color:var(--text-light); font-size: 1.3rem;">Secure your 7-day free trial. We personally audit every application.</p>
+                <p style="font-weight: 800;">✉️ contact.zelq@gmail.com</p>
+                <p style="font-weight: 800;">📞 +91 7880032340</p>
             </div>
             <div class="card" data-aos="fade-left">
                 <form action="https://formspree.io/f/xwvnneer" method="POST">
-                    <input type="text" name="name" placeholder="Name" style="width:100%; padding:1rem; margin-bottom:1rem; border-radius:12px; border:1px solid var(--border); background:none; color:inherit;" required>
-                    <input type="email" name="email" placeholder="Email" style="width:100%; padding:1rem; margin-bottom:1rem; border-radius:12px; border:1px solid var(--border); background:none; color:inherit;" required>
-                    <textarea name="message" placeholder="How can we scale your business?" style="width:100%; padding:1rem; margin-bottom:1rem; border-radius:12px; border:1px solid var(--border); background:none; color:inherit; height:100px;" required></textarea>
-                    <button type="submit" class="btn btn-primary" style="width:100%">Claim Free Trial</button>
+                    <input type="text" name="name" placeholder="Name" style="width:100%; padding:1.2rem; background:rgba(255,255,255,0.05); border:1px solid var(--border); border-radius:15px; color:inherit; margin-bottom: 1.5rem;" required>
+                    <input type="email" name="email" placeholder="Email" style="width:100%; padding:1.2rem; background:rgba(255,255,255,0.05); border:1px solid var(--border); border-radius:15px; color:inherit; margin-bottom: 1.5rem;" required>
+                    <textarea name="message" placeholder="Bottlenecks?" style="width:100%; padding:1.2rem; background:rgba(255,255,255,0.05); border:1px solid var(--border); border-radius:15px; color:inherit; height:120px; margin-bottom: 1.5rem;" required></textarea>
+                    <button type="submit" class="btn btn-p" style="width:100%">Secure My Slot</button>
                 </form>
             </div>
         </div>
     </section>
 
-    <footer style="padding: 60px; text-align: center; border-top: 1px solid var(--border);">
-        <div class="logo">ZELQ<span>.</span></div>
-        <p style="color:var(--text-light); font-size: 0.8rem; margin-top: 1.5rem;">© 2026 Zelq Growth. Shaurya & Vrishmanyu.</p>
+    <footer style="padding: 60px; text-align: center; border-top: 1px solid var(--border); background: var(--nav-bg); backdrop-filter: var(--glass-blur);">
+        <p style="color:var(--text-light); font-size: 0.9rem;">© 2026 Zelq Growth Agency. Shaurya Saksena & Vrishmanyu Pratap Singh.</p>
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -224,8 +241,7 @@ HTML
         AOS.init({ duration: 1000, once: true });
         function toggleTheme() {
             const html = document.documentElement;
-            const current = html.getAttribute('data-theme');
-            html.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
+            html.setAttribute('data-theme', html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
         }
     </script>
 </body>

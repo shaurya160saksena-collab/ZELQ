@@ -1,64 +1,74 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Zelq | High-Ticket Infrastructure & Growth</title>
+    <meta name="description" content="Zelq Growth Agency: Python automation, CRM scaling, and cinematic VFX infrastructure for high-ticket brands.">
+    
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800;900&display=swap" rel="stylesheet">
     <style>
         /* --- CORE THEME VARIABLES --- */
         :root {
-            --bg: #020617;
-            --surface: rgba(15, 23, 42, 0.4);
-            --text-main: #f8fafc;
-            --text-light: #94a3b8;
-            --accent: #38bdf8; 
-            --accent-glow: rgba(56, 189, 248, 0.3);
-            --border: rgba(255, 255, 255, 0.1);
-            --nav-bg: rgba(2, 6, 23, 0.7);
-            --glass-blur: blur(25px);
-        }
-
-        [data-theme="light"] {
-            --bg: #ffffff;
-            --surface: rgba(255, 255, 255, 0.4);
+            --bg: #fcfcfd; 
+            --surface: #ffffff;
             --text-main: #0f172a;
             --text-light: #64748b;
-            --accent: #4f46e5; 
-            --accent-glow: rgba(79, 70, 229, 0.3);
-            --border: rgba(255, 255, 255, 0.3);
-            --nav-bg: rgba(255, 255, 255, 0.7);
+            --accent: #6366f1; 
+            --accent-glow: rgba(99, 102, 241, 0.15);
+            --border: rgba(15, 23, 42, 0.08);
+            --nav-bg: rgba(252, 252, 253, 0.85);
+            --glass-blur: blur(20px);
+            --input-bg: rgba(241, 245, 249, 0.8);
+        }
+
+        [data-theme="dark"] {
+            --bg: #020617;
+            --surface: rgba(15, 23, 42, 0.6);
+            --text-main: #f8fafc;
+            --text-light: #94a3b8;
+            --accent: #818cf8; 
+            --accent-glow: rgba(129, 140, 248, 0.2);
+            --border: rgba(255, 255, 255, 0.1);
+            --nav-bg: rgba(2, 6, 23, 0.8);
+            --input-bg: rgba(255, 255, 255, 0.05);
         }
 
         /* --- BASE STYLES --- */
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; cursor: none; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; cursor: none; }
         html { scroll-behavior: smooth; overflow-x: hidden; width: 100%; }
         body { background-color: var(--bg); color: var(--text-main); overflow-x: hidden; width: 100%; position: relative; transition: background-color 0.5s, color 0.5s; }
+        h1, h2, h3, .morph-item { overflow-wrap: break-word; word-wrap: break-word; hyphens: auto; }
+
+        /* Skip to Content (Accessibility) */
+        .skip-link { position: absolute; top: -40px; left: 0; background: var(--accent); color: white; padding: 8px; z-index: 100000; transition: top 0.2s; }
+        .skip-link:focus { top: 0; }
 
         /* --- 1. PRE-LOADER --- */
-        #preloader { position: fixed; inset: 0; background: #000; z-index: 99999; display: flex; align-items: center; justify-content: center; transition: opacity 0.8s ease, visibility 0.8s; }
-        .preloader-logo { font-size: 3rem; font-weight: 950; letter-spacing: 5px; color: #fff; animation: pulseGlow 1.5s infinite alternate; }
+        #preloader { position: fixed; inset: 0; background: #000; z-index: 99999; display: flex; align-items: center; justify-content: center; transition: opacity 0.8s ease; }
+        .preloader-logo { font-size: 3rem; font-weight: 900; letter-spacing: 5px; color: #fff; animation: pulseGlow 1.5s infinite alternate; }
         .preloader-logo span { color: var(--accent); }
         @keyframes pulseGlow { from { text-shadow: 0 0 10px var(--accent-glow); transform: scale(0.98); } to { text-shadow: 0 0 30px var(--accent); transform: scale(1.02); } }
 
         /* --- 2. CUSTOM CURSOR --- */
         .cursor-dot, .cursor-outline { position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 10000; pointer-events: none; }
-        .cursor-dot { width: 8px; height: 8px; background: var(--accent); transition: width 0.2s, height 0.2s, background 0.2s; }
-        .cursor-outline { width: 40px; height: 40px; border: 2px solid var(--accent-glow); transition: width 0.2s, height 0.2s, transform 0.1s ease-out; }
+        .cursor-dot { width: 8px; height: 8px; background: var(--accent); transition: 0.2s; }
+        .cursor-outline { width: 40px; height: 40px; border: 2px solid var(--accent); opacity: 0.3; transition: 0.1s ease-out; }
         .cursor-hover .cursor-dot { width: 50px; height: 50px; background: var(--surface); backdrop-filter: blur(5px); border: 1px solid var(--accent); }
         .cursor-hover .cursor-outline { opacity: 0; }
         @media (max-width: 768px) { * { cursor: auto !important; } .cursor-dot, .cursor-outline { display: none !important; } }
 
         /* --- 3. SCROLL PROGRESS & BG EFFECTS --- */
-        #progress-bar { position: fixed; top: 0; left: 0; height: 3px; background: var(--accent); z-index: 10001; width: 0%; box-shadow: 0 0 15px var(--accent); }
+        #progress-bar { position: fixed; top: 0; left: 0; height: 4px; background: var(--accent); z-index: 10001; width: 0%; box-shadow: 0 0 15px var(--accent); }
         .bg-grid { position: fixed; inset: 0; z-index: -2; background-image: linear-gradient(to right, var(--text-light) 1px, transparent 1px), linear-gradient(to bottom, var(--text-light) 1px, transparent 1px); background-size: 80px 80px; opacity: 0.05; }
         .orb { position: absolute; border-radius: 50%; filter: blur(150px); z-index: -1; pointer-events: none; }
         .orb-1 { width: 800px; height: 800px; background: var(--accent-glow); top: -200px; left: -100px; animation: float 20s infinite alternate; }
-        .orb-2 { width: 700px; height: 700px; background: rgba(168, 85, 247, 0.2); bottom: -100px; right: -50px; animation: float 25s infinite alternate-reverse; }
+        .orb-2 { width: 700px; height: 700px; background: rgba(168, 85, 247, 0.1); bottom: -100px; right: -50px; animation: float 25s infinite alternate-reverse; }
         @keyframes float { from { transform: translate(0,0); } to { transform: translate(100px, 100px); } }
 
         /* --- 4. NAVIGATION --- */
-        nav { position: fixed; top: 0; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 5%; background: var(--nav-bg); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); z-index: 1000; border-bottom: 1px solid var(--border); }
+        nav { position: fixed; top: 0; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 5%; background: var(--nav-bg); backdrop-filter: var(--glass-blur); z-index: 1000; border-bottom: 1px solid var(--border); }
         .logo-box { height: 35px; overflow: hidden; width: 230px; }
         .logo-wrap { animation: logoSlide 12s cubic-bezier(0.8, 0, 0.2, 1) infinite; }
         .logo-item { font-size: 1.8rem; font-weight: 900; text-transform: uppercase; letter-spacing: 3px; height: 35px; line-height: 35px; }
@@ -66,16 +76,22 @@
         @keyframes logoSlide { 0%, 30% { transform: translateY(0); } 33%, 63% { transform: translateY(-35px); } 66%, 96% { transform: translateY(-70px); } 100% { transform: translateY(0); } }
 
         /* --- 5. HERO MORPHING TITLE --- */
-        .hero { min-height: 100vh; display: flex; align-items: center; padding: 150px 5% 100px 5%; }
+        .hero { min-height: 100vh; display: flex; align-items: center; padding: 150px 5% 60px 5%; }
         .morph-box { height: clamp(60px, 12vw, 140px); overflow: hidden; margin-bottom: 2rem; }
         .morph-list { animation: titleMorph 12s cubic-bezier(0.8, 0, 0.2, 1) infinite; }
-        .morph-item { font-size: clamp(3rem, 9vw, 6.5rem); font-weight: 950; line-height: 1.1; height: clamp(60px, 12vw, 140px); display: flex; align-items: center; white-space: nowrap; }
+        .morph-item { font-size: clamp(3rem, 9vw, 6.5rem); font-weight: 900; line-height: 1.1; height: clamp(60px, 12vw, 140px); display: flex; align-items: center; flex-wrap: wrap; }
         @keyframes titleMorph { 0%, 30% { transform: translateY(0); } 33%, 63% { transform: translateY(-33.33%); } 66%, 96% { transform: translateY(-66.66%); } 100% { transform: translateY(0); } }
 
+        /* --- TECH STACK LOGO WALL --- */
+        .tech-stack { padding: 40px 5%; margin-bottom: 40px; }
+        .logo-row { display: flex; justify-content: center; align-items: center; gap: clamp(30px, 6vw, 80px); flex-wrap: wrap; opacity: 0.4; filter: grayscale(100%); transition: 0.3s; }
+        .logo-row:hover { opacity: 0.8; filter: grayscale(20%); }
+        .logo-row h2 { font-weight: 900; font-size: clamp(1.5rem, 3vw, 2.5rem); text-transform: lowercase; letter-spacing: -1px; }
+
         /* --- 6. GLASS UI CARDS --- */
-        section { padding: 100px 5%; max-width: 1400px; margin: 0 auto; width: 100%; }
+        section { padding: 80px 5%; max-width: 1400px; margin: 0 auto; width: 100%; }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 3rem; }
-        .card { background: var(--surface); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); border: 1px solid var(--border); padding: 3rem; border-radius: 40px; transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 10px 40px rgba(0,0,0,0.2); height: 100%; }
+        .card { background: var(--surface); backdrop-filter: var(--glass-blur); border: 1px solid var(--border); padding: 3rem; border-radius: 40px; transition: 0.5s; box-shadow: 0 10px 40px rgba(0,0,0,0.03); height: 100%; }
         .card:hover { transform: translateY(-15px); border-color: var(--accent); box-shadow: 0 30px 60px var(--accent-glow); }
 
         /* --- 7. ROI CALCULATOR --- */
@@ -86,36 +102,40 @@
         input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 6px; background: var(--border); border-radius: 5px; }
         .roi-numbers { display: flex; justify-content: center; gap: 4rem; flex-wrap: wrap; margin-top: 2rem; }
         .roi-stat h4 { font-size: 1.2rem; color: var(--text-light); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 2px; }
-        .roi-stat h2 { font-size: clamp(2.5rem, 5vw, 4rem); color: var(--accent); font-weight: 950; }
+        .roi-stat h2 { font-size: clamp(2.5rem, 5vw, 4rem); color: var(--accent); font-weight: 900; }
 
-        /* --- 8. CLIENT PORTAL MODAL --- */
+        /* --- 8. MODALS --- */
         .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); z-index: 100000; display: none; align-items: center; justify-content: center; opacity: 0; transition: 0.3s; }
-        .modal-box { background: var(--surface); border: 1px solid var(--border); padding: 3rem; border-radius: 30px; text-align: center; max-width: 400px; width: 90%; transform: translateY(20px); transition: 0.3s; }
+        .modal-box { background: var(--surface); border: 1px solid var(--border); padding: 3rem; border-radius: 30px; text-align: center; max-width: 450px; width: 90%; transform: translateY(20px); transition: 0.3s; }
         .modal-active { display: flex; opacity: 1; }
         .modal-active .modal-box { transform: translateY(0); }
-        .input-glass { width: 100%; padding: 1.2rem; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 15px; color: inherit; margin-bottom: 1.5rem; font-size: 1rem; outline: none; transition: 0.3s; }
+        
+        .input-glass { width: 100%; padding: 1.2rem; background: var(--input-bg); border: 1px solid var(--border); border-radius: 15px; color: var(--text-main); margin-bottom: 1.5rem; font-size: 1rem; outline: none; transition: 0.3s; }
         .input-glass:focus { border-color: var(--accent); box-shadow: 0 0 15px var(--accent-glow); }
+        select.input-glass { appearance: none; cursor: pointer; }
+        select.input-glass option { background: var(--surface); color: var(--text-main); }
 
-        /* --- 9. LIVE CHAT & TOAST WIDGETS --- */
+        /* --- 9. WIDGETS (Chat, Toast, Sticky Mobile CTA) --- */
         .chat-widget { position: fixed; bottom: 30px; right: 30px; background: var(--accent); color: white; width: 65px; height: 65px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; z-index: 999; box-shadow: 0 10px 30px var(--accent-glow); cursor: pointer; transition: 0.3s; border: none; }
         .chat-widget:hover { transform: scale(1.1) translateY(-5px); }
-        .chat-window { position: fixed; bottom: 110px; right: 30px; width: 350px; background: var(--surface); backdrop-filter: var(--glass-blur); border: 1px solid var(--border); border-radius: 25px; z-index: 999; display: none; flex-direction: column; overflow: hidden; opacity: 0; transform: translateY(20px); transition: 0.3s; }
+        .chat-window { position: fixed; bottom: 110px; right: 30px; width: 350px; background: var(--surface); backdrop-filter: var(--glass-blur); border: 1px solid var(--border); border-radius: 25px; z-index: 999; display: none; flex-direction: column; overflow: hidden; opacity: 0; transform: translateY(20px); transition: 0.3s; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
         .chat-active { display: flex; opacity: 1; transform: translateY(0); }
         .chat-header { background: var(--accent); padding: 15px; color: white; font-weight: 800; display: flex; justify-content: space-between; align-items: center; }
         
-        /* The FOMO Toast Popup */
-        .toast-notification { position: fixed; bottom: 30px; left: -400px; background: var(--surface); backdrop-filter: var(--glass-blur); border: 1px solid var(--accent); padding: 1rem 1.5rem; border-radius: 20px; display: flex; align-items: center; gap: 15px; z-index: 1000; transition: 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 10px 30px var(--accent-glow); }
+        .toast-notification { position: fixed; bottom: 30px; left: -400px; background: var(--surface); border: 1px solid var(--accent); padding: 1rem 1.5rem; border-radius: 20px; display: flex; align-items: center; gap: 15px; z-index: 1000; transition: 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 10px 30px var(--accent-glow); }
         .toast-active { left: 30px; }
         .toast-dot { width: 10px; height: 10px; background: #10b981; border-radius: 50%; animation: pulseGlow 1.5s infinite alternate; }
 
-        /* --- 10. TECH MARQUEE, FAQ & BUTTONS --- */
-        .marquee-container { background: var(--nav-bg); backdrop-filter: var(--glass-blur); padding: 30px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); overflow: hidden; display: flex; }
+        /* Mobile Sticky CTA */
+        .mobile-cta-bar { display: none; position: fixed; bottom: 0; left: 0; width: 100%; background: var(--surface); backdrop-filter: blur(15px); border-top: 1px solid var(--border); padding: 15px; z-index: 998; text-align: center; }
+
+        /* --- 10. MARQUEE & FAQ --- */
+        .marquee-container { background: var(--surface); padding: 30px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); overflow: hidden; display: flex; }
         .marquee { display: flex; white-space: nowrap; animation: scroll 40s linear infinite; }
-        .marquee span { margin: 0 50px; font-weight: 900; opacity: 0.4; letter-spacing: 4px; font-size: 1.1rem; }
+        .marquee span { margin: 0 50px; font-weight: 800; color: var(--text-light); opacity: 0.5; letter-spacing: 4px; font-size: 1.1rem; }
         @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-        /* FAQ Accordion */
-        .faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; margin-bottom: 1rem; overflow: hidden; transition: 0.3s; backdrop-filter: var(--glass-blur); }
+        .faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; margin-bottom: 1rem; overflow: hidden; transition: 0.3s; }
         .faq-question { padding: 1.5rem; font-weight: 800; font-size: 1.1rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
         .faq-answer { padding: 0 1.5rem; max-height: 0; opacity: 0; transition: all 0.3s ease-in-out; color: var(--text-light); line-height: 1.6; }
         .faq-item.active { border-color: var(--accent); }
@@ -123,60 +143,73 @@
         .faq-icon { transition: 0.3s; font-size: 1.5rem; color: var(--accent); }
         .faq-item.active .faq-icon { transform: rotate(45deg); }
 
-        .btn { padding: 1.2rem 2.5rem; border-radius: 20px; font-weight: 900; text-decoration: none; display: inline-block; transition: 0.2s; border: none; font-size: 1rem; text-align: center; cursor: pointer; }
+        /* Buttons & Media */
+        .btn { padding: 1.2rem 2.5rem; border-radius: 20px; font-weight: 800; text-decoration: none; display: inline-block; transition: 0.2s; border: none; font-size: 1rem; text-align: center; cursor: pointer; }
         .btn-p { background: var(--accent); color: #fff; box-shadow: 0 10px 30px var(--accent-glow); }
         .btn-p:hover { transform: translateY(-3px); box-shadow: 0 15px 40px var(--accent-glow); }
-        .btn-p:active { transform: scale(0.95); }
 
         .vid-frame { height: 220px; border-radius: 25px; overflow: hidden; background: #000; margin-bottom: 2rem; position: relative; }
         .vid-frame video { width: 100%; height: 100%; object-fit: cover; opacity: 0.6; transition: 0.5s; }
         .card:hover .vid-frame video { opacity: 1; transform: scale(1.05); }
 
-        /* --- MOBILE RESPONSIVENESS --- */
+        /* Footer */
+        footer { padding: 80px 5% 40px 5%; border-top: 1px solid var(--border); background: var(--nav-bg); }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; max-width: 1400px; margin: 0 auto; margin-bottom: 3rem; }
+        .footer-links { list-style: none; line-height: 2; color: var(--text-light); }
+        .footer-links a { color: inherit; text-decoration: none; transition: 0.2s; }
+        .footer-links a:hover { color: var(--accent); }
+
+        /* --- MOBILE OVERRIDES --- */
         @media (max-width: 768px) { 
+            body { padding-bottom: 80px; } /* Space for sticky bar */
+            .mobile-cta-bar { display: block; }
             nav { padding: 1rem 5%; }
             .logo-box { width: 150px; height: 30px; }
             .logo-item { font-size: 1.2rem; height: 30px; line-height: 30px; }
-            @keyframes logoSlide { 0%, 30% { transform: translateY(0); } 33%, 63% { transform: translateY(-30px); } 66%, 96% { transform: translateY(-60px); } 100% { transform: translateY(0); } }
             .hero { text-align: center; padding-top: 120px; }
             .morph-item { justify-content: center; }
-            section { padding: 80px 5%; }
+            section { padding: 60px 5%; }
             .card { padding: 2rem; border-radius: 25px; }
             .roi-container { padding: 2rem; }
-            .chat-window { width: 90%; right: 5%; bottom: 100px; }
+            .chat-widget { bottom: 90px; } /* Above sticky bar */
+            .chat-window { width: 90%; right: 5%; bottom: 160px; }
             .toast-notification { width: 90%; left: 5%; bottom: -100px; }
-            .toast-active { bottom: 30px; left: 5%; }
+            .toast-active { bottom: 90px; left: 5%; }
         }
     </style>
 </head>
 <body>
 
-    <div id="preloader">
-        <div class="preloader-logo">ZELQ<span>.</span></div>
-    </div>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <div class="cursor-dot"></div>
-    <div class="cursor-outline"></div>
-    <div id="progress-bar"></div>
+    <div id="preloader"><div class="preloader-logo">ZELQ<span>.</span></div></div>
 
-    <div class="bg-grid"></div>
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
+    <div class="cursor-dot"></div><div class="cursor-outline"></div><div id="progress-bar"></div>
+    <div class="bg-grid"></div><div class="orb orb-1"></div><div class="orb orb-2"></div>
 
     <nav>
         <div class="logo-box">
             <div class="logo-wrap">
-                <div class="logo-item">ZELQ<span>.</span></div>
+                <div class="logo-item" aria-label="Zelq Homepage">ZELQ<span>.</span></div>
                 <div class="logo-item" style="font-size: 0.8rem; opacity: 0.7;">Growth Lab</div>
                 <div class="logo-item" style="font-size: 0.8rem; opacity: 0.7;">Infrastructure</div>
             </div>
         </div>
         <div style="display: flex; gap: 15px; align-items: center;">
-            <button onclick="openPortal()" class="btn hover-target" style="background:transparent; border:1px solid var(--border); color:inherit; padding: 0.6rem 1.2rem; font-size: 0.8rem;">Client Portal</button>
-            <a href="#contact" class="btn btn-p hover-target" style="padding: 0.6rem 1.2rem; font-size: 0.8rem;">Secure Slot</a>
-            <button onclick="toggleTheme()" class="hover-target" style="background:none; border:none; color:inherit; font-size:1.5rem; cursor:pointer;" id="themeBtn">🌓</button>
+            <button onclick="openPortal()" class="btn hover-target" style="background:transparent; border:1px solid var(--border); color:inherit; padding: 0.6rem 1.2rem; font-size: 0.8rem;" aria-label="Open Client Portal">Client Portal</button>
+            <button onclick="toggleTheme()" class="hover-target" style="background:none; border:none; color:inherit; font-size:1.5rem; cursor:pointer;" id="themeBtn" aria-label="Toggle Theme">🌓</button>
         </div>
     </nav>
+
+    <div class="modal-overlay" id="exitModal">
+        <div class="modal-box">
+            <h2 style="font-size: 2rem; margin-bottom: 1rem;">Wait! Don't Leave <span style="color:var(--accent)">Growth</span> on the Table.</h2>
+            <p style="color:var(--text-light); margin-bottom: 2rem;">Get our free Python automation blueprint before you go. Learn exactly how we save clients 40+ hours a week.</p>
+            <input type="email" class="input-glass hover-target" placeholder="Where should we send it?">
+            <button class="btn btn-p hover-target" style="width: 100%; margin-bottom: 1rem;" onclick="document.getElementById('exitModal').classList.remove('modal-active'); alert('Blueprint sent!')">Send Me The Blueprint</button>
+            <button onclick="document.getElementById('exitModal').classList.remove('modal-active')" class="hover-target" style="background:none; border:none; color:var(--text-light); cursor:pointer; text-decoration: underline;">No thanks, I like manual work</button>
+        </div>
+    </div>
 
     <div class="modal-overlay" id="portalModal">
         <div class="modal-box">
@@ -189,214 +222,316 @@
         </div>
     </div>
 
-    <section class="hero hover-target">
-        <div data-aos="fade-up" style="width: 100%;">
-            <span style="background:var(--accent-glow); color:var(--accent); padding: 8px 25px; border-radius: 50px; font-weight: 900; font-size: 0.75rem; border: 1px solid var(--accent); display: inline-block; margin-bottom: 1.5rem;">ESTABLISHED 2026 • GLOBAL OPERATIONS</span>
-            <div class="morph-box">
-                <div class="morph-list">
-                    <div class="morph-item">Dominate <span style="color:var(--accent); margin-left: 15px;">Growth.</span></div>
-                    <div class="morph-item">Scale <span style="color:var(--accent); margin-left: 15px;">Systems.</span></div>
-                    <div class="morph-item">Design <span style="color:var(--accent); margin-left: 15px;">Future.</span></div>
-                </div>
-            </div>
-            <p style="font-size: clamp(1.1rem, 3vw, 1.5rem); color: var(--text-light); max-width: 800px; line-height: 1.6; margin-bottom: 3.5rem;">The world's most aggressive growth agency. We install the media, automation, and code required for total market dominance.</p>
-            <div style="display: flex; gap: 20px; flex-wrap: wrap;">
-                <a href="#pricing" class="btn btn-p hover-target">Claim 7-Day Free Trial</a>
-                <a href="#portfolio" class="btn hover-target" style="border:1px solid var(--border); background:var(--surface); color:inherit; backdrop-filter:var(--glass-blur);">View The Vault</a>
-            </div>
-        </div>
-    </section>
-
-    <div class="marquee-container hover-target">
-        <div class="marquee">
-            <span>PYTHON AUTOMATION</span><span>CINEMATIC VFX</span><span>FULL-STACK ARCHITECTURE</span><span>CRM SCALING</span><span>AI DEPLOYMENT</span><span>UI/UX PSYCHOLOGY</span>
-            <span>PYTHON AUTOMATION</span><span>CINEMATIC VFX</span><span>FULL-STACK ARCHITECTURE</span><span>CRM SCALING</span><span>AI DEPLOYMENT</span><span>UI/UX PSYCHOLOGY</span>
+    <div class="modal-overlay" id="feedbackModal">
+        <div class="modal-box">
+            <h2 style="font-size: 2rem; margin-bottom: 1rem;">Submit <span style="color:var(--accent)">Feedback</span></h2>
+            <p style="color:var(--text-light); margin-bottom: 2rem; font-size: 0.9rem;">Share your experience. Verified 5-star reviews are published instantly to the Vault.</p>
+            <input type="text" id="revCompany" class="input-glass hover-target" placeholder="Company Name (e.g. EVNEK)">
+            <input type="text" id="revRole" class="input-glass hover-target" placeholder="Your Role (e.g. CMO)">
+            <select id="revRating" class="input-glass hover-target">
+                <option value="5">★★★★★ - Exceptional Impact</option>
+                <option value="4">★★★★☆ - Great Results</option>
+                <option value="3">★★★☆☆ - Average</option>
+                <option value="2">★★☆☆☆ - Below Expectations</option>
+            </select>
+            <textarea id="revText" class="input-glass hover-target" placeholder="Describe the infrastructure or assets we built for you..." style="height:100px;"></textarea>
+            <button onclick="submitReview()" class="btn btn-p hover-target" style="width: 100%; margin-bottom: 1rem;" id="submitRevBtn">Submit to Vault</button>
+            <button onclick="closeFeedback()" class="hover-target" style="background:none; border:none; color:var(--text-light); cursor:pointer; text-decoration: underline;">Cancel</button>
         </div>
     </div>
 
-    <section id="roi">
-        <div data-aos="fade-up" style="text-align: center;">
-            <h2 style="font-size: clamp(2.5rem, 6vw, 4rem);">Proof in <span>Numbers</span></h2>
-            <p style="color:var(--text-light); margin-top: 10px; font-size: 1.1rem;">Calculate how much money our Python automations save you annually.</p>
-        </div>
-        <div class="roi-container" data-aos="zoom-in">
-            <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">Hours your team spends on manual data entry per week:</h3>
-            <h1 id="hoursValue" style="font-size: 4rem; color: var(--accent); margin-bottom: 1rem;">20 hrs</h1>
-            <input type="range" id="hourSlider" class="hover-target" min="5" max="100" value="20" step="5">
-            <div class="roi-numbers">
-                <div class="roi-stat">
-                    <h4>Money Wasted / Yr</h4>
-                    <h2 id="wastedVal" style="color: #ef4444;">₹4,80,000</h2>
+    <main id="main-content">
+        <section class="hero hover-target">
+            <div data-aos="fade-up" style="width: 100%;">
+                <span style="background:var(--accent-glow); color:var(--accent); padding: 8px 25px; border-radius: 50px; font-weight: 800; font-size: 0.75rem; border: 1px solid var(--accent); display: inline-block; margin-bottom: 1.5rem;">ESTABLISHED 2026 • GLOBAL OPERATIONS</span>
+                <div class="morph-box">
+                    <div class="morph-list">
+                        <div class="morph-item">Dominate <span style="color:var(--accent); margin-left: 15px;">Growth.</span></div>
+                        <div class="morph-item">Scale <span style="color:var(--accent); margin-left: 15px;">Systems.</span></div>
+                        <div class="morph-item">Design <span style="color:var(--accent); margin-left: 15px;">Future.</span></div>
+                    </div>
                 </div>
-                <div class="roi-stat">
-                    <h4>Zelq Automation Cost</h4>
-                    <h2 style="color: #10b981;">₹0 (Automated)</h2>
+                <p style="font-size: clamp(1.1rem, 3vw, 1.5rem); color: var(--text-light); max-width: 800px; line-height: 1.6; margin-bottom: 3.5rem;">The world's most aggressive growth agency. We install the media, automation, and code required for total market dominance.</p>
+                <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                    <a href="#contact" class="btn btn-p hover-target">Apply for Partnership</a>
+                    <a href="#pricing" class="btn hover-target" style="border:1px solid var(--border); background:var(--surface); color:inherit;">View Pricing</a>
                 </div>
             </div>
-            <p style="color:var(--text-light); font-size: 0.8rem; margin-top: 2rem;">*Based on an average employee cost of ₹500/hour doing manual CRM updates.</p>
-        </div>
-    </section>
+        </section>
 
-    <section id="leadership">
-        <div style="text-align: center; margin-bottom: 5rem;" data-aos="fade-up">
-            <h2 style="font-size: clamp(2.5rem, 8vw, 4.5rem); font-weight: 950;">Founding <span style="color:var(--accent)">Leadership</span></h2>
+        <div class="tech-stack" data-aos="fade-up">
+            <p style="text-align: center; color: var(--text-light); font-weight: 800; font-size: 0.85rem; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 2px;">Powered by Industry-Leading Infrastructure</p>
+            <div class="logo-row">
+                <h2>aws</h2><h2>python</h2><h2>meta</h2><h2>stripe</h2><h2>zapier</h2><h2>hubspot</h2>
+            </div>
         </div>
-        <div class="grid">
-            <div class="card hover-target" data-aos="fade-right">
-                <h3 style="font-size: clamp(2rem, 5vw, 2.8rem); margin-bottom: 1rem; line-height: 1.2;">Vrishmanyu <br>Pratap Singh</h3>
-                <p style="color:var(--accent); font-weight: 900; margin-bottom: 2rem; letter-spacing: 1px;">HEAD OF OPERATIONS</p>
-                <ul style="list-style: none; line-height: 2.5; color: var(--text-light); font-weight: 600;">
-                    <li>⚡ CRM Architecture</li>
-                    <li>⚡ Python Scripting</li>
-                    <li>⚡ Financial Strategy</li>
-                    <li>⚡ Future Planning</li>
+
+        <section id="vsl" style="padding-top: 40px;">
+            <div style="text-align: center; margin-bottom: 3rem;" data-aos="fade-up">
+                <h2 style="font-size: clamp(2.5rem, 6vw, 3.5rem);">The <span style="color:var(--accent)">System</span> Explained</h2>
+                <p style="color:var(--text-light); font-size: 1.1rem; margin-top: 10px;">Watch how we deploy infrastructure to scale your revenue.</p>
+            </div>
+            <div class="card hover-target" data-aos="zoom-in" style="padding: 1rem; border-radius: 30px; max-width: 1000px; margin: 0 auto;">
+                <div class="vid-frame" style="height: auto; aspect-ratio: 16/9; margin-bottom: 0;">
+                    <video controls style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px; opacity: 1;" poster="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2">
+                        <source src="https://videos.pexels.com/video-files/3129957/3129957-uhd_2560_1440_25fps.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+        </section>
+
+        <div class="marquee-container hover-target">
+            <div class="marquee">
+                <span>PYTHON AUTOMATION</span><span>CINEMATIC VFX</span><span>FULL-STACK ARCHITECTURE</span><span>CRM SCALING</span><span>AI DEPLOYMENT</span><span>UI/UX PSYCHOLOGY</span>
+                <span>PYTHON AUTOMATION</span><span>CINEMATIC VFX</span><span>FULL-STACK ARCHITECTURE</span><span>CRM SCALING</span><span>AI DEPLOYMENT</span><span>UI/UX PSYCHOLOGY</span>
+            </div>
+        </div>
+
+        <section id="roi">
+            <div data-aos="fade-up" style="text-align: center;">
+                <h2 style="font-size: clamp(2.5rem, 6vw, 4rem);">Proof in <span>Numbers</span></h2>
+                <p style="color:var(--text-light); margin-top: 10px; font-size: 1.1rem;">Calculate how much money our Python automations save you annually.</p>
+            </div>
+            <div class="roi-container" data-aos="zoom-in">
+                <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">Hours your team spends on manual data entry per week:</h3>
+                <h1 id="hoursValue" style="font-size: 4rem; color: var(--accent); margin-bottom: 1rem;">20 hrs</h1>
+                <input type="range" id="hourSlider" class="hover-target" min="5" max="100" value="20" step="5" aria-label="Manual hours slider">
+                <div class="roi-numbers">
+                    <div class="roi-stat">
+                        <h4>Money Wasted / Yr</h4>
+                        <h2 id="wastedVal" style="color: #ef4444;">₹4,80,000</h2>
+                    </div>
+                    <div class="roi-stat">
+                        <h4>Zelq Automation Cost</h4>
+                        <h2 style="color: #10b981;">₹0 (Automated)</h2>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="leadership">
+            <div style="text-align: center; margin-bottom: 5rem;" data-aos="fade-up">
+                <h2 style="font-size: clamp(2.5rem, 8vw, 4.5rem); font-weight: 900;">Founding <span style="color:var(--accent)">Leadership</span></h2>
+            </div>
+            <div class="grid">
+                <div class="card hover-target" data-aos="fade-right">
+                    <h3 style="font-size: clamp(2rem, 5vw, 2.8rem); margin-bottom: 1rem; line-height: 1.2;">Vrishmanyu <br>Pratap Singh</h3>
+                    <p style="color:var(--accent); font-weight: 800; margin-bottom: 2rem; letter-spacing: 1px;">HEAD OF OPERATIONS</p>
+                    <ul style="list-style: none; line-height: 2.5; color: var(--text-light); font-weight: 600;">
+                        <li>⚡ CRM Architecture</li>
+                        <li>⚡ Python Scripting</li>
+                        <li>⚡ Financial Strategy</li>
+                        <li>⚡ Future Planning</li>
+                    </ul>
+                </div>
+                <div class="card hover-target" data-aos="fade-left">
+                    <h3 style="font-size: clamp(2rem, 5vw, 2.8rem); margin-bottom: 1rem; line-height: 1.2;">Shaurya <br>Saksena</h3>
+                    <p style="color:var(--accent); font-weight: 800; margin-bottom: 2rem; letter-spacing: 1px;">HEAD OF TECHNICAL</p>
+                    <ul style="list-style: none; line-height: 2.5; color: var(--text-light); font-weight: 600;">
+                        <li>⚡ Full-Stack Architecture</li>
+                        <li>⚡ Cinematic VFX & Colorist</li>
+                        <li>⚡ UI/UX Psychology</li>
+                        <li>⚡ Media Infrastructure</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="portfolio">
+            <div style="text-align: center; margin-bottom: 5rem;" data-aos="fade-up">
+                <h2 style="font-size: clamp(2.5rem, 6vw, 3.5rem);">The <span>Vault</span></h2>
+                <p style="color:var(--text-light); font-size: 1.1rem; margin-top: 10px;">Technical and creative precision in motion.</p>
+            </div>
+            <div class="grid">
+                <div class="card hover-target" data-aos="zoom-in">
+                    <div class="vid-frame"><video autoplay muted loop playsinline><source src="https://videos.pexels.com/video-files/3130182/3130182-uhd_2560_1440_30fps.mp4" type="video/mp4"></video></div>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 10px;">Luxury Brand Media</h3>
+                    <p style="color:var(--text-light); line-height: 1.6;">Cinematic color grading and CGI for high-end product launches.</p>
+                </div>
+                <div class="card hover-target" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="vid-frame"><video autoplay muted loop playsinline><source src="https://videos.pexels.com/video-files/3129957/3129957-uhd_2560_1440_25fps.mp4" type="video/mp4"></video></div>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 10px;">Automated Infrastructure</h3>
+                    <p style="color:var(--text-light); line-height: 1.6;">Python-driven CRM sync and data engines that run 24/7 without manual input.</p>
+                </div>
+                <div class="card hover-target" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="vid-frame"><video autoplay muted loop playsinline><source src="https://videos.pexels.com/video-files/4069480/4069480-uhd_2560_1440_25fps.mp4" type="video/mp4"></video></div>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 10px;">Product Architecture</h3>
+                    <p style="color:var(--text-light); line-height: 1.6;">Mobile-first web platforms built for speed, conversion, and global scaling.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="outcomes">
+            <div style="text-align: center; margin-bottom: 4rem;" data-aos="fade-up">
+                <h2 style="font-size: clamp(2.5rem, 6vw, 3.5rem);">System <span>Outcomes</span></h2>
+            </div>
+            <div class="grid">
+                <div class="card hover-target" data-aos="fade-up">
+                    <div style="font-size: 3rem; color: var(--accent); font-weight: 900; margin-bottom: 1rem;">+34%</div>
+                    <h3 style="margin-bottom: 10px;">E-Commerce Lead Conversion</h3>
+                    <p style="color:var(--text-light); margin-bottom: 1.5rem;">Deployed a seamless UX architecture and automated abandoned cart recovery sequences.</p>
+                    <div style="font-weight: 800; color: #10b981;">✓ ₹12L Additional Revenue / Quarter</div>
+                </div>
+                <div class="card hover-target" data-aos="fade-up" data-aos-delay="100">
+                    <div style="font-size: 3rem; color: var(--accent); font-weight: 900; margin-bottom: 1rem;">40 hrs</div>
+                    <h3 style="margin-bottom: 10px;">Weekly Time Reclaimed</h3>
+                    <p style="color:var(--text-light); margin-bottom: 1.5rem;">Built a custom Python pipeline to completely eliminate manual CRM data entry for a B2B firm.</p>
+                    <div style="font-weight: 800; color: #10b981;">✓ 100% Error Reduction</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="reviews">
+            <div style="text-align: center; margin-bottom: 4rem;" data-aos="fade-up">
+                <h2 style="font-size: clamp(2.5rem, 6vw, 3.5rem);">Client <span>Voices</span></h2>
+                <button onclick="openFeedback()" class="btn hover-target" style="margin-top: 15px; border: 1px solid var(--border); background: var(--surface); color: var(--text-main);">Leave a Review</button>
+            </div>
+            <div class="grid" id="reviewGrid">
+                <div class="card hover-target" data-aos="fade-right">
+                    <div style="color: #fbbf24; font-size: 1.5rem; margin-bottom: 1rem;">★★★★★</div>
+                    <p style="font-size: 1.1rem; line-height: 1.6; font-style: italic; margin-bottom: 1.5rem;">"Zelq completely rewired our backend. The Python infrastructure they deployed saved us hundreds of hours and scaled our operations effortlessly."</p>
+                    <h4 style="font-weight: 800;">Director of Operations</h4>
+                    <p style="color:var(--text-light); font-size: 0.85rem; margin-top: 5px;">EVNEK</p>
+                </div>
+                <div class="card hover-target" data-aos="fade-left">
+                    <div style="color: #fbbf24; font-size: 1.5rem; margin-bottom: 1rem;">★★★★★</div>
+                    <p style="font-size: 1.1rem; line-height: 1.6; font-style: italic; margin-bottom: 1.5rem;">"The cinematic VFX and branding assets Shaurya's team created put us in a different league. Brand Charm Company has seen a 40% bump in premium lead conversions."</p>
+                    <h4 style="font-weight: 800;">Chief Marketing Officer</h4>
+                    <p style="color:var(--text-light); font-size: 0.85rem; margin-top: 5px;">BCC (Brand Charm Company)</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="roadmap">
+            <div style="text-align:center; margin-bottom: 4rem;" data-aos="fade-up">
+                <h2 style="font-size: clamp(2.5rem, 6vw, 3.5rem);">The <span>Growth Roadmap</span></h2>
+            </div>
+            <div class="grid">
+                <div class="card hover-target"><h1 style="color:var(--accent); opacity:0.15; font-size: 3rem;">01</h1><h3 style="margin: 10px 0;">Infrastructure Audit</h3><p style="font-size:0.95rem; color:var(--text-light);">We find the tech and financial leaks in your current funnel.</p></div>
+                <div class="card hover-target"><h1 style="color:var(--accent); opacity:0.15; font-size: 3rem;">02</h1><h3 style="margin: 10px 0;">System Deployment</h3><p style="font-size:0.95rem; color:var(--text-light);">Python bots installed to automate 100% of your daily manual tasks.</p></div>
+                <div class="card hover-target"><h1 style="color:var(--accent); opacity:0.15; font-size: 3rem;">03</h1><h3 style="margin: 10px 0;">Visual Authority</h3><p style="font-size:0.95rem; color:var(--text-light);">High-ticket VFX assets that build instant brand trust and authority.</p></div>
+                <div class="card hover-target"><h1 style="color:var(--accent); opacity:0.15; font-size: 3rem;">04</h1><h3 style="margin: 10px 0;">Predictable Scale</h3><p style="font-size:0.95rem; color:var(--text-light);">Financial strategy and roadmap execution for long-term dominance.</p></div>
+            </div>
+        </section>
+
+        <section id="faq">
+            <div style="text-align: center; margin-bottom: 4rem;" data-aos="fade-up">
+                <h2 style="font-size: clamp(2.5rem, 6vw, 3.5rem);">Client <span>Intelligence</span></h2>
+            </div>
+            <div style="max-width: 800px; margin: 0 auto;">
+                <div class="faq-item hover-target" onclick="this.classList.toggle('active')" data-aos="fade-up">
+                    <div class="faq-question">What exactly does "Python Automation" mean for my business? <span class="faq-icon">+</span></div>
+                    <div class="faq-answer">It means eliminating human error and manual work. We write custom code that automatically moves leads from your ads into your CRM, sends welcome emails, and updates your spreadsheets instantly while you sleep.</div>
+                </div>
+                <div class="faq-item hover-target" onclick="this.classList.toggle('active')" data-aos="fade-up" data-aos-delay="100">
+                    <div class="faq-question">Why should I choose the Premium Plan over a standard agency? <span class="faq-icon">+</span></div>
+                    <div class="faq-answer">Standard agencies charge for hours and templates. The Premium Plan gives you direct access to our founders to build custom software, cinematic-grade video assets, and elite web architecture designed specifically for high-ticket scaling.</div>
+                </div>
+                <div class="faq-item hover-target" onclick="this.classList.toggle('active')" data-aos="fade-up" data-aos-delay="200">
+                    <div class="faq-question">How does the 7-Day Free Trial work? <span class="faq-icon">+</span></div>
+                    <div class="faq-answer">We limit our intake to 10 companies to ensure quality. If selected, we will audit your systems and deploy a basic CRM or media asset completely free for 7 days. If you don't see the value, you walk away paying nothing.</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="pricing">
+            <div style="background:var(--accent); color:#fff; padding: 40px 20px; border-radius: 30px; text-align:center; font-weight:800; margin-bottom: 5rem;" data-aos="zoom-in">
+                EXCLUSIVE: 1-WEEK FREE TRIAL FOR THE FIRST 10 COMPANIES
+            </div>
+            <div class="grid">
+                <div class="card hover-target" data-aos="fade-up">
+                    <h3 style="font-size: 2rem;">Basic</h3>
+                    <div style="font-size: 3rem; font-weight: 900; margin: 1rem 0;">₹1,500<span style="font-size: 1rem; color:var(--text-light)">/wk</span></div>
+                    <ul style="list-style:none; line-height:2.5; font-size:1.1rem; color:var(--text-light); margin-bottom: 2rem;"><li>✓ Social Media Content</li><li>✓ CRM Lead Setup</li><li>✓ Weekly Data Sync</li></ul>
+                    <a href="#contact" class="btn hover-target" style="border: 1px solid var(--border); width: 100%; color:inherit;">Select Basic</a>
+                </div>
+                <div class="card hover-target" style="border: 2px solid var(--accent); transform: scale(1.05);" data-aos="zoom-in" data-aos-delay="100">
+                    <span style="font-weight: 800; color: var(--accent); font-size: 0.8rem; letter-spacing: 2px;">PREMIUM ACCESS</span>
+                    <h3 style="font-size: 2.5rem; margin-top: 1rem;">Premium</h3>
+                    <div style="font-size: 3.5rem; font-weight: 900; margin: 1rem 0; color: var(--accent);">₹3,499<span style="font-size: 1rem; color:var(--text-light)">/wk</span></div>
+                    <ul style="list-style:none; line-height:2.5; font-size:1.1rem; color:var(--text-light); margin-bottom: 2rem;"><li>✓ <strong>High-End VFX & Video</strong></li><li>✓ <strong>Full-Stack App Dev</strong></li><li>✓ <strong>24/7 Founder Access</strong></li></ul>
+                    <a href="#contact" class="btn btn-p hover-target" style="width: 100%;">Claim Free Trial</a>
+                </div>
+                <div class="card hover-target" data-aos="fade-up" data-aos-delay="200">
+                    <h3 style="font-size: 2rem;">Pro</h3>
+                    <div style="font-size: 3rem; font-weight: 900; margin: 1rem 0;">₹2,750<span style="font-size: 1rem; color:var(--text-light)">/wk</span></div>
+                    <ul style="list-style:none; line-height:2.5; font-size:1.1rem; color:var(--text-light); margin-bottom: 2rem;"><li>✓ Python Automation Suite</li><li>✓ UI/UX Architecture</li><li>✓ Strategic Roadmap</li></ul>
+                    <a href="#contact" class="btn hover-target" style="border: 1px solid var(--border); width: 100%; color:inherit;">Select Pro</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="grid">
+                <div data-aos="fade-right">
+                    <h2 style="font-size: clamp(3rem, 10vw, 5rem); line-height: 0.9;">Ready to <br><span style="color:var(--accent)">Win?</span></h2>
+                    <p style="margin: 2.5rem 0; color:var(--text-light); font-size: 1.2rem;">We only accept 10 clients at a time. Secure your position by applying below.</p>
+                    <p style="font-weight: 800; font-size: 1.1rem; margin-bottom: 10px;">✉️ contact.zelq@gmail.com</p>
+                    <p style="font-weight: 800; font-size: 1.1rem;">📞 +91 7880032340</p>
+                </div>
+                <div class="card hover-target" data-aos="fade-left">
+                    <form action="https://formspree.io/f/xwvnneer" method="POST">
+                        <input type="text" name="name" placeholder="Full Name" class="input-glass hover-target" required>
+                        <input type="email" name="email" placeholder="Business Email" class="input-glass hover-target" required>
+                        <select name="revenue" class="input-glass hover-target" required aria-label="Monthly Revenue">
+                            <option value="" disabled selected>Current Monthly Revenue?</option>
+                            <option value="Under 1L">Under ₹1L</option>
+                            <option value="1L - 5L">₹1L - ₹5L</option>
+                            <option value="10L+">₹10L+</option>
+                        </select>
+                        <select name="bottleneck" class="input-glass hover-target" required aria-label="Primary Bottleneck">
+                            <option value="" disabled selected>Primary Bottleneck?</option>
+                            <option value="Lead Generation">Lead Generation</option>
+                            <option value="CRM/Automation">CRM & Workflow Automation</option>
+                            <option value="Branding/VFX">Brand Authority / Media assets</option>
+                        </select>
+                        <textarea name="message" placeholder="Provide extra details (Optional)" class="input-glass hover-target" style="height:100px;"></textarea>
+                        <button type="submit" class="btn btn-p hover-target" style="width:100%;">Submit Application</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="mobile-cta-bar">
+        <a href="#contact" class="btn btn-p" style="width: 100%; padding: 1rem; font-size: 1.1rem;">Apply Now</a>
+    </div>
+
+    <footer>
+        <div class="footer-grid">
+            <div>
+                <div style="font-size: 1.8rem; font-weight: 900; letter-spacing: 2px; margin-bottom: 1rem;">ZELQ<span style="color:var(--accent)">.</span></div>
+                <p style="color:var(--text-light); font-weight: 600; line-height: 1.6;">Aggressive growth infrastructure and automation for high-ticket businesses.</p>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 1.2rem; font-weight: 800;">Navigation</h4>
+                <ul class="footer-links">
+                    <li><a href="#vsl" class="hover-target">The System</a></li>
+                    <li><a href="#portfolio" class="hover-target">The Vault</a></li>
+                    <li><a href="#pricing" class="hover-target">Pricing Plans</a></li>
+                    <li><a href="#faq" class="hover-target">Client Intel</a></li>
                 </ul>
             </div>
-            <div class="card hover-target" data-aos="fade-left">
-                <h3 style="font-size: clamp(2rem, 5vw, 2.8rem); margin-bottom: 1rem; line-height: 1.2;">Shaurya <br>Saksena</h3>
-                <p style="color:var(--accent); font-weight: 900; margin-bottom: 2rem; letter-spacing: 1px;">HEAD OF TECHNICAL</p>
-                <ul style="list-style: none; line-height: 2.5; color: var(--text-light); font-weight: 600;">
-                    <li>⚡ Full-Stack Architecture</li>
-                    <li>⚡ VFX & Colorist</li>
-                    <li>⚡ UI/UX Psychology</li>
-                    <li>⚡ Media Infrastructure</li>
+            <div>
+                <h4 style="margin-bottom: 1.2rem; font-weight: 800;">Legal & Social</h4>
+                <ul class="footer-links">
+                    <li><a href="#" class="hover-target">Privacy Policy</a></li>
+                    <li><a href="#" class="hover-target">Terms of Service</a></li>
+                    <li><a href="#" class="hover-target">LinkedIn</a></li>
+                    <li><a href="#" class="hover-target">Instagram</a></li>
                 </ul>
             </div>
         </div>
-    </section>
-
-    <section id="portfolio">
-        <div style="text-align: center; margin-bottom: 5rem;" data-aos="fade-up">
-            <h2 style="font-size: clamp(2.5rem, 6vw, 3.5rem);">The <span>Vault</span></h2>
-            <p style="color:var(--text-light); font-size: 1.1rem; margin-top: 10px;">Technical and creative precision in motion.</p>
+        <div style="text-align: center; color:var(--text-light); font-weight: 600; padding-top: 2rem; border-top: 1px solid var(--border);">
+            © <span id="year"></span> Zelq Growth Agency. All Rights Reserved.
         </div>
-        <div class="grid">
-            <div class="card hover-target" data-aos="zoom-in">
-                <div class="vid-frame"><video autoplay muted loop playsinline><source src="https://videos.pexels.com/video-files/3130182/3130182-uhd_2560_1440_30fps.mp4" type="video/mp4"></video></div>
-                <h3 style="font-size: 1.5rem; margin-bottom: 10px;">Luxury Brand Media</h3>
-                <p style="color:var(--text-light); line-height: 1.6;">Cinematic color grading and CGI for high-end product launches.</p>
-            </div>
-            <div class="card hover-target" data-aos="zoom-in" data-aos-delay="100">
-                <div class="vid-frame"><video autoplay muted loop playsinline><source src="https://videos.pexels.com/video-files/3129957/3129957-uhd_2560_1440_25fps.mp4" type="video/mp4"></video></div>
-                <h3 style="font-size: 1.5rem; margin-bottom: 10px;">Automated Infrastructure</h3>
-                <p style="color:var(--text-light); line-height: 1.6;">Python-driven CRM sync and data engines that run 24/7 without manual input.</p>
-            </div>
-            <div class="card hover-target" data-aos="zoom-in" data-aos-delay="200">
-                <div class="vid-frame"><video autoplay muted loop playsinline><source src="https://videos.pexels.com/video-files/4069480/4069480-uhd_2560_1440_25fps.mp4" type="video/mp4"></video></div>
-                <h3 style="font-size: 1.5rem; margin-bottom: 10px;">Product Architecture</h3>
-                <p style="color:var(--text-light); line-height: 1.6;">Mobile-first web platforms built for speed, conversion, and global scaling.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="reviews">
-        <div style="text-align: center; margin-bottom: 4rem;" data-aos="fade-up">
-            <h2 style="font-size: clamp(2.5rem, 6vw, 3.5rem);">Client <span>Voices</span></h2>
-        </div>
-        <div class="grid">
-            <div class="card hover-target" data-aos="fade-right">
-                <div style="color: #fbbf24; font-size: 1.5rem; margin-bottom: 1rem;">★★★★★</div>
-                <p style="font-size: 1.1rem; line-height: 1.6; font-style: italic; margin-bottom: 1.5rem;">"Zelq's Python tools run our entire lead generation system now. We saved roughly ₹8L this year just by cutting out manual data entry."</p>
-                <h4 style="font-weight: 900;">Vikram S.</h4>
-                <p style="color:var(--text-light); font-size: 0.85rem;">Director, Global Logistics</p>
-            </div>
-            <div class="card hover-target" data-aos="fade-left">
-                <div style="color: #fbbf24; font-size: 1.5rem; margin-bottom: 1rem;">★★★★★</div>
-                <p style="font-size: 1.1rem; line-height: 1.6; font-style: italic; margin-bottom: 1.5rem;">"Shaurya's cinematic VFX work and Vrishmanyu's CRM logic completely changed how our high-end clients view our portfolio."</p>
-                <h4 style="font-weight: 900;">Sarah L.</h4>
-                <p style="color:var(--text-light); font-size: 0.85rem;">CMO, Zenith Tech</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="roadmap">
-        <div style="text-align:center; margin-bottom: 4rem;" data-aos="fade-up">
-            <h2 style="font-size: clamp(2.5rem, 6vw, 3.5rem);">The <span>Growth Roadmap</span></h2>
-        </div>
-        <div class="grid">
-            <div class="card hover-target"><h1 style="color:var(--accent); opacity:0.15; font-size: 3rem;">01</h1><h3 style="margin: 10px 0;">Infrastructure Audit</h3><p style="font-size:0.95rem; color:var(--text-light);">We find the tech and financial leaks in your current funnel.</p></div>
-            <div class="card hover-target"><h1 style="color:var(--accent); opacity:0.15; font-size: 3rem;">02</h1><h3 style="margin: 10px 0;">System Deployment</h3><p style="font-size:0.95rem; color:var(--text-light);">Python bots installed to automate 100% of your daily manual tasks.</p></div>
-            <div class="card hover-target"><h1 style="color:var(--accent); opacity:0.15; font-size: 3rem;">03</h1><h3 style="margin: 10px 0;">Visual Authority</h3><p style="font-size:0.95rem; color:var(--text-light);">High-ticket VFX assets that build instant brand trust and authority.</p></div>
-            <div class="card hover-target"><h1 style="color:var(--accent); opacity:0.15; font-size: 3rem;">04</h1><h3 style="margin: 10px 0;">Predictable Scale</h3><p style="font-size:0.95rem; color:var(--text-light);">Financial strategy and roadmap execution for long-term dominance.</p></div>
-        </div>
-    </section>
-
-    <section id="faq">
-        <div style="text-align: center; margin-bottom: 4rem;" data-aos="fade-up">
-            <h2 style="font-size: clamp(2.5rem, 6vw, 3.5rem);">Client <span>Intelligence</span></h2>
-        </div>
-        <div style="max-width: 800px; margin: 0 auto;">
-            <div class="faq-item hover-target" onclick="this.classList.toggle('active')" data-aos="fade-up">
-                <div class="faq-question">What exactly does "Python Automation" mean for my business? <span class="faq-icon">+</span></div>
-                <div class="faq-answer">It means eliminating human error and manual work. We write custom code that automatically moves leads from your ads into your CRM, sends welcome emails, and updates your spreadsheets instantly while you sleep.</div>
-            </div>
-            <div class="faq-item hover-target" onclick="this.classList.toggle('active')" data-aos="fade-up" data-aos-delay="100">
-                <div class="faq-question">Why should I choose the Premium Plan over a standard agency? <span class="faq-icon">+</span></div>
-                <div class="faq-answer">Standard agencies charge for hours and templates. The Premium Plan gives you direct access to our founders to build custom software, cinematic-grade video assets, and elite web architecture designed specifically for high-ticket scaling.</div>
-            </div>
-            <div class="faq-item hover-target" onclick="this.classList.toggle('active')" data-aos="fade-up" data-aos-delay="200">
-                <div class="faq-question">How does the 7-Day Free Trial work? <span class="faq-icon">+</span></div>
-                <div class="faq-answer">We limit our intake to 10 companies to ensure quality. If selected, we will audit your systems and deploy a basic CRM or media asset completely free for 7 days. If you don't see the value, you walk away paying nothing.</div>
-            </div>
-        </div>
-    </section>
-
-    <section id="pricing">
-        <div style="background:var(--accent); color:#fff; padding: 40px 20px; border-radius: 30px; text-align:center; font-weight:900; margin-bottom: 5rem;" data-aos="zoom-in">
-            EXCLUSIVE: 1-WEEK FREE TRIAL FOR THE FIRST 10 COMPANIES
-        </div>
-        <div class="grid">
-            <div class="card hover-target" data-aos="fade-up">
-                <h3 style="font-size: 2rem;">Basic</h3>
-                <div style="font-size: 3rem; font-weight: 950; margin: 1rem 0;">₹1,500<span style="font-size: 1rem; color:var(--text-light)">/wk</span></div>
-                <ul style="list-style:none; line-height:2.5; font-size:1.1rem; color:var(--text-light); margin-bottom: 2rem;"><li>✓ Social Media Content</li><li>✓ CRM Lead Setup</li><li>✓ Weekly Data Sync</li></ul>
-                <a href="#contact" class="btn hover-target" style="border: 1px solid var(--border); width: 100%; color:inherit;">Select Basic</a>
-            </div>
-            <div class="card hover-target" style="border: 3px solid var(--accent); transform: scale(1.05);" data-aos="zoom-in" data-aos-delay="100">
-                <span style="font-weight: 900; color: var(--accent); font-size: 0.8rem; letter-spacing: 2px;">PREMIUM ACCESS</span>
-                <h3 style="font-size: 2.5rem; margin-top: 1rem;">Premium</h3>
-                <div style="font-size: 3.5rem; font-weight: 950; margin: 1rem 0;">₹3,499<span style="font-size: 1rem; color:var(--text-light)">/wk</span></div>
-                <ul style="list-style:none; line-height:2.5; font-size:1.1rem; color:var(--text-light); margin-bottom: 2rem;"><li>✓ <strong>High-End VFX & Video</strong></li><li>✓ <strong>Full-Stack App Dev</strong></li><li>✓ <strong>24/7 Founder Access</strong></li></ul>
-                <a href="#contact" class="btn btn-p hover-target" style="width: 100%;">Claim Free Trial</a>
-            </div>
-            <div class="card hover-target" data-aos="fade-up" data-aos-delay="200">
-                <h3 style="font-size: 2rem;">Pro</h3>
-                <div style="font-size: 3rem; font-weight: 950; margin: 1rem 0;">₹2,750<span style="font-size: 1rem; color:var(--text-light)">/wk</span></div>
-                <ul style="list-style:none; line-height:2.5; font-size:1.1rem; color:var(--text-light); margin-bottom: 2rem;"><li>✓ Python Automation Suite</li><li>✓ UI/UX Architecture</li><li>✓ Strategic Roadmap</li></ul>
-                <a href="#contact" class="btn hover-target" style="border: 1px solid var(--border); width: 100%; color:inherit;">Select Pro</a>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact">
-        <div class="grid">
-            <div data-aos="fade-right">
-                <h2 style="font-size: clamp(3rem, 10vw, 5rem); line-height: 0.9;">Ready to <br><span style="color:var(--accent)">Win?</span></h2>
-                <p style="margin: 2.5rem 0; color:var(--text-light); font-size: 1.2rem;">We only accept 10 clients at a time. Secure your position.</p>
-                <p style="font-weight: 900; font-size: 1.1rem; margin-bottom: 10px;">✉️ contact.zelq@gmail.com</p>
-                <p style="font-weight: 900; font-size: 1.1rem;">📞 +91 7880032340</p>
-            </div>
-            <div class="card hover-target" data-aos="fade-left">
-                <form action="https://formspree.io/f/xwvnneer" method="POST">
-                    <input type="text" name="name" placeholder="Full Name" class="input-glass hover-target" required>
-                    <input type="email" name="email" placeholder="Business Email" class="input-glass hover-target" required>
-                    <textarea name="message" placeholder="What is your biggest bottleneck?" class="input-glass hover-target" style="height:120px;" required></textarea>
-                    <button type="submit" class="btn btn-p hover-target" style="width:100%; max-width: 100%;">Secure My Slot</button>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <footer style="padding: 80px 5%; text-align: center; border-top: 1px solid var(--border); background: var(--nav-bg); backdrop-filter: var(--glass-blur);">
-        <div style="font-size: 2rem; font-weight: 900; letter-spacing: 2px; margin-bottom: 1rem;">ZELQ<span style="color:var(--accent)">.</span></div>
-        <p style="color:var(--text-light); font-weight: 600;">© <span id="year"></span> Zelq Growth Agency.</p>
     </footer>
 
-    <button class="chat-widget hover-target" onclick="toggleChat()">💬</button>
+    <button class="chat-widget hover-target" aria-label="Open Live Chat" onclick="toggleChat()">💬</button>
     <div class="chat-window" id="chatWindow">
         <div class="chat-header">
             <span>Zelq Support ⚡</span>
-            <button class="hover-target" onclick="toggleChat()" style="background:none; border:none; color:white; font-size:1.5rem; cursor:pointer;">×</button>
+            <button class="hover-target" aria-label="Close Chat" onclick="toggleChat()" style="background:none; border:none; color:white; font-size:1.5rem; cursor:pointer;">×</button>
         </div>
         <div style="padding: 20px; text-align: center; min-height: 150px; display: flex; flex-direction: column; justify-content: center;">
             <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 1rem;">Our founders are currently executing roadmaps for clients.</p>
@@ -414,99 +549,133 @@
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // 1. Initialize Animations & Year
+        // AOS & Year Init
         AOS.init({ duration: 800, once: true });
         document.getElementById("year").innerHTML = new Date().getFullYear();
 
-        // 2. Preloader
-        window.onload = () => {
-            setTimeout(() => {
-                document.getElementById('preloader').style.opacity = '0';
-                setTimeout(() => document.getElementById('preloader').style.display = 'none', 800);
-            }, 1500);
-        };
+        // OS THEME SYNC (Enterprise Feature #21)
+        function initTheme() {
+            const savedTheme = localStorage.getItem('zelqTheme');
+            if (savedTheme) {
+                document.documentElement.setAttribute('data-theme', savedTheme);
+            } else {
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+            }
+        }
+        initTheme();
 
-        // 3. Custom Cursor
-        const cursorDot = document.querySelector('.cursor-dot');
-        const cursorOutline = document.querySelector('.cursor-outline');
-        window.addEventListener('mousemove', (e) => {
-            const posX = e.clientX; const posY = e.clientY;
-            cursorDot.style.left = `${posX}px`; cursorDot.style.top = `${posY}px`;
-            cursorOutline.animate({ left: `${posX}px`, top: `${posY}px` }, { duration: 500, fill: "forwards" });
-        });
-        document.querySelectorAll('a, button, input, textarea, .faq-item, .hover-target').forEach(el => {
-            el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
-            el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
-        });
-
-        // 4. Scroll Progress Bar
-        window.addEventListener('scroll', () => {
-            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            document.getElementById("progress-bar").style.width = (winScroll / height) * 100 + "%";
-        });
-
-        // 5. Theme Toggle with Local Storage Memory
         function toggleTheme() {
             const html = document.documentElement;
             const newTheme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
             html.setAttribute('data-theme', newTheme);
             localStorage.setItem('zelqTheme', newTheme);
         }
-        // Load saved theme
-        const savedTheme = localStorage.getItem('zelqTheme');
-        if(savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);
 
-        // 6. ROI Calculator Logic
+        // PRELOADER EXIT
+        window.onload = () => {
+            setTimeout(() => {
+                document.getElementById('preloader').style.opacity = '0';
+                setTimeout(() => document.getElementById('preloader').style.display = 'none', 800);
+            }, 1000);
+        };
+
+        // CURSOR LOGIC
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+        window.addEventListener('mousemove', (e) => {
+            cursorDot.style.left = cursorOutline.style.left = `${e.clientX}px`;
+            cursorDot.style.top = cursorOutline.style.top = `${e.clientY}px`;
+        });
+        document.querySelectorAll('a, button, input, textarea, select, .faq-item, .hover-target').forEach(el => {
+            el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+            el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+        });
+
+        // SCROLL PROGRESS
+        window.addEventListener('scroll', () => {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            document.getElementById("progress-bar").style.width = (winScroll / height) * 100 + "%";
+        });
+
+        // EXIT INTENT LOGIC (Enterprise Feature #3)
+        let exitIntentTriggered = false;
+        document.addEventListener('mouseleave', (e) => {
+            if (e.clientY < 0 && !exitIntentTriggered) {
+                document.getElementById('exitModal').classList.add('modal-active');
+                exitIntentTriggered = true;
+            }
+        });
+
+        // ROI CALCULATOR
         const slider = document.getElementById("hourSlider");
-        const hoursDisplay = document.getElementById("hoursValue");
-        const wastedDisplay = document.getElementById("wastedVal");
         slider.oninput = function() {
-            hoursDisplay.innerHTML = this.value + " hrs";
-            let wasted = this.value * 4 * 12 * 500;
-            wastedDisplay.innerHTML = "₹" + wasted.toLocaleString('en-IN');
+            document.getElementById("hoursValue").innerHTML = this.value + " hrs";
+            document.getElementById("wastedVal").innerHTML = "₹" + (this.value * 4 * 12 * 500).toLocaleString('en-IN');
         }
 
-        // 7. Client Portal Logic (Includes your specific email)
+        // CLIENT PORTAL LOGIC
         const portalModal = document.getElementById('portalModal');
-        const emailInput = document.getElementById('portalEmail');
-        const loginMsg = document.getElementById('loginMsg');
-        const loginBtn = document.getElementById('loginBtn');
-
         function openPortal() { portalModal.classList.add('modal-active'); }
-        function closePortal() { portalModal.classList.remove('modal-active'); loginMsg.style.display = 'none'; emailInput.value = ''; }
-        
+        function closePortal() { portalModal.classList.remove('modal-active'); document.getElementById('loginMsg').style.display = 'none'; document.getElementById('portalEmail').value = ''; }
         function verifyLogin() {
-            loginBtn.innerHTML = "Authenticating...";
+            const btn = document.getElementById('loginBtn');
+            btn.innerHTML = "Authenticating...";
             setTimeout(() => {
-                const enteredEmail = emailInput.value.toLowerCase().trim();
-                if(enteredEmail === "client@zelq.com" || enteredEmail === "shaurya160.saksena@gmail.com") {
-                    loginBtn.style.background = "#10b981";
-                    loginBtn.innerHTML = "Access Granted. Redirecting...";
-                    setTimeout(() => { 
-                        alert("Welcome to the Zelq Premium Dashboard."); 
-                        closePortal(); 
-                        loginBtn.style.background = ""; 
-                        loginBtn.innerHTML = "Access Portal"; 
-                    }, 1500);
-                } else {
-                    loginBtn.innerHTML = "Access Portal";
-                    loginMsg.style.display = 'block';
-                }
+                const email = document.getElementById('portalEmail').value.toLowerCase().trim();
+                if(email === "client@zelq.com" || email === "shaurya160.saksena@gmail.com") {
+                    btn.style.background = "#10b981"; btn.innerHTML = "Access Granted.";
+                    setTimeout(() => { alert("Welcome to the Zelq Premium Dashboard."); closePortal(); btn.style.background = ""; btn.innerHTML = "Access Portal"; }, 1500);
+                } else { btn.innerHTML = "Access Portal"; document.getElementById('loginMsg').style.display = 'block'; }
             }, 1200);
         }
 
-        // 8. Live Chat Logic
+        // FEEDBACK LOGIC
+        const feedbackModal = document.getElementById('feedbackModal');
+        function openFeedback() { feedbackModal.classList.add('modal-active'); }
+        function closeFeedback() { feedbackModal.classList.remove('modal-active'); }
+        function submitReview() {
+            const btn = document.getElementById('submitRevBtn');
+            const rating = document.getElementById('revRating').value;
+            const company = document.getElementById('revCompany').value || "Verified Client";
+            const role = document.getElementById('revRole').value || "Executive";
+            const text = document.getElementById('revText').value || "Exceptional infrastructure and workflow automation.";
+            
+            btn.innerHTML = "Verifying Review...";
+            setTimeout(() => {
+                if(rating === "5") {
+                    const grid = document.getElementById('reviewGrid');
+                    const newCard = document.createElement('div');
+                    newCard.className = "card hover-target";
+                    newCard.style.animation = "pulseGlow 1s ease";
+                    newCard.innerHTML = `
+                        <div style="color: #fbbf24; font-size: 1.5rem; margin-bottom: 1rem;">★★★★★</div>
+                        <p style="font-size: 1.1rem; line-height: 1.6; font-style: italic; margin-bottom: 1.5rem;">"${text}"</p>
+                        <h4 style="font-weight: 800;">${role}</h4>
+                        <p style="color:var(--text-light); font-size: 0.85rem; margin-top: 5px;">${company}</p>
+                    `;
+                    grid.prepend(newCard);
+                    alert("Success: 5-Star Review Verified and Added to the Vault.");
+                } else {
+                    alert("Thank you. Your feedback has been sent to our internal management team for review.");
+                }
+                closeFeedback();
+                btn.innerHTML = "Submit to Vault";
+                document.getElementById('revCompany').value = ''; document.getElementById('revRole').value = ''; document.getElementById('revText').value = '';
+            }, 1200);
+        }
+
+        // CHAT WIDGET
         const chatWindow = document.getElementById('chatWindow');
         function toggleChat() { chatWindow.classList.toggle('chat-active'); }
 
-        // 9. FOMO Toast Notification Popup
+        // FOMO TOAST
         setTimeout(() => {
             const toast = document.getElementById('toast');
             toast.classList.add('toast-active');
             setTimeout(() => toast.classList.remove('toast-active'), 6000);
-        }, 12000); // Pops up 12 seconds after page load
-
+        }, 12000); 
     </script>
 </body>
 </html>

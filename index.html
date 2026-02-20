@@ -39,7 +39,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; cursor: none; }
         html { scroll-behavior: smooth; overflow-x: hidden; width: 100%; }
         body { background-color: var(--bg); color: var(--text-main); overflow-x: hidden; width: 100%; position: relative; transition: background-color 0.5s, color 0.5s; }
-        h1, h2, h3, .morph-item { overflow-wrap: break-word; word-wrap: break-word; hyphens: auto; }
+        h1, h2, h3 { overflow-wrap: break-word; word-wrap: break-word; hyphens: auto; }
 
         /* Skip to Content (Accessibility) */
         .skip-link { position: absolute; top: -40px; left: 0; background: var(--accent); color: white; padding: 8px; z-index: 100000; transition: top 0.2s; }
@@ -75,11 +75,12 @@
         .logo-item span { color: var(--accent); }
         @keyframes logoSlide { 0%, 30% { transform: translateY(0); } 33%, 63% { transform: translateY(-35px); } 66%, 96% { transform: translateY(-70px); } 100% { transform: translateY(0); } }
 
-        /* --- 5. HERO MORPHING TITLE --- */
+        /* --- 5. HERO MORPHING TITLE (OVERLAP FIX APPLIED) --- */
         .hero { min-height: 100vh; display: flex; align-items: center; padding: 150px 5% 60px 5%; }
-        .morph-box { height: clamp(60px, 12vw, 140px); overflow: hidden; margin-bottom: 2rem; }
+        .morph-box { height: clamp(80px, 12vw, 140px); overflow: hidden; margin-bottom: 2rem; }
         .morph-list { animation: titleMorph 12s cubic-bezier(0.8, 0, 0.2, 1) infinite; }
-        .morph-item { font-size: clamp(3rem, 9vw, 6.5rem); font-weight: 900; line-height: 1.1; height: clamp(60px, 12vw, 140px); display: flex; align-items: center; flex-wrap: wrap; }
+        /* white-space: nowrap ensures words never stack vertically and bleed */
+        .morph-item { font-size: clamp(2.2rem, 7vw, 6.5rem); font-weight: 900; line-height: 1.1; height: clamp(80px, 12vw, 140px); display: flex; align-items: center; white-space: nowrap; }
         @keyframes titleMorph { 0%, 30% { transform: translateY(0); } 33%, 63% { transform: translateY(-33.33%); } 66%, 96% { transform: translateY(-66.66%); } 100% { transform: translateY(0); } }
 
         /* --- TECH STACK LOGO WALL --- */
@@ -104,7 +105,7 @@
         .roi-stat h4 { font-size: 1.2rem; color: var(--text-light); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 2px; }
         .roi-stat h2 { font-size: clamp(2.5rem, 5vw, 4rem); color: var(--accent); font-weight: 900; }
 
-        /* --- 8. MODALS --- */
+        /* --- 8. MODALS (Portal, Feedback, Exit Intent) --- */
         .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); z-index: 100000; display: none; align-items: center; justify-content: center; opacity: 0; transition: 0.3s; }
         .modal-box { background: var(--surface); border: 1px solid var(--border); padding: 3rem; border-radius: 30px; text-align: center; max-width: 450px; width: 90%; transform: translateY(20px); transition: 0.3s; }
         .modal-active { display: flex; opacity: 1; }
@@ -126,7 +127,6 @@
         .toast-active { left: 30px; }
         .toast-dot { width: 10px; height: 10px; background: #10b981; border-radius: 50%; animation: pulseGlow 1.5s infinite alternate; }
 
-        /* Mobile Sticky CTA */
         .mobile-cta-bar { display: none; position: fixed; bottom: 0; left: 0; width: 100%; background: var(--surface); backdrop-filter: blur(15px); border-top: 1px solid var(--border); padding: 15px; z-index: 998; text-align: center; }
 
         /* --- 10. MARQUEE & FAQ --- */
@@ -159,19 +159,23 @@
         .footer-links a { color: inherit; text-decoration: none; transition: 0.2s; }
         .footer-links a:hover { color: var(--accent); }
 
-        /* --- MOBILE OVERRIDES --- */
+        /* --- MOBILE OVERRIDES (Overlap Fixes Added) --- */
         @media (max-width: 768px) { 
-            body { padding-bottom: 80px; } /* Space for sticky bar */
+            body { padding-bottom: 80px; } 
             .mobile-cta-bar { display: block; }
             nav { padding: 1rem 5%; }
             .logo-box { width: 150px; height: 30px; }
             .logo-item { font-size: 1.2rem; height: 30px; line-height: 30px; }
-            .hero { text-align: center; padding-top: 120px; }
-            .morph-item { justify-content: center; }
+            
+            /* Overlap specific fixes */
+            .hero { text-align: center; padding-top: 140px; } 
+            .morph-box { height: 70px; margin-bottom: 1rem; width: 100%; } 
+            .morph-item { height: 70px; font-size: 2.1rem; justify-content: center; margin-left: -10px; } 
+            
             section { padding: 60px 5%; }
             .card { padding: 2rem; border-radius: 25px; }
             .roi-container { padding: 2rem; }
-            .chat-widget { bottom: 90px; } /* Above sticky bar */
+            .chat-widget { bottom: 90px; } 
             .chat-window { width: 90%; right: 5%; bottom: 160px; }
             .toast-notification { width: 90%; left: 5%; bottom: -100px; }
             .toast-active { bottom: 90px; left: 5%; }
@@ -252,7 +256,7 @@
                     </div>
                 </div>
                 <p style="font-size: clamp(1.1rem, 3vw, 1.5rem); color: var(--text-light); max-width: 800px; line-height: 1.6; margin-bottom: 3.5rem;">The world's most aggressive growth agency. We install the media, automation, and code required for total market dominance.</p>
-                <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                <div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
                     <a href="#contact" class="btn btn-p hover-target">Apply for Partnership</a>
                     <a href="#pricing" class="btn hover-target" style="border:1px solid var(--border); background:var(--surface); color:inherit;">View Pricing</a>
                 </div>
@@ -553,7 +557,7 @@
         AOS.init({ duration: 800, once: true });
         document.getElementById("year").innerHTML = new Date().getFullYear();
 
-        // OS THEME SYNC (Enterprise Feature #21)
+        // OS THEME SYNC
         function initTheme() {
             const savedTheme = localStorage.getItem('zelqTheme');
             if (savedTheme) {
@@ -599,7 +603,7 @@
             document.getElementById("progress-bar").style.width = (winScroll / height) * 100 + "%";
         });
 
-        // EXIT INTENT LOGIC (Enterprise Feature #3)
+        // EXIT INTENT LOGIC
         let exitIntentTriggered = false;
         document.addEventListener('mouseleave', (e) => {
             if (e.clientY < 0 && !exitIntentTriggered) {

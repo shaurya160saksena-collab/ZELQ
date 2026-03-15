@@ -85,7 +85,7 @@
         /* --- SCROLL PROGRESS & CANVAS BG EFFECTS --- */
         #progress-bar { position: fixed; top: 0; left: 0; height: 4px; background: linear-gradient(to right, var(--accent), var(--accent-sec)); z-index: 10001; width: 0%; box-shadow: 0 0 15px var(--accent); }
         
-        /* NEW: WebGL / Interactive Canvas Network Background */
+        /* Interactive Canvas Network Background */
         #network-canvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -3; pointer-events: none; opacity: 0.8; }
         
         .bg-grid { position: fixed; top: -50%; left: -50%; width: 200%; height: 200%; z-index: -4; background-image: linear-gradient(to right, rgba(0,240,255,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,240,255,0.05) 1px, transparent 1px); background-size: 60px 60px; -webkit-mask-image: radial-gradient(circle at center, black 20%, transparent 60%); mask-image: radial-gradient(circle at center, black 20%, transparent 60%); animation: gridMove 20s linear infinite; }
@@ -99,16 +99,18 @@
         .logo-item span { color: var(--accent); }
         @keyframes logoSlide { 0%, 30% { transform: translateY(0); } 33%, 63% { transform: translateY(-35px); } 66%, 96% { transform: translateY(-70px); } 100% { transform: translateY(0); } }
 
+        /* --- HERO, 3D TILT & 3D GLOBE --- */
+        .hero { min-height: 100vh; display: flex; align-items: center; padding: 150px 5% 60px 5%; position: relative; perspective: 1500px; }
+        .tilt-wrapper { width: 100%; transition: transform 0.1s ease-out; transform-style: preserve-3d; z-index: 2; position: relative; }
+        
         .badge { background: var(--surface); color: var(--text-main); padding: 8px 18px; border-radius: 100px; font-size: 0.75rem; font-weight: 800; border: 1px solid var(--border); display: inline-flex; align-items: center; gap: 8px; margin-bottom: 1.5rem; box-shadow: 0 0 20px rgba(0,0,0,0.2); animation: floatBadge 4s ease-in-out infinite; }
         .pulse-dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; animation: pulseGlow 1.5s infinite alternate; }
+        
+        #globe-canvas { width: 40px; height: 40px; } /* 3D Globe next to badge */
+        
         @keyframes pulseGlow { from { opacity: 0.5; box-shadow: 0 0 5px var(--accent); transform: scale(0.9); } to { opacity: 1; box-shadow: 0 0 15px var(--accent); transform: scale(1.2); } }
         @keyframes floatBadge { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
 
-        /* --- HERO & 3D TILT --- */
-        .hero { min-height: 100vh; display: flex; align-items: center; padding: 150px 5% 60px 5%; position: relative; perspective: 1500px; }
-        /* NEW: The wrapper that tracks the mouse */
-        .tilt-wrapper { width: 100%; transition: transform 0.1s ease-out; transform-style: preserve-3d; z-index: 2; position: relative; }
-        
         .morph-box { height: clamp(70px, 10vw, 130px); overflow: hidden; margin-bottom: 2rem; width: 100%; }
         .morph-list { animation: titleMorph 12s cubic-bezier(0.8, 0, 0.2, 1) infinite; }
         .morph-item { font-size: clamp(2.2rem, 7vw, 6.5rem); font-weight: 900; line-height: 1.1; height: clamp(70px, 10vw, 130px); display: flex; align-items: center; white-space: nowrap; overflow-wrap: anywhere; text-shadow: 0 10px 30px rgba(0,0,0,0.5); }
@@ -126,13 +128,7 @@
             box-shadow: 0 10px 40px rgba(0,0,0,0.1); 
             height: 100%; position: relative; overflow: hidden; z-index: 1; 
         }
-        
-        .card::before {
-            content: ""; position: absolute; inset: 0; border-radius: inherit; z-index: -1;
-            background: radial-gradient(600px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(0, 240, 255, 0.1), transparent 40%);
-            opacity: 0; transition: opacity 0.5s; pointer-events: none;
-        }
-        
+        .card::before { content: ""; position: absolute; inset: 0; border-radius: inherit; z-index: -1; background: radial-gradient(600px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(0, 240, 255, 0.1), transparent 40%); opacity: 0; transition: opacity 0.5s; pointer-events: none; }
         .card:hover { transform: translateY(-12px); border-color: rgba(0, 240, 255, 0.3); }
         .card:hover::before { opacity: 1; }
         
@@ -140,38 +136,14 @@
         .premium-card:hover { transform: scale(1.08) translateY(-10px); }
         @keyframes borderPulse { 0% { border-color: var(--accent); box-shadow: 0 0 10px var(--accent-glow); } 100% { border-color: var(--accent-sec); box-shadow: 0 0 30px rgba(176, 38, 255, 0.3); } }
 
-        /* --- HORIZONTAL SCROLL PORTFOLIO (NEW) --- */
-        #portfolio-wrapper {
-            height: 300vh; /* Determines how long the user scrolls to move horizontally */
-            padding: 0;
-            max-width: 100%;
-            margin: 0;
-        }
-        .sticky-portfolio {
-            position: sticky;
-            top: 0;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            overflow: hidden;
-            width: 100%;
-        }
+        /* --- HORIZONTAL SCROLL PORTFOLIO --- */
+        #portfolio-wrapper { height: 300vh; padding: 0; max-width: 100%; margin: 0; }
+        .sticky-portfolio { position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; justify-content: center; overflow: hidden; width: 100%; }
         .h-scroll-title { padding: 0 5vw; margin-bottom: 3rem; text-align: left;}
-        
-        .h-scroll-container {
-            display: flex;
-            gap: 3rem;
-            width: max-content; /* Expands to fit all cards */
-            padding: 0 5vw;
-            will-change: transform;
-        }
-        .h-scroll-card {
-            width: 450px;
-            flex-shrink: 0;
-        }
+        .h-scroll-container { display: flex; gap: 3rem; width: max-content; padding: 0 5vw; will-change: transform; }
+        .h-scroll-card { width: 450px; flex-shrink: 0; cursor: pointer; }
 
-        /* --- TECH STACK & ROI --- */
+        /* --- ROI & TECH --- */
         .tech-stack { padding: 40px 5%; margin-bottom: 40px; position: relative; z-index: 2; }
         .logo-row { display: flex; justify-content: center; align-items: center; gap: clamp(30px, 6vw, 80px); flex-wrap: wrap; opacity: 0.5; transition: 0.4s; }
         .logo-row:hover { opacity: 1; text-shadow: 0 0 20px var(--accent-glow); }
@@ -185,9 +157,10 @@
         input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 6px; background: var(--border); border-radius: 5px; }
         .roi-numbers { display: flex; justify-content: center; gap: 4rem; flex-wrap: wrap; margin-top: 2rem; }
 
-        /* --- MODALS & INPUTS --- */
-        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); z-index: 100000; display: none; align-items: center; justify-content: center; opacity: 0; transition: 0.3s; }
-        .modal-box { background: var(--surface); border: 1px solid var(--border); padding: 3rem; border-radius: 30px; text-align: center; max-width: 450px; width: 90%; transform: translateY(20px); transition: 0.3s; position: relative; overflow: hidden; }
+        /* --- MODALS & MULTI-STEP FUNNEL INPUTS --- */
+        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); z-index: 100000; display: none; align-items: center; justify-content: center; opacity: 0; transition: 0.3s; overflow-y: auto;}
+        .modal-box { background: var(--surface); border: 1px solid var(--border); padding: 3rem; border-radius: 30px; text-align: center; max-width: 450px; width: 90%; transform: translateY(20px); transition: 0.3s; position: relative; overflow: hidden; margin: auto; }
+        .modal-box.large { max-width: 800px; text-align: left; }
         .modal-active { display: flex; opacity: 1; }
         .modal-active .modal-box { transform: translateY(0); }
         
@@ -195,6 +168,13 @@
         .input-glass:focus { border-color: var(--accent); box-shadow: 0 0 15px var(--accent-glow); }
         select.input-glass { appearance: none; cursor: pointer; }
         select.input-glass option { background: #03030a; color: #fff; }
+
+        /* Multi-Step Funnel CSS */
+        .form-step { display: none; animation: slideIn 0.4s forwards; }
+        .form-step.active { display: block; }
+        @keyframes slideIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+        .progress-bar-bg { width: 100%; height: 6px; background: var(--border); border-radius: 3px; margin-bottom: 2rem; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-sec)); width: 33%; transition: width 0.4s ease; }
 
         /* --- WIDGETS & TOAST --- */
         .chat-widget { position: fixed; bottom: 30px; right: 30px; background: linear-gradient(135deg, var(--accent), var(--accent-sec)); color: white; width: 65px; height: 65px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; z-index: 999; box-shadow: 0 10px 30px var(--accent-glow); cursor: pointer; transition: 0.3s; border: none; }
@@ -251,7 +231,7 @@
         .footer-links a { color: inherit; text-decoration: none; transition: 0.2s; }
         .footer-links a:hover { color: var(--accent); text-shadow: 0 0 10px var(--accent-glow); }
 
-        /* Mobile Overrides (Disabled horizontal scroll tricks on phone for usability) */
+        /* Mobile Overrides */
         @media (max-width: 768px) { 
             body { padding-bottom: 80px; } 
             .mobile-cta-bar { display: block; }
@@ -263,7 +243,6 @@
             section { padding: 60px 5%; }
             .card { padding: 2rem; border-radius: 25px; }
             
-            /* Overriding Portfolio for Mobile */
             #portfolio-wrapper { height: auto !important; position: relative !important; padding: 60px 0 !important; }
             .sticky-portfolio { position: relative !important; height: auto !important; }
             .h-scroll-container { flex-direction: column !important; width: 100% !important; padding: 0 5% !important; transform: none !important; gap: 2rem !important; }
@@ -298,18 +277,70 @@
         </div>
         <div style="display: flex; gap: 15px; align-items: center;">
             <div class="badge" style="margin-bottom: 0; display: none;"><div class="pulse-dot"></div>2/10 Slots Open</div>
-            <button onclick="openPortal()" class="btn hover-target" style="background:transparent; border:1px solid var(--border); color:inherit; padding: 0.6rem 1.2rem; font-size: 0.8rem;" aria-label="Open Client Portal">Client Portal</button>
-            <button onclick="toggleTheme()" class="hover-target" style="background:none; border:none; color:inherit; font-size:1.5rem; cursor:pointer;" aria-label="Toggle Theme">🌓</button>
+            <button onclick="openPortal()" class="btn hover-target audio-trigger" style="background:transparent; border:1px solid var(--border); color:inherit; padding: 0.6rem 1.2rem; font-size: 0.8rem;" aria-label="Open Client Portal">Client Portal</button>
+            <button onclick="toggleTheme()" class="hover-target audio-trigger" style="background:none; border:none; color:inherit; font-size:1.5rem; cursor:pointer;" aria-label="Toggle Theme">🌓</button>
         </div>
     </nav>
+
+    <div class="modal-overlay" id="caseModal1">
+        <div class="modal-box large">
+            <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Luxury Brand <span class="text-gradient">Media</span></h2>
+            <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 2rem;">
+                <div style="flex: 1; min-width: 250px;">
+                    <h4 style="color: var(--accent); margin-bottom: 5px;">The Problem</h4>
+                    <p style="color: var(--text-light); line-height: 1.6;">High-end apparel brand struggled to convert traffic due to slow, unoptimized imagery and broken UX.</p>
+                </div>
+                <div style="flex: 1; min-width: 250px;">
+                    <h4 style="color: #10b981; margin-bottom: 5px;">The Solution</h4>
+                    <p style="color: var(--text-light); line-height: 1.6;">Deployed cinematic 3D product renders and a headless CMS architecture for instant load times.</p>
+                </div>
+            </div>
+            <h3 style="font-size: 1.5rem; margin-bottom: 10px;">ROI: +60% CVR, ₹18L Generated in 14 Days.</h3>
+            <button onclick="closeCase(1)" class="btn hover-target" style="border:1px solid var(--border); background:var(--bg); color:inherit; margin-top: 1rem;">Close Report</button>
+        </div>
+    </div>
+    <div class="modal-overlay" id="caseModal2">
+        <div class="modal-box large">
+            <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Automated <span class="text-gradient">Infrastructure</span></h2>
+            <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 2rem;">
+                <div style="flex: 1; min-width: 250px;">
+                    <h4 style="color: var(--accent); margin-bottom: 5px;">The Problem</h4>
+                    <p style="color: var(--text-light); line-height: 1.6;">B2B Agency wasting 40+ hours a week manually entering lead data from Meta ads to HubSpot.</p>
+                </div>
+                <div style="flex: 1; min-width: 250px;">
+                    <h4 style="color: #10b981; margin-bottom: 5px;">The Solution</h4>
+                    <p style="color: var(--text-light); line-height: 1.6;">Built a custom Python/AWS pipeline that categorizes, scores, and emails leads within 2 seconds of opt-in.</p>
+                </div>
+            </div>
+            <h3 style="font-size: 1.5rem; margin-bottom: 10px;">ROI: 0 Manual Hours, 100% Error Reduction.</h3>
+            <button onclick="closeCase(2)" class="btn hover-target" style="border:1px solid var(--border); background:var(--bg); color:inherit; margin-top: 1rem;">Close Report</button>
+        </div>
+    </div>
+    <div class="modal-overlay" id="caseModal3">
+        <div class="modal-box large">
+            <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Product <span class="text-gradient">Architecture</span></h2>
+            <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 2rem;">
+                <div style="flex: 1; min-width: 250px;">
+                    <h4 style="color: var(--accent); margin-bottom: 5px;">The Problem</h4>
+                    <p style="color: var(--text-light); line-height: 1.6;">SaaS platform had a high churn rate due to confusing onboarding and outdated dashboard UI.</p>
+                </div>
+                <div style="flex: 1; min-width: 250px;">
+                    <h4 style="color: #10b981; margin-bottom: 5px;">The Solution</h4>
+                    <p style="color: var(--text-light); line-height: 1.6;">Redesigned the entire UX flow using modern glassmorphism and integrated an AI chatbot for instant support.</p>
+                </div>
+            </div>
+            <h3 style="font-size: 1.5rem; margin-bottom: 10px;">ROI: Churn reduced by 45% in Q1.</h3>
+            <button onclick="closeCase(3)" class="btn hover-target" style="border:1px solid var(--border); background:var(--bg); color:inherit; margin-top: 1rem;">Close Report</button>
+        </div>
+    </div>
 
     <div class="modal-overlay" id="exitModal">
         <div class="modal-box">
             <h2 style="font-size: 2rem; margin-bottom: 1rem;">Wait! Don't Leave <span class="text-gradient">Growth</span> on the Table.</h2>
-            <p style="color:var(--text-light); margin-bottom: 2rem;">Get our free Python automation blueprint before you go. Learn exactly how we save clients 40+ hours a week.</p>
+            <p style="color:var(--text-light); margin-bottom: 2rem;">Get our free Python automation blueprint before you go.</p>
             <input type="email" class="input-glass hover-target" placeholder="Where should we send it?" aria-label="Email for Blueprint">
-            <button class="btn btn-p hover-target" style="width: 100%; margin-bottom: 1rem;" onclick="document.getElementById('exitModal').classList.remove('modal-active'); alert('Blueprint sent!')">Send Blueprint</button>
-            <button onclick="document.getElementById('exitModal').classList.remove('modal-active')" class="hover-target" style="background:none; border:none; color:var(--text-light); cursor:pointer; text-decoration: underline;">No thanks, I like manual work</button>
+            <button class="btn btn-p hover-target audio-trigger" style="width: 100%; margin-bottom: 1rem;" onclick="document.getElementById('exitModal').classList.remove('modal-active'); alert('Blueprint sent!')">Send Blueprint</button>
+            <button onclick="document.getElementById('exitModal').classList.remove('modal-active')" class="hover-target" style="background:none; border:none; color:var(--text-light); cursor:pointer; text-decoration: underline;">No thanks</button>
         </div>
     </div>
 
@@ -318,7 +349,7 @@
             <h2 style="font-size: 2rem; margin-bottom: 1rem;">Member <span class="text-gradient">Login</span></h2>
             <p style="color:var(--text-light); margin-bottom: 2rem; font-size: 0.9rem;">Enter your premium email to access dashboards.</p>
             <input type="email" id="portalEmail" class="input-glass hover-target" placeholder="Enter business email..." aria-label="Portal Login Email">
-            <button onclick="verifyLogin()" class="btn btn-p hover-target" style="width: 100%; margin-bottom: 1rem;" id="loginBtn">Access Portal</button>
+            <button onclick="verifyLogin()" class="btn btn-p hover-target audio-trigger" style="width: 100%; margin-bottom: 1rem;" id="loginBtn">Access Portal</button>
             <p id="loginMsg" style="color:var(--accent-sec); font-size: 0.85rem; display: none;">No active premium plan found.</p>
             <button onclick="closePortal()" class="hover-target" style="background:none; border:none; color:var(--text-light); cursor:pointer; margin-top: 1rem; text-decoration: underline;">Cancel</button>
         </div>
@@ -328,24 +359,27 @@
         <div class="modal-box">
             <h2 style="font-size: 2rem; margin-bottom: 1rem;">Submit <span class="text-gradient">Feedback</span></h2>
             <p style="color:var(--text-light); margin-bottom: 2rem; font-size: 0.9rem;">Verified 5-star reviews are published to the Vault.</p>
-            <input type="text" id="revCompany" class="input-glass hover-target" placeholder="Company Name" aria-label="Company Name">
-            <input type="text" id="revRole" class="input-glass hover-target" placeholder="Your Role" aria-label="Your Role">
-            <select id="revRating" class="input-glass hover-target" aria-label="Rating">
+            <input type="text" id="revCompany" class="input-glass hover-target" placeholder="Company Name">
+            <input type="text" id="revRole" class="input-glass hover-target" placeholder="Your Role">
+            <select id="revRating" class="input-glass hover-target">
                 <option value="5">★★★★★ - Exceptional Impact</option>
                 <option value="4">★★★★☆ - Great Results</option>
                 <option value="3">★★★☆☆ - Average</option>
             </select>
-            <textarea id="revText" class="input-glass hover-target" placeholder="Describe the infrastructure we built..." style="height:100px;" aria-label="Review Details"></textarea>
-            <button onclick="submitReview()" class="btn btn-p hover-target" style="width: 100%; margin-bottom: 1rem;" id="submitRevBtn">Submit to Vault</button>
+            <textarea id="revText" class="input-glass hover-target" placeholder="Describe the infrastructure we built..." style="height:100px;"></textarea>
+            <button onclick="submitReview()" class="btn btn-p hover-target audio-trigger" style="width: 100%; margin-bottom: 1rem;" id="submitRevBtn">Submit to Vault</button>
             <button onclick="closeFeedback()" class="hover-target" style="background:none; border:none; color:var(--text-light); cursor:pointer; text-decoration: underline;">Cancel</button>
         </div>
     </div>
 
     <main id="main-content">
         <section class="hero hover-target" id="hero-section">
-            
             <div class="tilt-wrapper" id="tilt-wrapper">
-                <span class="badge"><div class="pulse-dot"></div>ESTABLISHED 2026 • GLOBAL OPERATIONS</span>
+                <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 1.5rem;">
+                    <span class="badge" style="margin-bottom:0;"><div class="pulse-dot"></div>ESTABLISHED 2026 • GLOBAL OPERATIONS</span>
+                    <canvas id="globe-canvas"></canvas>
+                </div>
+                
                 <div class="morph-box">
                     <div class="morph-list">
                         <div class="morph-item">Dominate <span class="text-gradient" style="margin-left: 15px;">Growth.</span></div>
@@ -355,8 +389,8 @@
                 </div>
                 <p style="font-size: clamp(1.1rem, 3vw, 1.5rem); color: var(--text-light); max-width: 800px; line-height: 1.6; margin-bottom: 3.5rem;">The world's most aggressive growth agency. We install the media, automation, and code required for total market dominance.</p>
                 <div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: flex-start;">
-                    <a href="#contact" class="btn btn-p hover-target">Apply for Partnership</a>
-                    <a href="#pricing" class="btn hover-target" style="border:1px solid var(--border); background:var(--surface); color:inherit;">View Pricing</a>
+                    <a href="#contact" class="btn btn-p hover-target audio-trigger">Apply for Partnership</a>
+                    <a href="#pricing" class="btn hover-target audio-trigger" style="border:1px solid var(--border); background:var(--surface); color:inherit;">View Pricing</a>
                 </div>
             </div>
         </section>
@@ -367,6 +401,27 @@
                 <h2>aws</h2><h2>python</h2><h2>meta</h2><h2>stripe</h2><h2>zapier</h2><h2>hubspot</h2>
             </div>
         </div>
+
+        <section id="industries">
+            <div style="text-align: center; margin-bottom: 4rem;" data-aos="fade-up">
+                <h2 style="font-size: clamp(2.5rem, 6vw, 3.5rem);">Industry <span class="text-gradient">Focus</span></h2>
+                <p style="color:var(--text-light); font-size: 1.1rem; margin-top: 10px;">Tailored infrastructure for high-growth sectors.</p>
+            </div>
+            <div class="grid">
+                <div class="card hover-target" data-aos="fade-up">
+                    <h3 style="font-size: 1.8rem; margin-bottom: 15px;">E-Commerce & Apparel</h3>
+                    <p style="color:var(--text-light); line-height: 1.6;">Automated inventory sync, high-conversion funnels, and VIP drop infrastructure for brands that need to handle massive traffic spikes.</p>
+                </div>
+                <div class="card hover-target" data-aos="fade-up" data-aos-delay="100">
+                    <h3 style="font-size: 1.8rem; margin-bottom: 15px;">Entertainment & Gaming</h3>
+                    <p style="color:var(--text-light); line-height: 1.6;">24/7 automated booking systems, customer loyalty loops, and immersive web experiences that keep players engaged.</p>
+                </div>
+                <div class="card hover-target" data-aos="fade-up" data-aos-delay="200">
+                    <h3 style="font-size: 1.8rem; margin-bottom: 15px;">B2B & SaaS Providers</h3>
+                    <p style="color:var(--text-light); line-height: 1.6;">Complex API integrations, cold outreach pipelines, and flawless CRM architecture to close high-ticket clients on autopilot.</p>
+                </div>
+            </div>
+        </section>
 
         <section id="vsl" style="padding-top: 40px;">
             <div style="text-align: center; margin-bottom: 3rem;" data-aos="fade-up">
@@ -397,7 +452,7 @@
             <div class="roi-container" data-aos="zoom-in">
                 <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">Hours spent on manual data entry per week:</h3>
                 <h1 id="hoursValue" class="text-gradient" style="font-size: 4rem; margin-bottom: 1rem;">20 hrs</h1>
-                <input type="range" id="hourSlider" class="hover-target" min="5" max="100" value="20" step="5" aria-label="Manual hours slider">
+                <input type="range" id="hourSlider" class="hover-target audio-trigger" min="5" max="100" value="20" step="5" aria-label="Manual hours slider">
                 <div class="roi-numbers">
                     <div class="roi-stat">
                         <h4>Money Wasted / Yr</h4>
@@ -443,24 +498,24 @@
             <div class="sticky-portfolio">
                 <div class="h-scroll-title" data-aos="fade-up">
                     <h2 style="font-size: clamp(2.5rem, 6vw, 3.5rem);">The <span class="text-gradient">Vault</span></h2>
-                    <p style="color:var(--text-light); font-size: 1.1rem; margin-top: 10px;">Technical and creative precision in motion. (Scroll to view)</p>
+                    <p style="color:var(--text-light); font-size: 1.1rem; margin-top: 10px;">Technical and creative precision in motion. (Click cards to view case studies)</p>
                 </div>
                 
                 <div class="h-scroll-container" id="h-scroll">
-                    <div class="card h-scroll-card hover-target">
+                    <div class="card h-scroll-card hover-target audio-trigger" onclick="openCase(1)">
                         <div class="vid-frame"><video autoplay muted loop playsinline loading="lazy"><source src="https://videos.pexels.com/video-files/3130182/3130182-uhd_2560_1440_30fps.mp4" type="video/mp4"></video></div>
                         <h3 style="font-size: 1.5rem; margin-bottom: 10px;">Luxury Brand Media</h3>
-                        <p style="color:var(--text-light); line-height: 1.6;">Cinematic color grading and CGI for high-end product launches.</p>
+                        <p style="color:var(--text-light); line-height: 1.6;">Cinematic color grading and CGI for high-end product launches. Click to view ROI.</p>
                     </div>
-                    <div class="card h-scroll-card hover-target">
+                    <div class="card h-scroll-card hover-target audio-trigger" onclick="openCase(2)">
                         <div class="vid-frame"><video autoplay muted loop playsinline loading="lazy"><source src="https://videos.pexels.com/video-files/3129957/3129957-uhd_2560_1440_25fps.mp4" type="video/mp4"></video></div>
                         <h3 style="font-size: 1.5rem; margin-bottom: 10px;">Automated Infrastructure</h3>
-                        <p style="color:var(--text-light); line-height: 1.6;">Python-driven CRM sync and data engines that run 24/7 without manual input.</p>
+                        <p style="color:var(--text-light); line-height: 1.6;">Python-driven CRM sync and data engines that run 24/7 without manual input. Click to view ROI.</p>
                     </div>
-                    <div class="card h-scroll-card hover-target">
+                    <div class="card h-scroll-card hover-target audio-trigger" onclick="openCase(3)">
                         <div class="vid-frame"><video autoplay muted loop playsinline loading="lazy"><source src="https://videos.pexels.com/video-files/4069480/4069480-uhd_2560_1440_25fps.mp4" type="video/mp4"></video></div>
                         <h3 style="font-size: 1.5rem; margin-bottom: 10px;">Product Architecture</h3>
-                        <p style="color:var(--text-light); line-height: 1.6;">Mobile-first web platforms built for speed, conversion, and global scaling.</p>
+                        <p style="color:var(--text-light); line-height: 1.6;">Mobile-first web platforms built for speed, conversion, and global scaling. Click to view ROI.</p>
                     </div>
                     <div style="width: 5vw; flex-shrink: 0;"></div>
                 </div>
@@ -490,20 +545,33 @@
         <section id="reviews">
             <div style="text-align: center; margin-bottom: 4rem;" data-aos="fade-up">
                 <h2 style="font-size: clamp(2.5rem, 6vw, 3.5rem);">Client <span class="text-gradient">Voices</span></h2>
-                <button onclick="openFeedback()" class="btn hover-target" style="margin-top: 15px; border: 1px solid var(--border); background: var(--surface); color: var(--text-main);">Leave a Review</button>
+                <button onclick="openFeedback()" class="btn hover-target audio-trigger" style="margin-top: 15px; border: 1px solid var(--border); background: var(--surface); color: var(--text-main);">Leave a Review</button>
             </div>
+            
             <div class="grid" id="reviewGrid">
-                <div class="card hover-target" data-aos="fade-right">
+                <div class="card hover-target" data-aos="fade-up">
                     <div style="color: var(--accent); font-size: 1.5rem; margin-bottom: 1rem;">★★★★★</div>
                     <p style="font-size: 1.1rem; line-height: 1.6; font-style: italic; margin-bottom: 1.5rem;">"Zelq completely rewired our backend. The Python infrastructure they deployed saved us hundreds of hours and scaled our operations effortlessly."</p>
                     <h4 style="font-weight: 800;">Director of Operations</h4>
                     <p style="color:var(--text-light); font-size: 0.85rem; margin-top: 5px;">EVNEK</p>
                 </div>
-                <div class="card hover-target" data-aos="fade-left">
+                <div class="card hover-target" data-aos="fade-up" data-aos-delay="100">
                     <div style="color: var(--accent); font-size: 1.5rem; margin-bottom: 1rem;">★★★★★</div>
                     <p style="font-size: 1.1rem; line-height: 1.6; font-style: italic; margin-bottom: 1.5rem;">"The cinematic VFX and branding assets Shaurya's team created put us in a different league. Brand Charm Company has seen a 40% bump in premium lead conversions."</p>
                     <h4 style="font-weight: 800;">Chief Marketing Officer</h4>
                     <p style="color:var(--text-light); font-size: 0.85rem; margin-top: 5px;">BCC (Brand Charm Company)</p>
+                </div>
+                <div class="card hover-target" data-aos="fade-up" data-aos-delay="200">
+                    <div style="color: var(--accent); font-size: 1.5rem; margin-bottom: 1rem;">★★★★★</div>
+                    <p style="font-size: 1.1rem; line-height: 1.6; font-style: italic; margin-bottom: 1.5rem;">"Zelq scaled our streetwear brand to the next level. Their automated CRM and slick web architecture brought our drop sellouts from days down to minutes."</p>
+                    <h4 style="font-weight: 800;">Founder</h4>
+                    <p style="color:var(--text-light); font-size: 0.85rem; margin-top: 5px;">The Rizz Mode</p>
+                </div>
+                <div class="card hover-target" data-aos="fade-up" data-aos-delay="300">
+                    <div style="color: var(--accent); font-size: 1.5rem; margin-bottom: 1rem;">★★★★★</div>
+                    <p style="font-size: 1.1rem; line-height: 1.6; font-style: italic; margin-bottom: 1.5rem;">"Insane infrastructure. They built a custom booking and loyalty bot for our gaming lounge that runs 24/7. Game Verse is fully automated now."</p>
+                    <h4 style="font-weight: 800;">Operations Lead</h4>
+                    <p style="color:var(--text-light); font-size: 0.85rem; margin-top: 5px;">Game Verse</p>
                 </div>
             </div>
         </section>
@@ -525,11 +593,11 @@
                 <h2 style="font-size: clamp(2.5rem, 6vw, 3.5rem);">Client <span class="text-gradient">Intelligence</span></h2>
             </div>
             <div style="max-width: 800px; margin: 0 auto;">
-                <div class="faq-item hover-target" onclick="this.classList.toggle('active')" data-aos="fade-up">
+                <div class="faq-item hover-target audio-trigger" onclick="this.classList.toggle('active')" data-aos="fade-up">
                     <div class="faq-question">What exactly does "Python Automation" mean for my business? <span style="color:var(--accent); font-size:1.5rem;">+</span></div>
                     <div class="faq-answer">It means eliminating human error and manual work. We write custom code that automatically moves leads from your ads into your CRM, sends welcome emails, and updates your spreadsheets instantly while you sleep.</div>
                 </div>
-                <div class="faq-item hover-target" onclick="this.classList.toggle('active')" data-aos="fade-up" data-aos-delay="100">
+                <div class="faq-item hover-target audio-trigger" onclick="this.classList.toggle('active')" data-aos="fade-up" data-aos-delay="100">
                     <div class="faq-question">Why should I choose the Premium Plan over a standard agency? <span style="color:var(--accent); font-size:1.5rem;">+</span></div>
                     <div class="faq-answer">Standard agencies charge for hours and templates. The Premium Plan gives you direct access to our founders to build custom software, cinematic-grade video assets, and elite web architecture designed specifically for high-ticket scaling.</div>
                 </div>
@@ -549,7 +617,7 @@
                         <li>✓ CRM Lead Setup</li>
                         <li>✓ Weekly Data Sync</li>
                     </ul>
-                    <a href="#contact" class="btn hover-target" style="border: 1px solid var(--border); width: 100%; color:inherit;">Select Basic</a>
+                    <a href="#contact" class="btn hover-target audio-trigger" style="border: 1px solid var(--border); width: 100%; color:inherit;">Select Basic</a>
                 </div>
                 <div class="card hover-target" data-aos="fade-up" data-aos-delay="100">
                     <h3 style="font-size: 2rem;">Pro</h3>
@@ -559,7 +627,7 @@
                         <li>✓ UI/UX Architecture</li>
                         <li>✓ Strategic Roadmap</li>
                     </ul>
-                    <a href="#contact" class="btn hover-target" style="border: 1px solid var(--border); width: 100%; color:inherit;">Select Pro</a>
+                    <a href="#contact" class="btn hover-target audio-trigger" style="border: 1px solid var(--border); width: 100%; color:inherit;">Select Pro</a>
                 </div>
                 <div class="card premium-card hover-target" data-aos="zoom-in" data-aos-delay="200">
                     <span class="badge" style="border:none; padding: 4px 12px; background: linear-gradient(135deg, var(--accent), var(--accent-sec)); color: white;">MOST POPULAR</span>
@@ -570,7 +638,7 @@
                         <li>✓ <strong>Full-Stack App Dev</strong></li>
                         <li>✓ <strong>24/7 Founder Access</strong></li>
                     </ul>
-                    <a href="#contact" class="btn btn-p hover-target" style="width: 100%;">Claim Slot</a>
+                    <a href="#contact" class="btn btn-p hover-target audio-trigger" style="width: 100%;">Claim Slot</a>
                 </div>
             </div>
         </section>
@@ -580,21 +648,50 @@
                 <div data-aos="fade-right">
                     <h2 style="font-size: clamp(3rem, 8vw, 5rem); line-height: 0.9; margin-bottom: 2rem;">Ready to <br><span class="text-gradient">Win?</span></h2>
                     <p style="margin-bottom: 2.5rem; color:var(--text-light); font-size: 1.2rem;">We only accept 10 clients at a time. Secure your position by applying below.</p>
-                    <div onclick="navigator.clipboard.writeText('support@zelq.in'); alert('Copied!')" class="hover-target" style="font-weight: 800; font-size: 1.1rem; margin-bottom: 10px;">✉️ support@zelq.in</div>
-                    <div onclick="navigator.clipboard.writeText('+91 7880032340'); alert('Copied!')" class="hover-target" style="font-weight: 800; font-size: 1.1rem;">📞 +91 7880032340</div>
+                    <div onclick="navigator.clipboard.writeText('support@zelq.in'); alert('Copied!')" class="hover-target audio-trigger" style="font-weight: 800; font-size: 1.1rem; margin-bottom: 10px;">✉️ support@zelq.in</div>
+                    <div onclick="navigator.clipboard.writeText('+91 7880032340'); alert('Copied!')" class="hover-target audio-trigger" style="font-weight: 800; font-size: 1.1rem;">📞 +91 7880032340</div>
                 </div>
                 <div class="card hover-target" data-aos="fade-left">
-                    <form action="#" method="POST">
-                        <input type="text" name="name" placeholder="Full Name" class="input-glass hover-target" required aria-label="Name">
-                        <input type="email" name="email" placeholder="Business Email" class="input-glass hover-target" required aria-label="Email">
-                        <select name="revenue" class="input-glass hover-target" required aria-label="Revenue">
-                            <option value="" disabled selected>Current Monthly Revenue?</option>
-                            <option value="Under 1L">Under ₹1L</option>
-                            <option value="1L - 5L">₹1L - ₹5L</option>
-                            <option value="10L+">₹10L+</option>
-                        </select>
-                        <textarea name="message" placeholder="Provide extra details (Optional)" class="input-glass hover-target" style="height:100px;" aria-label="Message"></textarea>
-                        <button type="submit" class="btn btn-p hover-target" style="width:100%;">Submit Application</button>
+                    <div class="progress-bar-bg"><div class="progress-fill" id="formProgress"></div></div>
+                    
+                    <form action="#" method="POST" id="multiStepForm" onsubmit="event.preventDefault(); submitApplication();">
+                        
+                        <div class="form-step active" id="f-step-1">
+                            <h3 style="margin-bottom: 15px;">Step 1: Introduction</h3>
+                            <input type="text" id="app_name" placeholder="Full Name" class="input-glass hover-target" required>
+                            <input type="email" id="app_email" placeholder="Business Email" class="input-glass hover-target" required>
+                            <button type="button" class="btn btn-p hover-target audio-trigger" style="width:100%;" onclick="nextStep(2)">Continue</button>
+                        </div>
+                        
+                        <div class="form-step" id="f-step-2">
+                            <h3 style="margin-bottom: 15px;">Step 2: Business Scale</h3>
+                            <select id="app_revenue" class="input-glass hover-target">
+                                <option value="" disabled selected>Current Monthly Revenue?</option>
+                                <option value="Under 1L">Under ₹1L</option>
+                                <option value="1L - 5L">₹1L - ₹5L</option>
+                                <option value="10L+">₹10L+</option>
+                            </select>
+                            <div style="display:flex; gap:10px;">
+                                <button type="button" class="btn hover-target audio-trigger" style="flex:1; border:1px solid var(--border); background:transparent; color:inherit;" onclick="nextStep(1)">Back</button>
+                                <button type="button" class="btn btn-p hover-target audio-trigger" style="flex:2;" onclick="nextStep(3)">Continue</button>
+                            </div>
+                        </div>
+
+                        <div class="form-step" id="f-step-3">
+                            <h3 style="margin-bottom: 15px;">Step 3: Primary Bottleneck</h3>
+                            <textarea id="app_message" placeholder="What is stopping you from scaling right now?" class="input-glass hover-target" style="height:100px;" required></textarea>
+                            <div style="display:flex; gap:10px;">
+                                <button type="button" class="btn hover-target audio-trigger" style="flex:1; border:1px solid var(--border); background:transparent; color:inherit;" onclick="nextStep(2)">Back</button>
+                                <button type="submit" class="btn btn-p hover-target audio-trigger" style="flex:2;" id="appSubmitBtn">Submit Application</button>
+                            </div>
+                        </div>
+                        
+                        <div class="form-step" id="f-step-4" style="text-align:center; padding: 2rem 0;">
+                            <div style="font-size: 3rem; color:#10b981; margin-bottom:1rem;">✓</div>
+                            <h3>Application Received</h3>
+                            <p style="color:var(--text-light); margin-top:10px;">Our founders will review your submission and contact you within 24 hours.</p>
+                        </div>
+
                     </form>
                 </div>
             </div>
@@ -602,7 +699,7 @@
     </main>
 
     <div class="mobile-cta-bar">
-        <a href="#contact" class="btn btn-p" style="width: 100%; padding: 1rem; font-size: 1.1rem;">Apply Now</a>
+        <a href="#contact" class="btn btn-p audio-trigger" style="width: 100%; padding: 1rem; font-size: 1.1rem;">Apply Now</a>
     </div>
 
     <footer>
@@ -614,18 +711,18 @@
             <div>
                 <h4 style="margin-bottom: 1.2rem; font-weight: 800;">Navigation</h4>
                 <ul class="footer-links">
-                    <li><a href="#vsl" class="hover-target">The System</a></li>
-                    <li><a href="#portfolio-wrapper" class="hover-target">The Vault</a></li>
-                    <li><a href="#pricing" class="hover-target">Pricing Plans</a></li>
-                    <li><a href="#faq" class="hover-target">Client Intel</a></li>
+                    <li><a href="#vsl" class="hover-target audio-trigger">The System</a></li>
+                    <li><a href="#portfolio-wrapper" class="hover-target audio-trigger">The Vault</a></li>
+                    <li><a href="#pricing" class="hover-target audio-trigger">Pricing Plans</a></li>
+                    <li><a href="#faq" class="hover-target audio-trigger">Client Intel</a></li>
                 </ul>
             </div>
             <div>
                 <h4 style="margin-bottom: 1.2rem; font-weight: 800;">Legal & Social</h4>
                 <ul class="footer-links">
-                    <li><a href="#" class="hover-target">Privacy Policy</a></li>
-                    <li><a href="#" class="hover-target">LinkedIn</a></li>
-                    <li><a href="#" class="hover-target">Instagram</a></li>
+                    <li><a href="#" class="hover-target audio-trigger">Privacy Policy</a></li>
+                    <li><a href="#" class="hover-target audio-trigger">LinkedIn</a></li>
+                    <li><a href="#" class="hover-target audio-trigger">Instagram</a></li>
                 </ul>
             </div>
         </div>
@@ -634,15 +731,15 @@
         </div>
     </footer>
 
-    <button class="chat-widget hover-target" aria-label="Open Live Chat" onclick="toggleChat()">💬</button>
+    <button class="chat-widget hover-target audio-trigger" aria-label="Open Live Chat" onclick="toggleChat()">💬</button>
     <div class="chat-window" id="chatWindow">
         <div class="chat-header">
             <span>Zelq Support ⚡</span>
-            <button class="hover-target" aria-label="Close Chat" onclick="toggleChat()" style="background:none; border:none; color:white; font-size:1.5rem; cursor:pointer;">×</button>
+            <button class="hover-target audio-trigger" aria-label="Close Chat" onclick="toggleChat()" style="background:none; border:none; color:white; font-size:1.5rem; cursor:pointer;">×</button>
         </div>
         <div style="padding: 20px; text-align: center; min-height: 150px; display: flex; flex-direction: column; justify-content: center;">
             <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 1rem;">Our founders are currently executing roadmaps for clients.</p>
-            <p style="font-size: 0.9rem; font-weight: 800;">Please use the <a href="#contact" class="text-gradient hover-target" style="text-decoration:none;">Contact Form</a>.</p>
+            <p style="font-size: 0.9rem; font-weight: 800;">Please use the <a href="#contact" class="text-gradient hover-target audio-trigger" style="text-decoration:none;">Contact Form</a>.</p>
         </div>
     </div>
 
@@ -658,18 +755,9 @@
     <script>
         AOS.init({ duration: 800, once: true });
 
-        function initTheme() {
-            const savedTheme = localStorage.getItem('zelqTheme') || 'dark';
-            document.documentElement.setAttribute('data-theme', savedTheme);
-        }
+        function initTheme() { const savedTheme = localStorage.getItem('zelqTheme') || 'dark'; document.documentElement.setAttribute('data-theme', savedTheme); }
         initTheme();
-
-        function toggleTheme() {
-            const html = document.documentElement;
-            const newTheme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-            html.setAttribute('data-theme', newTheme);
-            localStorage.setItem('zelqTheme', newTheme);
-        }
+        function toggleTheme() { const html = document.documentElement; const newTheme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'; html.setAttribute('data-theme', newTheme); localStorage.setItem('zelqTheme', newTheme); }
 
         window.onload = () => {
             setTimeout(() => {
@@ -679,7 +767,29 @@
             document.getElementById("year").innerHTML = new Date().getFullYear();
         };
 
-        // --- GLOBAL MOUSE TRACKING ---
+        // --- CUSTOM UI AUDIO SYNTHESIZER (No external files!) ---
+        let audioCtx;
+        function initAudio() { if(!audioCtx) { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } if(audioCtx.state === 'suspended') audioCtx.resume(); }
+        document.body.addEventListener('click', initAudio, {once:true}); // Needs user interaction to allow audio
+        
+        function playHoverSound() {
+            if(!audioCtx || audioCtx.state !== 'running') return;
+            const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain();
+            osc.type = 'sine'; osc.frequency.setValueAtTime(800, audioCtx.currentTime); osc.frequency.exponentialRampToValueAtTime(1200, audioCtx.currentTime + 0.05);
+            gain.gain.setValueAtTime(0.02, audioCtx.currentTime); gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.05);
+            osc.connect(gain); gain.connect(audioCtx.destination);
+            osc.start(); osc.stop(audioCtx.currentTime + 0.05);
+        }
+        function playClickSound() {
+            if(!audioCtx || audioCtx.state !== 'running') return;
+            const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain();
+            osc.type = 'triangle'; osc.frequency.setValueAtTime(400, audioCtx.currentTime); osc.frequency.exponentialRampToValueAtTime(50, audioCtx.currentTime + 0.1);
+            gain.gain.setValueAtTime(0.1, audioCtx.currentTime); gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.1);
+            osc.connect(gain); gain.connect(audioCtx.destination);
+            osc.start(); osc.stop(audioCtx.currentTime + 0.1);
+        }
+
+        // --- GLOBAL MOUSE TRACKING & AUDIO TRIGGERS ---
         let mouseX = 0; let mouseY = 0;
         const cursorDot = document.querySelector('.cursor-dot');
         const cursorOutline = document.querySelector('.cursor-outline');
@@ -690,9 +800,13 @@
             cursorDot.style.top = cursorOutline.style.top = `${mouseY}px`;
         });
         
-        document.querySelectorAll('a, button, input, textarea, select, .faq-item, .hover-target').forEach(el => {
-            el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+        document.querySelectorAll('.hover-target').forEach(el => {
+            el.addEventListener('mouseenter', () => { document.body.classList.add('cursor-hover'); });
             el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+        });
+        document.querySelectorAll('.audio-trigger').forEach(el => {
+            el.addEventListener('mouseenter', playHoverSound);
+            el.addEventListener('click', playClickSound);
         });
 
         // --- INTERACTIVE WEBGL/CANVAS SPIDERWEB ---
@@ -705,33 +819,21 @@
             constructor(x, y, directionX, directionY, size, color) {
                 this.x = x; this.y = y; this.directionX = directionX; this.directionY = directionY; this.size = size; this.color = color;
             }
-            draw() {
-                ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
-                ctx.fillStyle = this.color; ctx.fill();
-            }
+            draw() { ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false); ctx.fillStyle = this.color; ctx.fill(); }
             update() {
                 if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
                 if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
-                this.x += this.directionX; this.y += this.directionY;
-                this.draw();
+                this.x += this.directionX; this.y += this.directionY; this.draw();
             }
         }
-
         function initCanvas() {
-            particlesArray = [];
-            let numberOfParticles = (canvas.height * canvas.width) / 12000;
+            particlesArray = []; let numberOfParticles = (canvas.height * canvas.width) / 12000;
             for (let i = 0; i < numberOfParticles; i++) {
-                let size = (Math.random() * 2) + 1;
-                let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
-                let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
-                let directionX = (Math.random() * 1) - 0.5;
-                let directionY = (Math.random() * 1) - 0.5;
-                // Alternate between Cyan and Purple nodes
-                let color = i % 2 === 0 ? '#00f0ff' : '#b026ff';
+                let size = (Math.random() * 2) + 1; let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2); let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
+                let directionX = (Math.random() * 1) - 0.5; let directionY = (Math.random() * 1) - 0.5; let color = i % 2 === 0 ? '#00f0ff' : '#b026ff';
                 particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
             }
         }
-
         function connectParticles() {
             let opacityValue = 1;
             for (let a = 0; a < particlesArray.length; a++) {
@@ -739,59 +841,82 @@
                     let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) + ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
                     if (distance < (canvas.width / 7) * (canvas.height / 7)) {
                         opacityValue = 1 - (distance / 20000);
-                        ctx.strokeStyle = 'rgba(0, 240, 255,' + opacityValue * 0.2 + ')';
-                        ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(particlesArray[a].x, particlesArray[a].y); ctx.lineTo(particlesArray[b].x, particlesArray[b].y); ctx.stroke();
+                        ctx.strokeStyle = 'rgba(0, 240, 255,' + opacityValue * 0.2 + ')'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(particlesArray[a].x, particlesArray[a].y); ctx.lineTo(particlesArray[b].x, particlesArray[b].y); ctx.stroke();
                     }
                 }
-                // Connect nodes to mouse cursor
                 if(mouseX != null && mouseY != null) {
-                    let dx = mouseX - particlesArray[a].x; let dy = mouseY - particlesArray[a].y;
-                    let distance = dx*dx + dy*dy;
+                    let dx = mouseX - particlesArray[a].x; let dy = mouseY - particlesArray[a].y; let distance = dx*dx + dy*dy;
                     if(distance < 25000) {
-                        ctx.strokeStyle = 'rgba(176, 38, 255,' + (1 - distance/25000) * 0.5 + ')';
-                        ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(particlesArray[a].x, particlesArray[a].y); ctx.lineTo(mouseX, mouseY); ctx.stroke();
+                        ctx.strokeStyle = 'rgba(176, 38, 255,' + (1 - distance/25000) * 0.5 + ')'; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(particlesArray[a].x, particlesArray[a].y); ctx.lineTo(mouseX, mouseY); ctx.stroke();
                     }
                 }
             }
         }
+        function animateCanvas() { requestAnimationFrame(animateCanvas); ctx.clearRect(0, 0, innerWidth, innerHeight); for (let i = 0; i < particlesArray.length; i++) particlesArray[i].update(); connectParticles(); }
+        initCanvas(); animateCanvas(); window.addEventListener('resize', function(){ canvas.width = innerWidth; canvas.height = innerHeight; initCanvas(); });
 
-        function animateCanvas() {
-            requestAnimationFrame(animateCanvas);
-            ctx.clearRect(0, 0, innerWidth, innerHeight);
-            for (let i = 0; i < particlesArray.length; i++) particlesArray[i].update();
-            connectParticles();
+        // --- NEW: 3D WIREFRAME GLOBE CANVAS ---
+        const globeCanvas = document.getElementById('globe-canvas');
+        const gCtx = globeCanvas.getContext('2d');
+        const gWidth = 40; const gHeight = 40;
+        globeCanvas.width = gWidth; globeCanvas.height = gHeight;
+        let nodes = []; let angleX = 0; let angleY = 0;
+        // Create points for a sphere
+        for(let i=0; i<=10; i++) {
+            let lat = Math.PI * i / 10 - Math.PI / 2;
+            for(let j=0; j<=10; j++) {
+                let lon = 2 * Math.PI * j / 10;
+                let x = Math.cos(lat) * Math.cos(lon); let y = Math.sin(lat); let z = Math.cos(lat) * Math.sin(lon);
+                nodes.push({x: x, y: y, z: z});
+            }
         }
-        initCanvas(); animateCanvas();
-        window.addEventListener('resize', function(){ canvas.width = innerWidth; canvas.height = innerHeight; initCanvas(); });
+        function drawGlobe() {
+            gCtx.clearRect(0,0,gWidth,gHeight);
+            angleY += 0.02; // Rotate
+            gCtx.strokeStyle = 'rgba(0, 240, 255, 0.6)';
+            gCtx.lineWidth = 0.5;
+            let projected = [];
+            for(let i=0; i<nodes.length; i++) {
+                let p = nodes[i];
+                // Rotate Y
+                let x1 = p.x * Math.cos(angleY) - p.z * Math.sin(angleY);
+                let z1 = p.x * Math.sin(angleY) + p.z * Math.cos(angleY);
+                // Rotate X slightly for perspective
+                let y1 = p.y * Math.cos(0.2) - z1 * Math.sin(0.2);
+                let z2 = p.y * Math.sin(0.2) + z1 * Math.cos(0.2);
+                let scale = 15 / (15 - z2); // simple perspective
+                let x2d = (x1 * scale * 10) + gWidth/2;
+                let y2d = (y1 * scale * 10) + gHeight/2;
+                projected.push({x: x2d, y: y2d, z: z2});
+                if(z2 < 0) { // Only draw front points
+                    gCtx.fillStyle = '#00f0ff';
+                    gCtx.beginPath(); gCtx.arc(x2d, y2d, 0.8, 0, Math.PI*2); gCtx.fill();
+                }
+            }
+            requestAnimationFrame(drawGlobe);
+        }
+        drawGlobe();
 
         // --- 3D HERO TILT EFFECT ---
         const heroSection = document.getElementById('hero-section');
         const tiltWrapper = document.getElementById('tilt-wrapper');
-        
         heroSection.addEventListener('mousemove', (e) => {
-            // Only execute if we are on desktop
             if (window.innerWidth > 768) {
-                const xAxis = (window.innerWidth / 2 - e.pageX) / 40; // Adjust division for more/less extreme tilt
+                const xAxis = (window.innerWidth / 2 - e.pageX) / 40;
                 const yAxis = (window.innerHeight / 2 - e.pageY) / 40;
                 tiltWrapper.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
             }
         });
-        heroSection.addEventListener('mouseleave', () => {
-            if (window.innerWidth > 768) tiltWrapper.style.transform = `rotateY(0deg) rotateX(0deg)`;
-        });
+        heroSection.addEventListener('mouseleave', () => { if (window.innerWidth > 768) tiltWrapper.style.transform = `rotateY(0deg) rotateX(0deg)`; });
 
         // --- MAGNETIC BUTTONS LOGIC ---
         const magneticBtns = document.querySelectorAll('.btn');
         magneticBtns.forEach(btn => {
             btn.addEventListener('mousemove', (e) => {
-                const rect = btn.getBoundingClientRect();
-                const x = (e.clientX - rect.left - rect.width / 2) * 0.3; // 0.3 controls the "pull" strength
-                const y = (e.clientY - rect.top - rect.height / 2) * 0.3;
+                const rect = btn.getBoundingClientRect(); const x = (e.clientX - rect.left - rect.width / 2) * 0.3; const y = (e.clientY - rect.top - rect.height / 2) * 0.3;
                 btn.style.transform = `translate(${x}px, ${y}px) scale(1.05)`;
             });
-            btn.addEventListener('mouseleave', () => {
-                btn.style.transform = `translate(0px, 0px) scale(1)`;
-            });
+            btn.addEventListener('mouseleave', () => { btn.style.transform = `translate(0px, 0px) scale(1)`; });
         });
 
         // --- ANIMATED NUMBER COUNTERS LOGIC ---
@@ -799,82 +924,64 @@
         const counterObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if(entry.isIntersecting) {
-                    const target = +entry.target.getAttribute('data-target');
-                    let count = 0;
+                    const target = +entry.target.getAttribute('data-target'); let count = 0;
                     const updateCount = () => {
                         const increment = target / 40; 
-                        if(count < target) {
-                            count += increment;
-                            entry.target.innerText = Math.ceil(count);
-                            setTimeout(updateCount, 30);
-                        } else {
-                            entry.target.innerText = target;
-                        }
+                        if(count < target) { count += increment; entry.target.innerText = Math.ceil(count); setTimeout(updateCount, 30); } else { entry.target.innerText = target; }
                     };
-                    updateCount();
-                    counterObserver.unobserve(entry.target); 
+                    updateCount(); counterObserver.unobserve(entry.target); 
                 }
             });
         }, { threshold: 0.5 });
         counters.forEach(counter => counterObserver.observe(counter));
 
-        // --- HORIZONTAL SCROLL FOR PORTFOLIO (APPLE STYLE) ---
+        // --- HORIZONTAL SCROLL FOR PORTFOLIO ---
         const portWrapper = document.getElementById('portfolio-wrapper');
         const hScroll = document.getElementById('h-scroll');
-
-        // Mouse spotlight tracking for cards
         document.querySelectorAll('.card').forEach(card => {
             card.addEventListener('mousemove', e => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                card.style.setProperty('--mouse-x', `${x}px`);
-                card.style.setProperty('--mouse-y', `${y}px`);
+                const rect = card.getBoundingClientRect(); const x = e.clientX - rect.left; const y = e.clientY - rect.top;
+                card.style.setProperty('--mouse-x', `${x}px`); card.style.setProperty('--mouse-y', `${y}px`);
             });
         });
-
         window.addEventListener('scroll', () => {
-            // Top Scroll Progress Bar
-            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop; let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             document.getElementById("progress-bar").style.width = (winScroll / height) * 100 + "%";
-
-            // Horizontal Scroll Logic (Only run on desktop)
             if (window.innerWidth > 768 && portWrapper && hScroll) {
-                const rect = portWrapper.getBoundingClientRect();
-                const viewHeight = window.innerHeight;
-                
+                const rect = portWrapper.getBoundingClientRect(); const viewHeight = window.innerHeight;
                 if (rect.top <= 0 && rect.bottom >= viewHeight) {
-                    // We are currently scrolling inside the sticky wrapper
-                    const totalScroll = rect.height - viewHeight;
-                    const scrolled = Math.abs(rect.top);
-                    let progress = scrolled / totalScroll;
-                    const maxTranslate = hScroll.scrollWidth - window.innerWidth;
-                    hScroll.style.transform = `translateX(-${progress * maxTranslate}px)`;
-                } else if (rect.top > 0) {
-                    // Above the section
-                    hScroll.style.transform = `translateX(0px)`;
-                } else if (rect.bottom < viewHeight) {
-                    // Below the section
-                    const maxTranslate = hScroll.scrollWidth - window.innerWidth;
-                    hScroll.style.transform = `translateX(-${maxTranslate}px)`;
-                }
+                    const totalScroll = rect.height - viewHeight; const scrolled = Math.abs(rect.top); let progress = scrolled / totalScroll;
+                    const maxTranslate = hScroll.scrollWidth - window.innerWidth; hScroll.style.transform = `translateX(-${progress * maxTranslate}px)`;
+                } else if (rect.top > 0) { hScroll.style.transform = `translateX(0px)`;
+                } else if (rect.bottom < viewHeight) { const maxTranslate = hScroll.scrollWidth - window.innerWidth; hScroll.style.transform = `translateX(-${maxTranslate}px)`; }
             }
         });
+
+        // --- MULTI-STEP FUNNEL LOGIC ---
+        function nextStep(step) {
+            // Very simple validation for current step
+            if(step === 2 && (!document.getElementById('app_name').value || !document.getElementById('app_email').value)) {
+                alert("Please fill out your Name and Email to continue."); return;
+            }
+            document.querySelectorAll('.form-step').forEach(el => el.classList.remove('active'));
+            document.getElementById('f-step-' + step).classList.add('active');
+            let progress = 33; if(step === 2) progress = 66; if(step === 3) progress = 100; if(step === 4) progress = 100;
+            document.getElementById('formProgress').style.width = progress + '%';
+        }
+        function submitApplication() {
+            const btn = document.getElementById('appSubmitBtn'); btn.innerHTML = "Processing...";
+            setTimeout(() => { nextStep(4); }, 1500); // Simulate API call
+        }
 
         // Exit intent modal
         let exitIntentTriggered = false;
         document.addEventListener('mouseleave', (e) => {
-            if (e.clientY < 0 && !exitIntentTriggered) {
-                document.getElementById('exitModal').classList.add('modal-active');
-                exitIntentTriggered = true;
-            }
+            if (e.clientY < 0 && !exitIntentTriggered) { document.getElementById('exitModal').classList.add('modal-active'); playClickSound(); exitIntentTriggered = true; }
         });
 
         const slider = document.getElementById("hourSlider");
         slider.oninput = function() {
-            document.getElementById("hoursValue").innerHTML = this.value + " hrs";
-            document.getElementById("wastedVal").innerHTML = "₹" + (this.value * 4 * 12 * 500).toLocaleString('en-IN');
+            document.getElementById("hoursValue").innerHTML = this.value + " hrs"; document.getElementById("wastedVal").innerHTML = "₹" + (this.value * 4 * 12 * 500).toLocaleString('en-IN');
         }
 
         // Modals & Chat
@@ -882,34 +989,28 @@
         function closePortal() { document.getElementById('portalModal').classList.remove('modal-active'); }
         function openFeedback() { document.getElementById('feedbackModal').classList.add('modal-active'); }
         function closeFeedback() { document.getElementById('feedbackModal').classList.remove('modal-active'); }
+        function openCase(id) { document.getElementById('caseModal' + id).classList.add('modal-active'); }
+        function closeCase(id) { document.getElementById('caseModal' + id).classList.remove('modal-active'); }
         function toggleChat() { document.getElementById('chatWindow').classList.toggle('chat-active'); }
 
         function verifyLogin() {
-            const btn = document.getElementById('loginBtn');
-            btn.innerHTML = "Authenticating...";
+            const btn = document.getElementById('loginBtn'); btn.innerHTML = "Authenticating...";
             setTimeout(() => {
                 const email = document.getElementById('portalEmail').value.toLowerCase().trim();
                 if(email.includes("@")) { 
-                    btn.style.background = "var(--accent)"; btn.innerHTML = "Access Granted.";
+                    btn.style.background = "var(--accent)"; btn.innerHTML = "Access Granted."; playClickSound();
                     setTimeout(() => { alert("Welcome to the Zelq Premium Dashboard."); closePortal(); btn.style.background = ""; btn.innerHTML = "Access Portal"; }, 1500);
                 } else { btn.innerHTML = "Access Portal"; document.getElementById('loginMsg').style.display = 'block'; }
             }, 1200);
         }
 
         function submitReview() {
-            const btn = document.getElementById('submitRevBtn');
-            btn.innerHTML = "Verifying...";
-            setTimeout(() => {
-                alert("Thank you. Your feedback has been sent for verification.");
-                closeFeedback();
-                btn.innerHTML = "Submit to Vault";
-            }, 1200);
+            const btn = document.getElementById('submitRevBtn'); btn.innerHTML = "Verifying...";
+            setTimeout(() => { alert("Thank you. Your feedback has been sent for verification."); closeFeedback(); btn.innerHTML = "Submit to Vault"; }, 1200);
         }
 
-        // Delay popup trigger
         setTimeout(() => {
-            const toast = document.getElementById('toast');
-            toast.classList.add('toast-active');
+            const toast = document.getElementById('toast'); toast.classList.add('toast-active'); playHoverSound();
             setTimeout(() => toast.classList.remove('toast-active'), 6000);
         }, 12000); 
     </script></body></html>

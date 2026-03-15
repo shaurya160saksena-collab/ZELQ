@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html lang="en" data-theme="dark">
-<head>
+<!DOCTYPE html><html lang="en" data-theme="dark"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Zelq | High-Ticket Infrastructure & Growth</title>
@@ -9,34 +7,32 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800;900&display=swap" rel="stylesheet">
     <style>
-        /* --- MODERNIZED CORE THEME VARIABLES --- */
+        /* --- CYBER NEON THEME VARIABLES --- */
         :root {
-            /* Light Mode - Clean, Sleek, Professional */
-            --bg: #f8fafc; 
+            --bg: #f0f4f8; 
             --surface: #ffffff;
             --text-main: #0f172a;
             --text-light: #475569;
-            --accent: #4f46e5; /* Deep Indigo */
-            --accent-sec: #0ea5e9; /* Sky Blue */
-            --accent-glow: rgba(79, 70, 229, 0.15);
-            --border: rgba(15, 23, 42, 0.06);
-            --nav-bg: rgba(248, 250, 252, 0.85);
-            --glass-blur: blur(24px);
+            --accent: #0ea5e9; 
+            --accent-sec: #8b5cf6; 
+            --accent-glow: rgba(14, 165, 233, 0.15);
+            --border: rgba(15, 23, 42, 0.08);
+            --nav-bg: rgba(240, 244, 248, 0.85);
+            --glass-blur: blur(24px) saturate(150%);
             --input-bg: rgba(241, 245, 249, 0.8);
         }
 
         [data-theme="dark"] {
-            /* Dark Mode - Obsidian, Premium, Tech-Forward */
-            --bg: #05050a;
-            --surface: rgba(15, 17, 26, 0.6);
-            --text-main: #f8fafc;
-            --text-light: #94a3b8;
-            --accent: #8b5cf6; /* Electric Violet */
-            --accent-sec: #38bdf8; /* Neon Cyan */
-            --accent-glow: rgba(139, 92, 246, 0.2);
-            --border: rgba(255, 255, 255, 0.08);
-            --nav-bg: rgba(5, 5, 10, 0.8);
-            --input-bg: rgba(255, 255, 255, 0.03);
+            --bg: #03030a;
+            --surface: rgba(10, 10, 25, 0.5);
+            --text-main: #ffffff;
+            --text-light: #8ba1b5;
+            --accent: #00f0ff; 
+            --accent-sec: #b026ff; 
+            --accent-glow: rgba(0, 240, 255, 0.25);
+            --border: rgba(255, 255, 255, 0.1);
+            --nav-bg: rgba(3, 3, 10, 0.75);
+            --input-bg: rgba(255, 255, 255, 0.04);
         }
 
         /* --- BASE STYLES --- */
@@ -45,39 +41,55 @@
         body { background-color: var(--bg); color: var(--text-main); overflow-x: hidden; width: 100%; position: relative; transition: background-color 0.5s, color 0.5s; font-display: swap; }
         h1, h2, h3 { overflow-wrap: break-word; word-wrap: break-word; hyphens: auto; }
 
-        /* Modern Text Gradient */
-        .text-gradient {
-            background: linear-gradient(135deg, var(--accent), var(--accent-sec));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
+        /* CUSTOM CYBER SCROLLBAR */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: var(--text-light); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent); box-shadow: 0 0 10px var(--accent-glow); }
 
-        /* Skip to Content (Accessibility) */
+        /* Modern Text Gradient & Outline */
+        .text-gradient { background: linear-gradient(135deg, var(--accent), var(--accent-sec)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .text-stroke { color: transparent; -webkit-text-stroke: 1px var(--text-light); transition: 0.3s; }
+        .text-stroke:hover { color: var(--accent); -webkit-text-stroke: 1px var(--accent); text-shadow: 0 0 15px var(--accent-glow); }
+
+        /* Skip to Content */
         .skip-link { position: absolute; top: -60px; left: 0; background: var(--accent); color: white; padding: 12px; z-index: 100000; transition: top 0.3s; font-weight: bold; text-decoration: none; border-radius: 0 0 12px 0; }
         .skip-link:focus { top: 0; }
 
+        /* --- GLITCH ANIMATION --- */
+        .glitch { position: relative; display: inline-block; }
+        .glitch::before, .glitch::after { content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.8; pointer-events: none; }
+        .glitch::before { left: 2px; text-shadow: -2px 0 var(--accent-sec); clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%); animation: glitch-anim 3s infinite linear alternate-reverse; }
+        .glitch::after { left: -2px; text-shadow: -2px 0 var(--accent); clip-path: polygon(0 80%, 100% 20%, 100% 100%, 0 100%); animation: glitch-anim2 2.5s infinite linear alternate-reverse; }
+        
+        @keyframes glitch-anim { 0% { clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%); transform: translate(0); } 20% { clip-path: polygon(0 15%, 100% 15%, 100% 15%, 0 15%); transform: translate(-2px, 1px); } 40% { clip-path: polygon(0 10%, 100% 10%, 100% 20%, 0 20%); transform: translate(2px, -1px); } 60% { clip-path: polygon(0 1%, 100% 1%, 100% 2%, 0 2%); transform: translate(0); } 80% { clip-path: polygon(0 33%, 100% 33%, 100% 33%, 0 33%); transform: translate(1px, 1px); } 100% { clip-path: polygon(0 44%, 100% 44%, 100% 44%, 0 44%); transform: translate(-1px, 0); } }
+        @keyframes glitch-anim2 { 0% { clip-path: polygon(0 25%, 100% 25%, 100% 30%, 0 30%); transform: translate(0); } 20% { clip-path: polygon(0 3%, 100% 3%, 100% 3%, 0 3%); transform: translate(1px, -1px); } 40% { clip-path: polygon(0 5%, 100% 5%, 100% 20%, 0 20%); transform: translate(-1px, 1px); } 60% { clip-path: polygon(0 20%, 100% 20%, 100% 20%, 0 20%); transform: translate(0); } 80% { clip-path: polygon(0 23%, 100% 23%, 100% 23%, 0 23%); transform: translate(-2px, 0); } 100% { clip-path: polygon(0 43%, 100% 43%, 100% 43%, 0 43%); transform: translate(1px, 1px); } }
+
         /* --- PRE-LOADER --- */
-        #preloader { position: fixed; inset: 0; background: #000; z-index: 99999; display: flex; align-items: center; justify-content: center; transition: opacity 0.8s ease; }
-        .preloader-logo { font-size: 3rem; font-weight: 900; letter-spacing: 5px; color: #fff; animation: pulseGlow 1.5s infinite alternate; }
-        .preloader-logo span { color: var(--accent); }
-        @keyframes pulseGlow { from { text-shadow: 0 0 10px var(--accent-glow); transform: scale(0.98); } to { text-shadow: 0 0 30px var(--accent); transform: scale(1.02); } }
+        #preloader { position: fixed; inset: 0; background: #010105; z-index: 99999; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.8s ease; }
+        .preloader-logo { font-size: 3rem; font-weight: 900; color: #fff; animation: tracking-in-expand 1s cubic-bezier(0.215, 0.610, 0.355, 1.000) both; }
+        .loading-bar { width: 150px; height: 3px; background: rgba(255,255,255,0.05); margin-top: 20px; position: relative; overflow: hidden; border-radius: 3px; }
+        .loading-bar::after { content: ''; position: absolute; left: -50%; width: 50%; height: 100%; background: linear-gradient(90deg, transparent, var(--accent), var(--accent-sec)); animation: loadSweep 1.2s infinite ease-in-out; }
+        
+        @keyframes tracking-in-expand { 0% { letter-spacing: -0.5em; opacity: 0; } 40% { opacity: 0.6; } 100% { opacity: 1; letter-spacing: 5px; text-shadow: 0 0 20px var(--accent-glow); } }
+        @keyframes loadSweep { 0% { left: -50%; } 100% { left: 100%; } }
 
         /* --- CUSTOM CURSOR --- */
         .cursor-dot, .cursor-outline { position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 10000; pointer-events: none; }
-        .cursor-dot { width: 8px; height: 8px; background: var(--accent); transition: 0.2s; }
-        .cursor-outline { width: 40px; height: 40px; border: 2px solid var(--accent); opacity: 0.3; transition: 0.1s ease-out; }
-        .cursor-hover .cursor-dot { width: 60px; height: 60px; background: var(--surface); backdrop-filter: blur(5px); border: 1px solid var(--accent); opacity: 0.6; }
-        .cursor-hover .cursor-outline { opacity: 0; }
+        .cursor-dot { width: 8px; height: 8px; background: var(--accent); transition: 0.2s; box-shadow: 0 0 10px var(--accent); }
+        .cursor-outline { width: 40px; height: 40px; border: 2px solid var(--accent); opacity: 0.4; transition: 0.1s ease-out; }
+        .cursor-hover .cursor-dot { width: 60px; height: 60px; background: transparent; border: 1px solid var(--accent); opacity: 0.6; backdrop-filter: invert(10%); }
+        .cursor-hover .cursor-outline { opacity: 0; transform: translate(-50%, -50%) scale(1.5); }
         @media (max-width: 768px) { * { cursor: auto !important; } .cursor-dot, .cursor-outline { display: none !important; } }
 
-        /* --- SCROLL PROGRESS & BG EFFECTS --- */
+        /* --- SCROLL PROGRESS & CANVAS BG EFFECTS --- */
         #progress-bar { position: fixed; top: 0; left: 0; height: 4px; background: linear-gradient(to right, var(--accent), var(--accent-sec)); z-index: 10001; width: 0%; box-shadow: 0 0 15px var(--accent); }
-        .bg-grid { position: fixed; inset: 0; z-index: -2; background-image: linear-gradient(to right, var(--text-light) 1px, transparent 1px), linear-gradient(to bottom, var(--text-light) 1px, transparent 1px); background-size: 80px 80px; opacity: 0.04; }
-        .orb { position: absolute; border-radius: 50%; filter: blur(150px); z-index: -1; pointer-events: none; }
-        .orb-1 { width: 600px; height: 600px; background: var(--accent-glow); top: -100px; left: -100px; animation: float 20s infinite alternate; }
-        .orb-2 { width: 600px; height: 600px; background: rgba(56, 189, 248, 0.1); bottom: -100px; right: -50px; animation: float 25s infinite alternate-reverse; }
-        @keyframes float { from { transform: translate(0,0); } to { transform: translate(100px, 100px); } }
+        
+        /* NEW: WebGL / Interactive Canvas Network Background */
+        #network-canvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -3; pointer-events: none; opacity: 0.8; }
+        
+        .bg-grid { position: fixed; top: -50%; left: -50%; width: 200%; height: 200%; z-index: -4; background-image: linear-gradient(to right, rgba(0,240,255,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,240,255,0.05) 1px, transparent 1px); background-size: 60px 60px; -webkit-mask-image: radial-gradient(circle at center, black 20%, transparent 60%); mask-image: radial-gradient(circle at center, black 20%, transparent 60%); animation: gridMove 20s linear infinite; }
+        @keyframes gridMove { 0% { transform: translateY(0) translateX(0); } 100% { transform: translateY(60px) translateX(60px); } }
 
         /* --- NAVIGATION --- */
         nav { position: fixed; top: 0; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 1rem 5%; background: var(--nav-bg); backdrop-filter: var(--glass-blur); z-index: 1000; border-bottom: 1px solid var(--border); }
@@ -87,124 +99,205 @@
         .logo-item span { color: var(--accent); }
         @keyframes logoSlide { 0%, 30% { transform: translateY(0); } 33%, 63% { transform: translateY(-35px); } 66%, 96% { transform: translateY(-70px); } 100% { transform: translateY(0); } }
 
-        /* UI Components */
-        .badge { background: var(--accent-glow); color: var(--accent); padding: 6px 16px; border-radius: 100px; font-size: 0.75rem; font-weight: 800; border: 1px solid var(--border); display: inline-flex; align-items: center; gap: 8px; margin-bottom: 1.5rem; }
-        .pulse-dot { width: 8px; height: 8px; background: #10b981; border-radius: 50%; animation: pulseGlow 1.5s infinite alternate; }
+        .badge { background: var(--surface); color: var(--text-main); padding: 8px 18px; border-radius: 100px; font-size: 0.75rem; font-weight: 800; border: 1px solid var(--border); display: inline-flex; align-items: center; gap: 8px; margin-bottom: 1.5rem; box-shadow: 0 0 20px rgba(0,0,0,0.2); animation: floatBadge 4s ease-in-out infinite; }
+        .pulse-dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; animation: pulseGlow 1.5s infinite alternate; }
+        @keyframes pulseGlow { from { opacity: 0.5; box-shadow: 0 0 5px var(--accent); transform: scale(0.9); } to { opacity: 1; box-shadow: 0 0 15px var(--accent); transform: scale(1.2); } }
+        @keyframes floatBadge { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
 
-        /* --- HERO --- */
-        .hero { min-height: 100vh; display: flex; align-items: center; padding: 150px 5% 60px 5%; }
+        /* --- HERO & 3D TILT --- */
+        .hero { min-height: 100vh; display: flex; align-items: center; padding: 150px 5% 60px 5%; position: relative; perspective: 1500px; }
+        /* NEW: The wrapper that tracks the mouse */
+        .tilt-wrapper { width: 100%; transition: transform 0.1s ease-out; transform-style: preserve-3d; z-index: 2; position: relative; }
+        
         .morph-box { height: clamp(70px, 10vw, 130px); overflow: hidden; margin-bottom: 2rem; width: 100%; }
         .morph-list { animation: titleMorph 12s cubic-bezier(0.8, 0, 0.2, 1) infinite; }
-        .morph-item { font-size: clamp(2.2rem, 7vw, 6.5rem); font-weight: 900; line-height: 1.1; height: clamp(70px, 10vw, 130px); display: flex; align-items: center; white-space: nowrap; overflow-wrap: anywhere; }
-        @keyframes titleMorph { 0%, 30% { transform: translateY(0); } 33%, 63% { transform: translateY(-33.33%); } 66%, 96% { transform: translateY(-66.66%); } 100% { transform: translateY(0); } }
+        .morph-item { font-size: clamp(2.2rem, 7vw, 6.5rem); font-weight: 900; line-height: 1.1; height: clamp(70px, 10vw, 130px); display: flex; align-items: center; white-space: nowrap; overflow-wrap: anywhere; text-shadow: 0 10px 30px rgba(0,0,0,0.5); }
 
-        /* --- TECH STACK --- */
-        .tech-stack { padding: 40px 5%; margin-bottom: 40px; }
-        .logo-row { display: flex; justify-content: center; align-items: center; gap: clamp(30px, 6vw, 80px); flex-wrap: wrap; opacity: 0.4; filter: grayscale(100%); transition: 0.3s; }
-        .logo-row:hover { opacity: 0.8; filter: grayscale(0%); }
+        /* --- SPOTLIGHT CARDS --- */
+        section { padding: 80px 5%; max-width: 1400px; margin: 0 auto; width: 100%; position: relative; z-index: 2; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 3rem; }
+        
+        .card { 
+            background: var(--surface); 
+            backdrop-filter: var(--glass-blur); 
+            border: 1px solid var(--border); 
+            padding: 3rem; border-radius: 32px; 
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.4s; 
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1); 
+            height: 100%; position: relative; overflow: hidden; z-index: 1; 
+        }
+        
+        .card::before {
+            content: ""; position: absolute; inset: 0; border-radius: inherit; z-index: -1;
+            background: radial-gradient(600px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(0, 240, 255, 0.1), transparent 40%);
+            opacity: 0; transition: opacity 0.5s; pointer-events: none;
+        }
+        
+        .card:hover { transform: translateY(-12px); border-color: rgba(0, 240, 255, 0.3); }
+        .card:hover::before { opacity: 1; }
+        
+        .premium-card { border: 2px solid var(--accent); animation: borderPulse 3s infinite alternate; transform: scale(1.05); }
+        .premium-card:hover { transform: scale(1.08) translateY(-10px); }
+        @keyframes borderPulse { 0% { border-color: var(--accent); box-shadow: 0 0 10px var(--accent-glow); } 100% { border-color: var(--accent-sec); box-shadow: 0 0 30px rgba(176, 38, 255, 0.3); } }
+
+        /* --- HORIZONTAL SCROLL PORTFOLIO (NEW) --- */
+        #portfolio-wrapper {
+            height: 300vh; /* Determines how long the user scrolls to move horizontally */
+            padding: 0;
+            max-width: 100%;
+            margin: 0;
+        }
+        .sticky-portfolio {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            overflow: hidden;
+            width: 100%;
+        }
+        .h-scroll-title { padding: 0 5vw; margin-bottom: 3rem; text-align: left;}
+        
+        .h-scroll-container {
+            display: flex;
+            gap: 3rem;
+            width: max-content; /* Expands to fit all cards */
+            padding: 0 5vw;
+            will-change: transform;
+        }
+        .h-scroll-card {
+            width: 450px;
+            flex-shrink: 0;
+        }
+
+        /* --- TECH STACK & ROI --- */
+        .tech-stack { padding: 40px 5%; margin-bottom: 40px; position: relative; z-index: 2; }
+        .logo-row { display: flex; justify-content: center; align-items: center; gap: clamp(30px, 6vw, 80px); flex-wrap: wrap; opacity: 0.5; transition: 0.4s; }
+        .logo-row:hover { opacity: 1; text-shadow: 0 0 20px var(--accent-glow); }
         .logo-row h2 { font-weight: 900; font-size: clamp(1.5rem, 3vw, 2.5rem); text-transform: lowercase; letter-spacing: -1px; }
 
-        /* --- GLASS UI CARDS --- */
-        section { padding: 80px 5%; max-width: 1400px; margin: 0 auto; width: 100%; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 3rem; }
-        .card { background: var(--surface); backdrop-filter: var(--glass-blur); border: 1px solid var(--border); padding: 3rem; border-radius: 32px; transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 10px 40px rgba(0,0,0,0.02); height: 100%; position: relative; overflow: hidden; }
-        .card:hover { transform: translateY(-12px); border-color: var(--accent); box-shadow: 0 30px 60px var(--accent-glow); }
-
-        /* --- ROI CALCULATOR --- */
-        .roi-container { background: var(--surface); backdrop-filter: var(--glass-blur); border: 1px solid var(--border); padding: 4rem; border-radius: 40px; text-align: center; margin-top: 3rem; }
+        .roi-container { background: var(--surface); backdrop-filter: var(--glass-blur); border: 1px solid var(--border); padding: 4rem; border-radius: 40px; text-align: center; margin-top: 3rem; position: relative; overflow: hidden; transition: 0.4s;}
+        .roi-container:hover { border-color: var(--accent-sec); box-shadow: 0 0 40px var(--accent-glow); }
         input[type=range] { -webkit-appearance: none; width: 100%; max-width: 600px; background: transparent; margin: 2rem 0; }
-        input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 30px; width: 30px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent-sec)); cursor: pointer; margin-top: -12px; box-shadow: 0 0 20px var(--accent); transition: 0.2s; }
-        input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.2); }
+        input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 35px; width: 35px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent-sec)); cursor: pointer; margin-top: -15px; box-shadow: 0 0 20px var(--accent); transition: 0.3s; }
+        input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.2); box-shadow: 0 0 30px var(--accent-sec); }
         input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 6px; background: var(--border); border-radius: 5px; }
         .roi-numbers { display: flex; justify-content: center; gap: 4rem; flex-wrap: wrap; margin-top: 2rem; }
 
         /* --- MODALS & INPUTS --- */
         .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); z-index: 100000; display: none; align-items: center; justify-content: center; opacity: 0; transition: 0.3s; }
-        .modal-box { background: var(--surface); border: 1px solid var(--border); padding: 3rem; border-radius: 30px; text-align: center; max-width: 450px; width: 90%; transform: translateY(20px); transition: 0.3s; }
+        .modal-box { background: var(--surface); border: 1px solid var(--border); padding: 3rem; border-radius: 30px; text-align: center; max-width: 450px; width: 90%; transform: translateY(20px); transition: 0.3s; position: relative; overflow: hidden; }
         .modal-active { display: flex; opacity: 1; }
         .modal-active .modal-box { transform: translateY(0); }
         
         .input-glass { width: 100%; padding: 1.2rem; background: var(--input-bg); border: 1px solid var(--border); border-radius: 16px; color: var(--text-main); margin-bottom: 1.5rem; font-size: 1rem; outline: none; transition: 0.3s; }
         .input-glass:focus { border-color: var(--accent); box-shadow: 0 0 15px var(--accent-glow); }
         select.input-glass { appearance: none; cursor: pointer; }
-        select.input-glass option { background: var(--surface); color: var(--text-main); }
+        select.input-glass option { background: #03030a; color: #fff; }
 
-        /* --- WIDGETS --- */
+        /* --- WIDGETS & TOAST --- */
         .chat-widget { position: fixed; bottom: 30px; right: 30px; background: linear-gradient(135deg, var(--accent), var(--accent-sec)); color: white; width: 65px; height: 65px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; z-index: 999; box-shadow: 0 10px 30px var(--accent-glow); cursor: pointer; transition: 0.3s; border: none; }
-        .chat-widget:hover { transform: scale(1.1) translateY(-5px); }
-        .chat-window { position: fixed; bottom: 110px; right: 30px; width: 350px; background: var(--surface); backdrop-filter: var(--glass-blur); border: 1px solid var(--border); border-radius: 25px; z-index: 999; display: none; flex-direction: column; overflow: hidden; opacity: 0; transform: translateY(20px); transition: 0.3s; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .chat-widget:hover { transform: scale(1.1) translateY(-5px); box-shadow: 0 15px 40px rgba(176, 38, 255, 0.4); }
+        .chat-window { position: fixed; bottom: 110px; right: 30px; width: 350px; background: var(--surface); backdrop-filter: var(--glass-blur); border: 1px solid var(--border); border-radius: 25px; z-index: 999; display: none; flex-direction: column; overflow: hidden; opacity: 0; transform: translateY(20px); transition: 0.3s; box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
         .chat-active { display: flex; opacity: 1; transform: translateY(0); }
         .chat-header { background: linear-gradient(135deg, var(--accent), var(--accent-sec)); padding: 15px; color: white; font-weight: 800; display: flex; justify-content: space-between; align-items: center; }
         
-        .toast-notification { position: fixed; bottom: 30px; left: -400px; background: var(--surface); border: 1px solid var(--accent); padding: 1rem 1.5rem; border-radius: 20px; display: flex; align-items: center; gap: 15px; z-index: 1000; transition: 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 10px 30px var(--accent-glow); }
-        .toast-active { left: 30px; }
+        .toast-notification { position: fixed; bottom: 30px; left: 30px; background: var(--surface); border: 1px solid var(--accent); padding: 1rem 1.5rem; border-radius: 20px; display: flex; align-items: center; gap: 15px; z-index: 1000; box-shadow: 0 10px 30px var(--accent-glow); visibility: hidden; transform: translateY(150px); opacity: 0; pointer-events: none; transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .toast-active { visibility: visible; transform: translateY(0); opacity: 1; pointer-events: auto; }
         
         .mobile-cta-bar { display: none; position: fixed; bottom: 0; left: 0; width: 100%; background: var(--surface); backdrop-filter: blur(15px); border-top: 1px solid var(--border); padding: 15px; z-index: 998; text-align: center; }
 
-        /* --- MARQUEE & FAQ --- */
-        .marquee-container { background: var(--surface); padding: 30px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); overflow: hidden; display: flex; }
-        .marquee { display: flex; white-space: nowrap; animation: scroll 40s linear infinite; }
-        .marquee span { margin: 0 50px; font-weight: 800; color: var(--text-light); opacity: 0.5; letter-spacing: 4px; font-size: 1.1rem; }
+        /* --- MARQUEE --- */
+        .marquee-container { background: var(--surface); padding: 30px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); overflow: hidden; display: flex; position: relative; z-index: 2;}
+        .marquee { display: flex; white-space: nowrap; animation: scroll 30s linear infinite; }
+        .marquee span { margin: 0 50px; font-weight: 800; font-size: 1.2rem; letter-spacing: 4px; transition: 0.3s;}
         @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-        .faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; margin-bottom: 1rem; overflow: hidden; transition: 0.3s; }
-        .faq-question { padding: 1.5rem; font-weight: 800; font-size: 1.1rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-        .faq-answer { padding: 0 1.5rem; max-height: 0; opacity: 0; transition: all 0.3s ease-in-out; color: var(--text-light); line-height: 1.6; }
-        .faq-item.active { border-color: var(--accent); }
+        /* --- FAQ --- */
+        .faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; margin-bottom: 1rem; overflow: hidden; transition: 0.4s; position: relative; z-index: 1;}
+        .faq-question { padding: 1.5rem; font-weight: 800; font-size: 1.1rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: 0.3s;}
+        .faq-item:hover { border-color: var(--accent-glow); transform: translateX(5px); }
+        .faq-answer { padding: 0 1.5rem; max-height: 0; opacity: 0; transition: all 0.4s ease-in-out; color: var(--text-light); line-height: 1.6; }
+        .faq-item.active { border-color: var(--accent); box-shadow: 0 5px 20px var(--accent-glow); }
         .faq-item.active .faq-answer { padding: 0 1.5rem 1.5rem 1.5rem; max-height: 300px; opacity: 1; }
         
-        /* Buttons & Media */
-        .btn { padding: 1.2rem 2.5rem; border-radius: 16px; font-weight: 800; text-decoration: none; display: inline-block; transition: 0.3s; border: none; font-size: 1rem; text-align: center; cursor: pointer; }
-        .btn-p { background: linear-gradient(135deg, var(--accent), var(--accent-sec)); color: #fff; box-shadow: 0 10px 30px var(--accent-glow); }
-        .btn-p:hover { transform: translateY(-3px); box-shadow: 0 15px 40px var(--accent-glow); }
+        /* --- MAGNETIC BUTTONS --- */
+        .btn { 
+            padding: 1.2rem 2.5rem; border-radius: 16px; font-weight: 800; text-decoration: none; 
+            display: inline-block; border: none; font-size: 1rem; text-align: center; cursor: pointer; 
+            position: relative; overflow: hidden;
+            transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s; 
+        }
+        .btn-p { background: linear-gradient(135deg, var(--accent), var(--accent-sec)); color: #fff; box-shadow: 0 10px 30px var(--accent-glow); position: relative;}
+        .btn-p::after { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent); transform: skewX(-25deg); transition: left 0.6s ease; }
+        .btn-p:hover { box-shadow: 0 15px 40px rgba(176, 38, 255, 0.4); }
+        .btn-p:hover::after { left: 150%; }
 
-        .vid-frame { height: 220px; border-radius: 20px; overflow: hidden; background: #000; margin-bottom: 2rem; position: relative; }
-        .vid-frame video { width: 100%; height: 100%; object-fit: cover; opacity: 0.7; transition: 0.5s; }
-        .card:hover .vid-frame video { opacity: 1; transform: scale(1.05); }
+        /* --- CYBER CUTOUT VIDEO MASKS --- */
+        .vid-frame { 
+            height: 220px; 
+            background: #000; margin-bottom: 2rem; position: relative; 
+            clip-path: polygon(0 0, 90% 0, 100% 15%, 100% 100%, 10% 100%, 0 85%);
+            transition: 0.5s;
+        }
+        .vid-frame video { width: 100%; height: 100%; object-fit: cover; opacity: 0.6; transition: 0.5s; }
+        .card:hover .vid-frame { transform: scale(1.03); box-shadow: 0 10px 30px var(--accent-glow); }
+        .card:hover .vid-frame video { opacity: 1; }
 
-        /* Footer */
-        footer { padding: 80px 5% 40px 5%; border-top: 1px solid var(--border); background: var(--nav-bg); }
+        footer { padding: 80px 5% 40px 5%; border-top: 1px solid var(--border); background: var(--nav-bg); position: relative; z-index: 2;}
         .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; max-width: 1400px; margin: 0 auto; margin-bottom: 3rem; }
         .footer-links { list-style: none; line-height: 2; color: var(--text-light); }
         .footer-links a { color: inherit; text-decoration: none; transition: 0.2s; }
-        .footer-links a:hover { color: var(--accent); }
+        .footer-links a:hover { color: var(--accent); text-shadow: 0 0 10px var(--accent-glow); }
 
-        /* Mobile Overrides */
+        /* Mobile Overrides (Disabled horizontal scroll tricks on phone for usability) */
         @media (max-width: 768px) { 
             body { padding-bottom: 80px; } 
             .mobile-cta-bar { display: block; }
             nav { padding: 1rem 5%; }
             .logo-box { width: 180px; }
-            .hero { text-align: center; padding-top: 130px; } 
+            .hero { text-align: center; padding-top: 130px; perspective: none; } 
+            .tilt-wrapper { transform: none !important; }
             .morph-item { font-size: 2.2rem; justify-content: center; margin-left: -10px; } 
             section { padding: 60px 5%; }
             .card { padding: 2rem; border-radius: 25px; }
+            
+            /* Overriding Portfolio for Mobile */
+            #portfolio-wrapper { height: auto !important; position: relative !important; padding: 60px 0 !important; }
+            .sticky-portfolio { position: relative !important; height: auto !important; }
+            .h-scroll-container { flex-direction: column !important; width: 100% !important; padding: 0 5% !important; transform: none !important; gap: 2rem !important; }
+            .h-scroll-card { width: 100% !important; }
+
             .roi-container { padding: 2rem; }
             .chat-window { width: 90%; right: 5%; bottom: 160px; }
-            .toast-notification { width: 90%; left: 5%; bottom: -100px; }
-            .toast-active { bottom: 90px; left: 5%; }
+            .toast-notification { left: 5%; bottom: 90px; width: 90%; transform: translateY(150px); }
+            .toast-active { transform: translateY(0); }
         }
-    </style>
-</head>
-<body>
+    </style></head><body>
 
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <div id="preloader" aria-hidden="true"><div class="preloader-logo">ZELQ<span class="text-gradient">.</span></div></div>
+    <canvas id="network-canvas"></canvas>
+
+    <div id="preloader" aria-hidden="true">
+        <div class="preloader-logo">ZELQ<span class="text-gradient">.</span></div>
+        <div class="loading-bar"></div>
+    </div>
 
     <div class="cursor-dot"></div><div class="cursor-outline"></div><div id="progress-bar"></div>
-    <div class="bg-grid"></div><div class="orb orb-1"></div><div class="orb orb-2"></div>
+    <div class="bg-grid"></div>
 
     <nav>
         <div class="logo-box">
             <div class="logo-wrap">
-                <div class="logo-item" aria-label="Zelq Homepage">ZELQ<span class="text-gradient">.</span></div>
+                <div class="logo-item glitch" data-text="ZELQ." aria-label="Zelq Homepage">ZELQ<span class="text-gradient">.</span></div>
                 <div class="logo-item" style="font-size: 0.8rem; opacity: 0.7;">Growth Lab</div>
                 <div class="logo-item" style="font-size: 0.8rem; opacity: 0.7;">Infrastructure</div>
             </div>
         </div>
         <div style="display: flex; gap: 15px; align-items: center;">
-            <div class="badge" style="margin-bottom: 0; display: none; /* Hide on smallest screens */"><div class="pulse-dot"></div>2/10 Slots Open</div>
+            <div class="badge" style="margin-bottom: 0; display: none;"><div class="pulse-dot"></div>2/10 Slots Open</div>
             <button onclick="openPortal()" class="btn hover-target" style="background:transparent; border:1px solid var(--border); color:inherit; padding: 0.6rem 1.2rem; font-size: 0.8rem;" aria-label="Open Client Portal">Client Portal</button>
             <button onclick="toggleTheme()" class="hover-target" style="background:none; border:none; color:inherit; font-size:1.5rem; cursor:pointer;" aria-label="Toggle Theme">🌓</button>
         </div>
@@ -226,7 +319,7 @@
             <p style="color:var(--text-light); margin-bottom: 2rem; font-size: 0.9rem;">Enter your premium email to access dashboards.</p>
             <input type="email" id="portalEmail" class="input-glass hover-target" placeholder="Enter business email..." aria-label="Portal Login Email">
             <button onclick="verifyLogin()" class="btn btn-p hover-target" style="width: 100%; margin-bottom: 1rem;" id="loginBtn">Access Portal</button>
-            <p id="loginMsg" style="color:#ef4444; font-size: 0.85rem; display: none;">No active premium plan found.</p>
+            <p id="loginMsg" style="color:var(--accent-sec); font-size: 0.85rem; display: none;">No active premium plan found.</p>
             <button onclick="closePortal()" class="hover-target" style="background:none; border:none; color:var(--text-light); cursor:pointer; margin-top: 1rem; text-decoration: underline;">Cancel</button>
         </div>
     </div>
@@ -249,9 +342,10 @@
     </div>
 
     <main id="main-content">
-        <section class="hero hover-target">
-            <div data-aos="fade-up" style="width: 100%;">
-                <span class="badge">ESTABLISHED 2026 • GLOBAL OPERATIONS</span>
+        <section class="hero hover-target" id="hero-section">
+            
+            <div class="tilt-wrapper" id="tilt-wrapper">
+                <span class="badge"><div class="pulse-dot"></div>ESTABLISHED 2026 • GLOBAL OPERATIONS</span>
                 <div class="morph-box">
                     <div class="morph-list">
                         <div class="morph-item">Dominate <span class="text-gradient" style="margin-left: 15px;">Growth.</span></div>
@@ -276,12 +370,12 @@
 
         <section id="vsl" style="padding-top: 40px;">
             <div style="text-align: center; margin-bottom: 3rem;" data-aos="fade-up">
-                <h2 style="font-size: clamp(2.5rem, 6vw, 3.5rem);">The <span class="text-gradient">System</span> Explained</h2>
+                <h2 style="font-size: clamp(2.5rem, 6vw, 3.5rem);">The <span class="text-gradient glitch" data-text="System">System</span> Explained</h2>
                 <p style="color:var(--text-light); font-size: 1.1rem; margin-top: 10px;">Watch how we deploy infrastructure to scale your revenue.</p>
             </div>
             <div class="card hover-target" data-aos="zoom-in" style="padding: 1rem; border-radius: 30px; max-width: 1000px; margin: 0 auto;">
                 <div class="vid-frame" style="height: auto; aspect-ratio: 16/9; margin-bottom: 0;">
-                    <video controls preload="none" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px; opacity: 1;" poster="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2">
+                    <video controls preload="none" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; opacity: 1;" poster="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2">
                         <source src="https://videos.pexels.com/video-files/3129957/3129957-uhd_2560_1440_25fps.mp4" type="video/mp4">
                     </video>
                 </div>
@@ -290,8 +384,8 @@
 
         <div class="marquee-container hover-target">
             <div class="marquee">
-                <span>PYTHON AUTOMATION</span><span>CINEMATIC VFX</span><span>FULL-STACK ARCHITECTURE</span><span>CRM SCALING</span><span>AI DEPLOYMENT</span>
-                <span>PYTHON AUTOMATION</span><span>CINEMATIC VFX</span><span>FULL-STACK ARCHITECTURE</span><span>CRM SCALING</span><span>AI DEPLOYMENT</span>
+                <span class="text-stroke">PYTHON AUTOMATION</span><span>CINEMATIC VFX</span><span class="text-stroke">FULL-STACK ARCHITECTURE</span><span>CRM SCALING</span><span class="text-stroke">AI DEPLOYMENT</span>
+                <span class="text-stroke">PYTHON AUTOMATION</span><span>CINEMATIC VFX</span><span class="text-stroke">FULL-STACK ARCHITECTURE</span><span>CRM SCALING</span><span class="text-stroke">AI DEPLOYMENT</span>
             </div>
         </div>
 
@@ -311,7 +405,7 @@
                     </div>
                     <div class="roi-stat">
                         <h4>Zelq Automation Cost</h4>
-                        <h2 style="color: #10b981;">₹0 (Automated)</h2>
+                        <h2 style="color: var(--accent);">₹0 (Automated)</h2>
                     </div>
                 </div>
             </div>
@@ -345,26 +439,30 @@
             </div>
         </section>
 
-        <section id="portfolio">
-            <div style="text-align: center; margin-bottom: 5rem;" data-aos="fade-up">
-                <h2 style="font-size: clamp(2.5rem, 6vw, 3.5rem);">The <span class="text-gradient">Vault</span></h2>
-                <p style="color:var(--text-light); font-size: 1.1rem; margin-top: 10px;">Technical and creative precision in motion.</p>
-            </div>
-            <div class="grid">
-                <div class="card hover-target" data-aos="zoom-in">
-                    <div class="vid-frame"><video autoplay muted loop playsinline loading="lazy"><source src="https://videos.pexels.com/video-files/3130182/3130182-uhd_2560_1440_30fps.mp4" type="video/mp4"></video></div>
-                    <h3 style="font-size: 1.5rem; margin-bottom: 10px;">Luxury Brand Media</h3>
-                    <p style="color:var(--text-light); line-height: 1.6;">Cinematic color grading and CGI for high-end product launches.</p>
+        <section id="portfolio-wrapper">
+            <div class="sticky-portfolio">
+                <div class="h-scroll-title" data-aos="fade-up">
+                    <h2 style="font-size: clamp(2.5rem, 6vw, 3.5rem);">The <span class="text-gradient">Vault</span></h2>
+                    <p style="color:var(--text-light); font-size: 1.1rem; margin-top: 10px;">Technical and creative precision in motion. (Scroll to view)</p>
                 </div>
-                <div class="card hover-target" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="vid-frame"><video autoplay muted loop playsinline loading="lazy"><source src="https://videos.pexels.com/video-files/3129957/3129957-uhd_2560_1440_25fps.mp4" type="video/mp4"></video></div>
-                    <h3 style="font-size: 1.5rem; margin-bottom: 10px;">Automated Infrastructure</h3>
-                    <p style="color:var(--text-light); line-height: 1.6;">Python-driven CRM sync and data engines that run 24/7 without manual input.</p>
-                </div>
-                <div class="card hover-target" data-aos="zoom-in" data-aos-delay="200">
-                    <div class="vid-frame"><video autoplay muted loop playsinline loading="lazy"><source src="https://videos.pexels.com/video-files/4069480/4069480-uhd_2560_1440_25fps.mp4" type="video/mp4"></video></div>
-                    <h3 style="font-size: 1.5rem; margin-bottom: 10px;">Product Architecture</h3>
-                    <p style="color:var(--text-light); line-height: 1.6;">Mobile-first web platforms built for speed, conversion, and global scaling.</p>
+                
+                <div class="h-scroll-container" id="h-scroll">
+                    <div class="card h-scroll-card hover-target">
+                        <div class="vid-frame"><video autoplay muted loop playsinline loading="lazy"><source src="https://videos.pexels.com/video-files/3130182/3130182-uhd_2560_1440_30fps.mp4" type="video/mp4"></video></div>
+                        <h3 style="font-size: 1.5rem; margin-bottom: 10px;">Luxury Brand Media</h3>
+                        <p style="color:var(--text-light); line-height: 1.6;">Cinematic color grading and CGI for high-end product launches.</p>
+                    </div>
+                    <div class="card h-scroll-card hover-target">
+                        <div class="vid-frame"><video autoplay muted loop playsinline loading="lazy"><source src="https://videos.pexels.com/video-files/3129957/3129957-uhd_2560_1440_25fps.mp4" type="video/mp4"></video></div>
+                        <h3 style="font-size: 1.5rem; margin-bottom: 10px;">Automated Infrastructure</h3>
+                        <p style="color:var(--text-light); line-height: 1.6;">Python-driven CRM sync and data engines that run 24/7 without manual input.</p>
+                    </div>
+                    <div class="card h-scroll-card hover-target">
+                        <div class="vid-frame"><video autoplay muted loop playsinline loading="lazy"><source src="https://videos.pexels.com/video-files/4069480/4069480-uhd_2560_1440_25fps.mp4" type="video/mp4"></video></div>
+                        <h3 style="font-size: 1.5rem; margin-bottom: 10px;">Product Architecture</h3>
+                        <p style="color:var(--text-light); line-height: 1.6;">Mobile-first web platforms built for speed, conversion, and global scaling.</p>
+                    </div>
+                    <div style="width: 5vw; flex-shrink: 0;"></div>
                 </div>
             </div>
         </section>
@@ -375,16 +473,16 @@
             </div>
             <div class="grid">
                 <div class="card hover-target" data-aos="fade-up">
-                    <div class="text-gradient" style="font-size: 3.5rem; font-weight: 900; margin-bottom: 1rem;">+34%</div>
+                    <div class="text-gradient" style="font-size: 3.5rem; font-weight: 900; margin-bottom: 1rem;">+<span class="counter" data-target="34">0</span>%</div>
                     <h3 style="margin-bottom: 10px;">E-Commerce Lead Conversion</h3>
                     <p style="color:var(--text-light); margin-bottom: 1.5rem;">Deployed a seamless UX architecture and automated abandoned cart recovery sequences.</p>
-                    <div style="font-weight: 800; color: #10b981;">✓ ₹12L Additional Revenue / Quarter</div>
+                    <div style="font-weight: 800; color: var(--accent);">✓ ₹12L Additional Revenue / Quarter</div>
                 </div>
                 <div class="card hover-target" data-aos="fade-up" data-aos-delay="100">
-                    <div class="text-gradient" style="font-size: 3.5rem; font-weight: 900; margin-bottom: 1rem;">40 hrs</div>
+                    <div class="text-gradient" style="font-size: 3.5rem; font-weight: 900; margin-bottom: 1rem;"><span class="counter" data-target="40">0</span> hrs</div>
                     <h3 style="margin-bottom: 10px;">Weekly Time Reclaimed</h3>
                     <p style="color:var(--text-light); margin-bottom: 1.5rem;">Built a custom Python pipeline to completely eliminate manual CRM data entry for a B2B firm.</p>
-                    <div style="font-weight: 800; color: #10b981;">✓ 100% Error Reduction</div>
+                    <div style="font-weight: 800; color: var(--accent);">✓ 100% Error Reduction</div>
                 </div>
             </div>
         </section>
@@ -396,13 +494,13 @@
             </div>
             <div class="grid" id="reviewGrid">
                 <div class="card hover-target" data-aos="fade-right">
-                    <div style="color: #fbbf24; font-size: 1.5rem; margin-bottom: 1rem;">★★★★★</div>
+                    <div style="color: var(--accent); font-size: 1.5rem; margin-bottom: 1rem;">★★★★★</div>
                     <p style="font-size: 1.1rem; line-height: 1.6; font-style: italic; margin-bottom: 1.5rem;">"Zelq completely rewired our backend. The Python infrastructure they deployed saved us hundreds of hours and scaled our operations effortlessly."</p>
                     <h4 style="font-weight: 800;">Director of Operations</h4>
                     <p style="color:var(--text-light); font-size: 0.85rem; margin-top: 5px;">EVNEK</p>
                 </div>
                 <div class="card hover-target" data-aos="fade-left">
-                    <div style="color: #fbbf24; font-size: 1.5rem; margin-bottom: 1rem;">★★★★★</div>
+                    <div style="color: var(--accent); font-size: 1.5rem; margin-bottom: 1rem;">★★★★★</div>
                     <p style="font-size: 1.1rem; line-height: 1.6; font-style: italic; margin-bottom: 1.5rem;">"The cinematic VFX and branding assets Shaurya's team created put us in a different league. Brand Charm Company has seen a 40% bump in premium lead conversions."</p>
                     <h4 style="font-weight: 800;">Chief Marketing Officer</h4>
                     <p style="color:var(--text-light); font-size: 0.85rem; margin-top: 5px;">BCC (Brand Charm Company)</p>
@@ -415,10 +513,10 @@
                 <h2 style="font-size: clamp(2.5rem, 6vw, 3.5rem);">The <span class="text-gradient">Roadmap</span></h2>
             </div>
             <div class="grid">
-                <div class="card hover-target"><h1 class="text-gradient" style="opacity:0.3; font-size: 3rem;">01</h1><h3 style="margin: 10px 0;">Infrastructure Audit</h3><p style="font-size:0.95rem; color:var(--text-light);">We find the tech and financial leaks in your current funnel.</p></div>
-                <div class="card hover-target"><h1 class="text-gradient" style="opacity:0.3; font-size: 3rem;">02</h1><h3 style="margin: 10px 0;">System Deployment</h3><p style="font-size:0.95rem; color:var(--text-light);">Python bots installed to automate 100% of your daily manual tasks.</p></div>
-                <div class="card hover-target"><h1 class="text-gradient" style="opacity:0.3; font-size: 3rem;">03</h1><h3 style="margin: 10px 0;">Visual Authority</h3><p style="font-size:0.95rem; color:var(--text-light);">High-ticket VFX assets that build instant brand trust and authority.</p></div>
-                <div class="card hover-target"><h1 class="text-gradient" style="opacity:0.3; font-size: 3rem;">04</h1><h3 style="margin: 10px 0;">Predictable Scale</h3><p style="font-size:0.95rem; color:var(--text-light);">Financial strategy and roadmap execution for long-term dominance.</p></div>
+                <div class="card hover-target"><h1 class="text-gradient glitch" data-text="01" style="opacity:0.3; font-size: 3rem;">01</h1><h3 style="margin: 10px 0;">Infrastructure Audit</h3><p style="font-size:0.95rem; color:var(--text-light);">We find the tech and financial leaks in your current funnel.</p></div>
+                <div class="card hover-target"><h1 class="text-gradient glitch" data-text="02" style="opacity:0.3; font-size: 3rem;">02</h1><h3 style="margin: 10px 0;">System Deployment</h3><p style="font-size:0.95rem; color:var(--text-light);">Python bots installed to automate 100% of your daily manual tasks.</p></div>
+                <div class="card hover-target"><h1 class="text-gradient glitch" data-text="03" style="opacity:0.3; font-size: 3rem;">03</h1><h3 style="margin: 10px 0;">Visual Authority</h3><p style="font-size:0.95rem; color:var(--text-light);">High-ticket VFX assets that build instant brand trust and authority.</p></div>
+                <div class="card hover-target"><h1 class="text-gradient glitch" data-text="04" style="opacity:0.3; font-size: 3rem;">04</h1><h3 style="margin: 10px 0;">Predictable Scale</h3><p style="font-size:0.95rem; color:var(--text-light);">Financial strategy and roadmap execution for long-term dominance.</p></div>
             </div>
         </section>
 
@@ -463,10 +561,10 @@
                     </ul>
                     <a href="#contact" class="btn hover-target" style="border: 1px solid var(--border); width: 100%; color:inherit;">Select Pro</a>
                 </div>
-                <div class="card hover-target" style="border: 2px solid var(--accent); transform: scale(1.05);" data-aos="zoom-in" data-aos-delay="200">
-                    <span class="badge" style="border:none; padding: 4px 12px;">MOST POPULAR</span>
+                <div class="card premium-card hover-target" data-aos="zoom-in" data-aos-delay="200">
+                    <span class="badge" style="border:none; padding: 4px 12px; background: linear-gradient(135deg, var(--accent), var(--accent-sec)); color: white;">MOST POPULAR</span>
                     <h3 style="font-size: 2.5rem; margin-top: 0.5rem;">Premium</h3>
-                    <div class="text-gradient" style="font-size: 3.5rem; font-weight: 900; margin: 1rem 0;">₹3,999<span style="font-size: 1rem; color:var(--text-light); -webkit-text-fill-color: var(--text-light);">/wk</span></div>
+                    <div class="text-gradient glitch" data-text="₹3,999" style="font-size: 3.5rem; font-weight: 900; margin: 1rem 0;">₹3,999<span style="font-size: 1rem; color:var(--text-light); -webkit-text-fill-color: var(--text-light);">/wk</span></div>
                     <ul style="list-style:none; line-height:2.5; color:var(--text-light); margin-bottom: 2rem;">
                         <li>✓ <strong>High-End VFX & Video</strong></li>
                         <li>✓ <strong>Full-Stack App Dev</strong></li>
@@ -482,7 +580,7 @@
                 <div data-aos="fade-right">
                     <h2 style="font-size: clamp(3rem, 8vw, 5rem); line-height: 0.9; margin-bottom: 2rem;">Ready to <br><span class="text-gradient">Win?</span></h2>
                     <p style="margin-bottom: 2.5rem; color:var(--text-light); font-size: 1.2rem;">We only accept 10 clients at a time. Secure your position by applying below.</p>
-                    <div onclick="navigator.clipboard.writeText('contact.zelq@gmail.com'); alert('Copied!')" class="hover-target" style="font-weight: 800; font-size: 1.1rem; margin-bottom: 10px;">✉️ contact.zelq@gmail.com</div>
+                    <div onclick="navigator.clipboard.writeText('support@zelq.in'); alert('Copied!')" class="hover-target" style="font-weight: 800; font-size: 1.1rem; margin-bottom: 10px;">✉️ support@zelq.in</div>
                     <div onclick="navigator.clipboard.writeText('+91 7880032340'); alert('Copied!')" class="hover-target" style="font-weight: 800; font-size: 1.1rem;">📞 +91 7880032340</div>
                 </div>
                 <div class="card hover-target" data-aos="fade-left">
@@ -517,7 +615,7 @@
                 <h4 style="margin-bottom: 1.2rem; font-weight: 800;">Navigation</h4>
                 <ul class="footer-links">
                     <li><a href="#vsl" class="hover-target">The System</a></li>
-                    <li><a href="#portfolio" class="hover-target">The Vault</a></li>
+                    <li><a href="#portfolio-wrapper" class="hover-target">The Vault</a></li>
                     <li><a href="#pricing" class="hover-target">Pricing Plans</a></li>
                     <li><a href="#faq" class="hover-target">Client Intel</a></li>
                 </ul>
@@ -558,12 +656,10 @@
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // Init AOS
         AOS.init({ duration: 800, once: true });
 
-        // Theme Toggle Logic
         function initTheme() {
-            const savedTheme = localStorage.getItem('zelqTheme') || 'dark'; // Defaulting to dark for modern vibe
+            const savedTheme = localStorage.getItem('zelqTheme') || 'dark';
             document.documentElement.setAttribute('data-theme', savedTheme);
         }
         initTheme();
@@ -575,7 +671,6 @@
             localStorage.setItem('zelqTheme', newTheme);
         }
 
-        // Preloader & Year
         window.onload = () => {
             setTimeout(() => {
                 document.getElementById('preloader').style.opacity = '0';
@@ -584,26 +679,190 @@
             document.getElementById("year").innerHTML = new Date().getFullYear();
         };
 
-        // Custom Cursor
+        // --- GLOBAL MOUSE TRACKING ---
+        let mouseX = 0; let mouseY = 0;
         const cursorDot = document.querySelector('.cursor-dot');
         const cursorOutline = document.querySelector('.cursor-outline');
+        
         window.addEventListener('mousemove', (e) => {
-            cursorDot.style.left = cursorOutline.style.left = `${e.clientX}px`;
-            cursorDot.style.top = cursorOutline.style.top = `${e.clientY}px`;
+            mouseX = e.clientX; mouseY = e.clientY;
+            cursorDot.style.left = cursorOutline.style.left = `${mouseX}px`;
+            cursorDot.style.top = cursorOutline.style.top = `${mouseY}px`;
         });
+        
         document.querySelectorAll('a, button, input, textarea, select, .faq-item, .hover-target').forEach(el => {
             el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
             el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
         });
 
-        // Scroll Progress
+        // --- INTERACTIVE WEBGL/CANVAS SPIDERWEB ---
+        const canvas = document.getElementById('network-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+        let particlesArray = [];
+
+        class Particle {
+            constructor(x, y, directionX, directionY, size, color) {
+                this.x = x; this.y = y; this.directionX = directionX; this.directionY = directionY; this.size = size; this.color = color;
+            }
+            draw() {
+                ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+                ctx.fillStyle = this.color; ctx.fill();
+            }
+            update() {
+                if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
+                if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
+                this.x += this.directionX; this.y += this.directionY;
+                this.draw();
+            }
+        }
+
+        function initCanvas() {
+            particlesArray = [];
+            let numberOfParticles = (canvas.height * canvas.width) / 12000;
+            for (let i = 0; i < numberOfParticles; i++) {
+                let size = (Math.random() * 2) + 1;
+                let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
+                let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
+                let directionX = (Math.random() * 1) - 0.5;
+                let directionY = (Math.random() * 1) - 0.5;
+                // Alternate between Cyan and Purple nodes
+                let color = i % 2 === 0 ? '#00f0ff' : '#b026ff';
+                particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
+            }
+        }
+
+        function connectParticles() {
+            let opacityValue = 1;
+            for (let a = 0; a < particlesArray.length; a++) {
+                for (let b = a; b < particlesArray.length; b++) {
+                    let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) + ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
+                    if (distance < (canvas.width / 7) * (canvas.height / 7)) {
+                        opacityValue = 1 - (distance / 20000);
+                        ctx.strokeStyle = 'rgba(0, 240, 255,' + opacityValue * 0.2 + ')';
+                        ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(particlesArray[a].x, particlesArray[a].y); ctx.lineTo(particlesArray[b].x, particlesArray[b].y); ctx.stroke();
+                    }
+                }
+                // Connect nodes to mouse cursor
+                if(mouseX != null && mouseY != null) {
+                    let dx = mouseX - particlesArray[a].x; let dy = mouseY - particlesArray[a].y;
+                    let distance = dx*dx + dy*dy;
+                    if(distance < 25000) {
+                        ctx.strokeStyle = 'rgba(176, 38, 255,' + (1 - distance/25000) * 0.5 + ')';
+                        ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(particlesArray[a].x, particlesArray[a].y); ctx.lineTo(mouseX, mouseY); ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animateCanvas() {
+            requestAnimationFrame(animateCanvas);
+            ctx.clearRect(0, 0, innerWidth, innerHeight);
+            for (let i = 0; i < particlesArray.length; i++) particlesArray[i].update();
+            connectParticles();
+        }
+        initCanvas(); animateCanvas();
+        window.addEventListener('resize', function(){ canvas.width = innerWidth; canvas.height = innerHeight; initCanvas(); });
+
+        // --- 3D HERO TILT EFFECT ---
+        const heroSection = document.getElementById('hero-section');
+        const tiltWrapper = document.getElementById('tilt-wrapper');
+        
+        heroSection.addEventListener('mousemove', (e) => {
+            // Only execute if we are on desktop
+            if (window.innerWidth > 768) {
+                const xAxis = (window.innerWidth / 2 - e.pageX) / 40; // Adjust division for more/less extreme tilt
+                const yAxis = (window.innerHeight / 2 - e.pageY) / 40;
+                tiltWrapper.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+            }
+        });
+        heroSection.addEventListener('mouseleave', () => {
+            if (window.innerWidth > 768) tiltWrapper.style.transform = `rotateY(0deg) rotateX(0deg)`;
+        });
+
+        // --- MAGNETIC BUTTONS LOGIC ---
+        const magneticBtns = document.querySelectorAll('.btn');
+        magneticBtns.forEach(btn => {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const x = (e.clientX - rect.left - rect.width / 2) * 0.3; // 0.3 controls the "pull" strength
+                const y = (e.clientY - rect.top - rect.height / 2) * 0.3;
+                btn.style.transform = `translate(${x}px, ${y}px) scale(1.05)`;
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = `translate(0px, 0px) scale(1)`;
+            });
+        });
+
+        // --- ANIMATED NUMBER COUNTERS LOGIC ---
+        const counters = document.querySelectorAll('.counter');
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    const target = +entry.target.getAttribute('data-target');
+                    let count = 0;
+                    const updateCount = () => {
+                        const increment = target / 40; 
+                        if(count < target) {
+                            count += increment;
+                            entry.target.innerText = Math.ceil(count);
+                            setTimeout(updateCount, 30);
+                        } else {
+                            entry.target.innerText = target;
+                        }
+                    };
+                    updateCount();
+                    counterObserver.unobserve(entry.target); 
+                }
+            });
+        }, { threshold: 0.5 });
+        counters.forEach(counter => counterObserver.observe(counter));
+
+        // --- HORIZONTAL SCROLL FOR PORTFOLIO (APPLE STYLE) ---
+        const portWrapper = document.getElementById('portfolio-wrapper');
+        const hScroll = document.getElementById('h-scroll');
+
+        // Mouse spotlight tracking for cards
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+
         window.addEventListener('scroll', () => {
+            // Top Scroll Progress Bar
             let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             document.getElementById("progress-bar").style.width = (winScroll / height) * 100 + "%";
+
+            // Horizontal Scroll Logic (Only run on desktop)
+            if (window.innerWidth > 768 && portWrapper && hScroll) {
+                const rect = portWrapper.getBoundingClientRect();
+                const viewHeight = window.innerHeight;
+                
+                if (rect.top <= 0 && rect.bottom >= viewHeight) {
+                    // We are currently scrolling inside the sticky wrapper
+                    const totalScroll = rect.height - viewHeight;
+                    const scrolled = Math.abs(rect.top);
+                    let progress = scrolled / totalScroll;
+                    const maxTranslate = hScroll.scrollWidth - window.innerWidth;
+                    hScroll.style.transform = `translateX(-${progress * maxTranslate}px)`;
+                } else if (rect.top > 0) {
+                    // Above the section
+                    hScroll.style.transform = `translateX(0px)`;
+                } else if (rect.bottom < viewHeight) {
+                    // Below the section
+                    const maxTranslate = hScroll.scrollWidth - window.innerWidth;
+                    hScroll.style.transform = `translateX(-${maxTranslate}px)`;
+                }
+            }
         });
 
-        // Exit Intent
+        // Exit intent modal
         let exitIntentTriggered = false;
         document.addEventListener('mouseleave', (e) => {
             if (e.clientY < 0 && !exitIntentTriggered) {
@@ -612,7 +871,6 @@
             }
         });
 
-        // ROI Calculator
         const slider = document.getElementById("hourSlider");
         slider.oninput = function() {
             document.getElementById("hoursValue").innerHTML = this.value + " hrs";
@@ -626,20 +884,18 @@
         function closeFeedback() { document.getElementById('feedbackModal').classList.remove('modal-active'); }
         function toggleChat() { document.getElementById('chatWindow').classList.toggle('chat-active'); }
 
-        // Simulated Portal Login
         function verifyLogin() {
             const btn = document.getElementById('loginBtn');
             btn.innerHTML = "Authenticating...";
             setTimeout(() => {
                 const email = document.getElementById('portalEmail').value.toLowerCase().trim();
-                if(email.includes("@")) { // Simplified simulation
-                    btn.style.background = "#10b981"; btn.innerHTML = "Access Granted.";
+                if(email.includes("@")) { 
+                    btn.style.background = "var(--accent)"; btn.innerHTML = "Access Granted.";
                     setTimeout(() => { alert("Welcome to the Zelq Premium Dashboard."); closePortal(); btn.style.background = ""; btn.innerHTML = "Access Portal"; }, 1500);
                 } else { btn.innerHTML = "Access Portal"; document.getElementById('loginMsg').style.display = 'block'; }
             }, 1200);
         }
 
-        // Simulated Review Submit
         function submitReview() {
             const btn = document.getElementById('submitRevBtn');
             btn.innerHTML = "Verifying...";
@@ -650,12 +906,10 @@
             }, 1200);
         }
 
-        // FOMO Toast Popup
+        // Delay popup trigger
         setTimeout(() => {
             const toast = document.getElementById('toast');
             toast.classList.add('toast-active');
             setTimeout(() => toast.classList.remove('toast-active'), 6000);
         }, 12000); 
-    </script>
-</body>
-</html>
+    </script></body></html>

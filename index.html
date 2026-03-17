@@ -142,6 +142,15 @@
         .h-scroll-container { display: flex; gap: 3rem; width: max-content; padding: 0 5vw; will-change: transform; }
         .h-scroll-card { width: 450px; flex-shrink: 0; cursor: pointer; }
 
+        /* --- NEW: DATA STREAM DIVIDER --- */
+        .data-stream-divider { width: 100%; padding: 40px 5%; overflow: hidden; position: relative; z-index: 2; margin-bottom: 2rem;}
+        .stream-track { width: 100%; height: 2px; background: rgba(255,255,255,0.05); position: relative; border-radius: 2px; }
+        .stream-pulse-1 { position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(90deg, transparent, var(--accent), transparent); animation: streamMove 2.5s linear infinite; }
+        .stream-pulse-2 { position: absolute; top: 0; right: -100%; width: 50%; height: 100%; background: linear-gradient(-90deg, transparent, var(--accent-sec), transparent); animation: streamMoveRev 3s linear infinite; }
+        .stream-text { display: flex; justify-content: space-between; margin: 15px 0; color: var(--text-light); font-family: monospace; font-size: 0.85rem; opacity: 0.7; }
+        @keyframes streamMove { 0% { left: -100%; } 100% { left: 200%; } }
+        @keyframes streamMoveRev { 0% { right: -100%; } 100% { right: 200%; } }
+
         /* --- ROI & TECH --- */
         .tech-stack { padding: 40px 5%; margin-bottom: 40px; position: relative; z-index: 2; }
         .logo-row { display: flex; justify-content: center; align-items: center; gap: clamp(30px, 6vw, 80px); flex-wrap: wrap; opacity: 0.5; transition: 0.4s; }
@@ -174,7 +183,7 @@
         .progress-bar-bg { width: 100%; height: 6px; background: var(--border); border-radius: 3px; margin-bottom: 2rem; overflow: hidden; }
         .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-sec)); width: 33%; transition: width 0.4s ease; }
 
-        /* --- NEW: TERMINAL SECTION --- */
+        /* --- LIVE OPERATIONS TERMINAL --- */
         .terminal-container { background: #05050a; border-radius: 20px; border: 1px solid var(--border); overflow: hidden; max-width: 900px; margin: 0 auto; box-shadow: 0 15px 40px rgba(0,0,0,0.5); text-align: left; }
         .terminal-header { background: rgba(255,255,255,0.05); padding: 12px 20px; display: flex; gap: 8px; border-bottom: 1px solid var(--border); align-items: center; }
         .terminal-dot { width: 12px; height: 12px; border-radius: 50%; }
@@ -496,7 +505,7 @@
             <div class="grid">
                 <div class="card hover-target" data-aos="fade-up">
                     <h3 style="font-size: clamp(2rem, 5vw, 2.8rem); margin-bottom: 1rem; line-height: 1.2;">Vrishmanyu <br>Pratap Singh</h3>
-                    <p style="color:var(--accent); font-weight: 800; margin-bottom: 2rem; letter-spacing: 1px;">HEAD OF OPERATIONS</p>
+                    <p style="color:var(--accent); font-weight: 800; margin-bottom: 2rem; letter-spacing: 1px;">FOUNDER & HEAD OF OPS</p>
                     <ul style="list-style: none; line-height: 2.5; color: var(--text-light); font-weight: 600;">
                         <li>⚡ CRM Architecture</li>
                         <li>⚡ Python Scripting</li>
@@ -506,7 +515,7 @@
                 </div>
                 <div class="card hover-target" data-aos="fade-up" data-aos-delay="100">
                     <h3 style="font-size: clamp(2rem, 5vw, 2.8rem); margin-bottom: 1rem; line-height: 1.2;">Shaurya <br>Saksena</h3>
-                    <p style="color:var(--accent); font-weight: 800; margin-bottom: 2rem; letter-spacing: 1px;">HEAD OF TECHNICAL</p>
+                    <p style="color:var(--accent); font-weight: 800; margin-bottom: 2rem; letter-spacing: 1px;">FOUNDER & HEAD OF TECH</p>
                     <ul style="list-style: none; line-height: 2.5; color: var(--text-light); font-weight: 600;">
                         <li>⚡ Full-Stack Architecture</li>
                         <li>⚡ Cinematic VFX & Colorist</li>
@@ -514,9 +523,39 @@
                         <li>⚡ Media Infrastructure</li>
                     </ul>
                 </div>
-                <div class="card hover-target" data-aos="fade-up" data-aos-delay="200" style="border-color: var(--accent-sec);">
+                <div class="card hover-target" data-aos="fade-up" data-aos-delay="200">
+                    <h3 style="font-size: clamp(2rem, 5vw, 2.8rem); margin-bottom: 1rem; line-height: 1.2;">Atharva <br>Mishra</h3>
+                    <p style="color:var(--accent-sec); font-weight: 800; margin-bottom: 2rem; letter-spacing: 1px;">CO-FOUNDER / STRATEGY</p>
+                    <ul style="list-style: none; line-height: 2.5; color: var(--text-light); font-weight: 600;">
+                        <li>⚡ Elite Communication</li>
+                        <li>⚡ Future Planning</li>
+                        <li>⚡ Content Strategy</li>
+                        <li>⚡ Deep Research</li>
+                    </ul>
+                </div>
+                <div class="card hover-target" data-aos="fade-up" data-aos-delay="300">
+                    <h3 style="font-size: clamp(2rem, 5vw, 2.8rem); margin-bottom: 1rem; line-height: 1.2;">Tanmay <br>Khare</h3>
+                    <p style="color:var(--accent-sec); font-weight: 800; margin-bottom: 2rem; letter-spacing: 1px;">CO-FOUNDER / DATA & AI</p>
+                    <ul style="list-style: none; line-height: 2.5; color: var(--text-light); font-weight: 600;">
+                        <li>⚡ Advanced AI Prompting</li>
+                        <li>⚡ Data Analysis</li>
+                        <li>⚡ Financial Architecture</li>
+                        <li>⚡ System Optimization</li>
+                    </ul>
+                </div>
+                <div class="card hover-target" data-aos="fade-up" data-aos-delay="400">
+                    <h3 style="font-size: clamp(2rem, 5vw, 2.8rem); margin-bottom: 1rem; line-height: 1.2;">Prakhar <br>Prabhakar</h3>
+                    <p style="color:var(--accent-sec); font-weight: 800; margin-bottom: 2rem; letter-spacing: 1px;">CO-FOUNDER / MEDIA</p>
+                    <ul style="list-style: none; line-height: 2.5; color: var(--text-light); font-weight: 600;">
+                        <li>⚡ Cinematic Editing</li>
+                        <li>⚡ VFX & SFX Artist</li>
+                        <li>⚡ Content Planning</li>
+                        <li>⚡ Visual Architecture</li>
+                    </ul>
+                </div>
+                <div class="card hover-target" data-aos="fade-up" data-aos-delay="500" style="border-color: var(--accent);">
                     <h3 style="font-size: clamp(2rem, 5vw, 2.8rem); margin-bottom: 1rem; line-height: 1.2;">Zelq-Core <br>AI Engine</h3>
-                    <p style="color:var(--accent-sec); font-weight: 800; margin-bottom: 2rem; letter-spacing: 1px;">AUTONOMOUS SYSTEM</p>
+                    <p style="color:var(--accent); font-weight: 800; margin-bottom: 2rem; letter-spacing: 1px;">AUTONOMOUS SYSTEM</p>
                     <ul style="list-style: none; line-height: 2.5; color: var(--text-light); font-weight: 600;">
                         <li>⚡ Machine Learning Models</li>
                         <li>⚡ 24/7 Predictive Routing</li>
@@ -552,6 +591,20 @@
                     </div>
                     <div style="width: 5vw; flex-shrink: 0;"></div>
                 </div>
+            </div>
+        </section>
+
+        <section class="data-stream-divider">
+            <div class="stream-track">
+                <div class="stream-pulse-1"></div>
+            </div>
+            <div class="stream-text">
+                <span>ENCRYPTED CONNECTION</span>
+                <span class="glitch" data-text="NODE: ACTIVE">NODE: ACTIVE</span>
+                <span>LATENCY: 12ms</span>
+            </div>
+            <div class="stream-track">
+                <div class="stream-pulse-2"></div>
             </div>
         </section>
 
@@ -843,7 +896,11 @@
         class Particle {
             constructor(x, y, directionX, directionY, size, color) { this.x = x; this.y = y; this.directionX = directionX; this.directionY = directionY; this.size = size; this.color = color; }
             draw() { ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false); ctx.fillStyle = this.color; ctx.fill(); }
-            update() { if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX; if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY; this.x += this.directionX; this.y += this.directionY; this.draw(); }
+            update() {
+                if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
+                if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
+                this.x += this.directionX; this.y += this.directionY; this.draw();
+            }
         }
         function initCanvas() {
             particlesArray = []; let numberOfParticles = (canvas.height * canvas.width) / 12000;
@@ -871,7 +928,7 @@
         function animateCanvas() { requestAnimationFrame(animateCanvas); ctx.clearRect(0, 0, innerWidth, innerHeight); for (let i = 0; i < particlesArray.length; i++) particlesArray[i].update(); connectParticles(); }
         initCanvas(); animateCanvas(); window.addEventListener('resize', function(){ canvas.width = innerWidth; canvas.height = innerHeight; initCanvas(); });
 
-        // --- NEW: 3D WIREFRAME GLOBE CANVAS ---
+        // --- 3D WIREFRAME GLOBE CANVAS ---
         const globeCanvas = document.getElementById('globe-canvas'); const gCtx = globeCanvas.getContext('2d');
         const gWidth = 40; const gHeight = 40; globeCanvas.width = gWidth; globeCanvas.height = gHeight;
         let nodes = []; let angleX = 0; let angleY = 0;

@@ -1,1084 +1,794 @@
-<!DOCTYPE html><html lang="en" data-theme="dark"><head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Zelq | High-Ticket Infrastructure & Growth</title>
-    <meta name="description" content="Zelq Growth Agency: Python automation, CRM scaling, and cinematic VFX infrastructure for high-ticket brands.">
-    
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZELQ | Elite Digital Marketing & Editing</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
     <style>
-        /* --- CYBER NEON THEME VARIABLES --- */
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300;400;600&display=swap');
+
+        /* ==========================================
+           1. CSS VARIABLES
+           ========================================== */
         :root {
-            --bg: #f0f4f8; 
-            --surface: #ffffff;
-            --text-main: #0f172a;
-            --text-light: #475569;
-            --accent: #0ea5e9; 
-            --accent-sec: #8b5cf6; 
-            --accent-glow: rgba(14, 165, 233, 0.15);
-            --border: rgba(15, 23, 42, 0.08);
-            --nav-bg: rgba(240, 244, 248, 0.85);
-            --glass-blur: blur(24px) saturate(150%);
-            --input-bg: rgba(241, 245, 249, 0.8);
-        }
-
-        [data-theme="dark"] {
-            --bg: #03030a;
-            --surface: rgba(10, 10, 25, 0.5);
-            --text-main: #ffffff;
-            --text-light: #8ba1b5;
-            --accent: #00f0ff; 
-            --accent-sec: #b026ff; 
-            --accent-glow: rgba(0, 240, 255, 0.25);
-            --border: rgba(255, 255, 255, 0.1);
-            --nav-bg: rgba(3, 3, 10, 0.75);
-            --input-bg: rgba(255, 255, 255, 0.04);
-        }
-
-        /* --- BASE STYLES --- */
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; cursor: none; }
-        html { scroll-behavior: smooth; overflow-x: hidden; width: 100%; scroll-padding-top: 100px; }
-        body { background-color: var(--bg); color: var(--text-main); overflow-x: hidden; width: 100%; position: relative; transition: background-color 0.5s, color 0.5s; font-display: swap; }
-        h1, h2, h3 { overflow-wrap: break-word; word-wrap: break-word; hyphens: auto; }
-
-        /* CUSTOM CYBER SCROLLBAR */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: var(--bg); }
-        ::-webkit-scrollbar-thumb { background: var(--text-light); border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--accent); box-shadow: 0 0 10px var(--accent-glow); }
-
-        /* Modern Text Gradient & Outline */
-        .text-gradient { background: linear-gradient(135deg, var(--accent), var(--accent-sec)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .text-stroke { color: transparent; -webkit-text-stroke: 1px var(--text-light); transition: 0.3s; }
-        .text-stroke:hover { color: var(--accent); -webkit-text-stroke: 1px var(--accent); text-shadow: 0 0 15px var(--accent-glow); }
-
-        /* Skip to Content */
-        .skip-link { position: absolute; top: -60px; left: 0; background: var(--accent); color: white; padding: 12px; z-index: 100000; transition: top 0.3s; font-weight: bold; text-decoration: none; border-radius: 0 0 12px 0; }
-        .skip-link:focus { top: 0; }
-
-        /* --- GLITCH ANIMATION --- */
-        .glitch { position: relative; display: inline-block; }
-        .glitch::before, .glitch::after { content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.8; pointer-events: none; }
-        .glitch::before { left: 2px; text-shadow: -2px 0 var(--accent-sec); clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%); animation: glitch-anim 3s infinite linear alternate-reverse; }
-        .glitch::after { left: -2px; text-shadow: -2px 0 var(--accent); clip-path: polygon(0 80%, 100% 20%, 100% 100%, 0 100%); animation: glitch-anim2 2.5s infinite linear alternate-reverse; }
-        
-        @keyframes glitch-anim { 0% { clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%); transform: translate(0); } 20% { clip-path: polygon(0 15%, 100% 15%, 100% 15%, 0 15%); transform: translate(-2px, 1px); } 40% { clip-path: polygon(0 10%, 100% 10%, 100% 20%, 0 20%); transform: translate(2px, -1px); } 60% { clip-path: polygon(0 1%, 100% 1%, 100% 2%, 0 2%); transform: translate(0); } 80% { clip-path: polygon(0 33%, 100% 33%, 100% 33%, 0 33%); transform: translate(1px, 1px); } 100% { clip-path: polygon(0 44%, 100% 44%, 100% 44%, 0 44%); transform: translate(-1px, 0); } }
-        @keyframes glitch-anim2 { 0% { clip-path: polygon(0 25%, 100% 25%, 100% 30%, 0 30%); transform: translate(0); } 20% { clip-path: polygon(0 3%, 100% 3%, 100% 3%, 0 3%); transform: translate(1px, -1px); } 40% { clip-path: polygon(0 5%, 100% 5%, 100% 20%, 0 20%); transform: translate(-1px, 1px); } 60% { clip-path: polygon(0 20%, 100% 20%, 100% 20%, 0 20%); transform: translate(0); } 80% { clip-path: polygon(0 23%, 100% 23%, 100% 23%, 0 23%); transform: translate(-2px, 0); } 100% { clip-path: polygon(0 43%, 100% 43%, 100% 43%, 0 43%); transform: translate(1px, 1px); } }
-
-        /* --- PRE-LOADER --- */
-        #preloader { position: fixed; inset: 0; background: #010105; z-index: 99999; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.8s ease; }
-        .preloader-logo { font-size: 3rem; font-weight: 900; color: #fff; animation: tracking-in-expand 1s cubic-bezier(0.215, 0.610, 0.355, 1.000) both; }
-        .loading-bar { width: 150px; height: 3px; background: rgba(255,255,255,0.05); margin-top: 20px; position: relative; overflow: hidden; border-radius: 3px; }
-        .loading-bar::after { content: ''; position: absolute; left: -50%; width: 50%; height: 100%; background: linear-gradient(90deg, transparent, var(--accent), var(--accent-sec)); animation: loadSweep 1.2s infinite ease-in-out; }
-        
-        @keyframes tracking-in-expand { 0% { letter-spacing: -0.5em; opacity: 0; } 40% { opacity: 0.6; } 100% { opacity: 1; letter-spacing: 5px; text-shadow: 0 0 20px var(--accent-glow); } }
-        @keyframes loadSweep { 0% { left: -50%; } 100% { left: 100%; } }
-
-        /* --- CUSTOM CURSOR --- */
-        .cursor-dot, .cursor-outline { position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 10000; pointer-events: none; }
-        .cursor-dot { width: 8px; height: 8px; background: var(--accent); transition: 0.2s; box-shadow: 0 0 10px var(--accent); }
-        .cursor-outline { width: 40px; height: 40px; border: 2px solid var(--accent); opacity: 0.4; transition: 0.1s ease-out; }
-        .cursor-hover .cursor-dot { width: 60px; height: 60px; background: transparent; border: 1px solid var(--accent); opacity: 0.6; backdrop-filter: invert(10%); }
-        .cursor-hover .cursor-outline { opacity: 0; transform: translate(-50%, -50%) scale(1.5); }
-        @media (max-width: 768px) { * { cursor: auto !important; } .cursor-dot, .cursor-outline { display: none !important; } }
-
-        /* --- SCROLL PROGRESS & CANVAS BG EFFECTS --- */
-        #progress-bar { position: fixed; top: 0; left: 0; height: 4px; background: linear-gradient(to right, var(--accent), var(--accent-sec)); z-index: 10001; width: 0%; box-shadow: 0 0 15px var(--accent); }
-        
-        #network-canvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -3; pointer-events: none; opacity: 0.8; }
-        
-        .bg-grid { position: fixed; top: -50%; left: -50%; width: 200%; height: 200%; z-index: -4; background-image: linear-gradient(to right, rgba(0,240,255,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,240,255,0.05) 1px, transparent 1px); background-size: 60px 60px; -webkit-mask-image: radial-gradient(circle at center, black 20%, transparent 60%); mask-image: radial-gradient(circle at center, black 20%, transparent 60%); animation: gridMove 20s linear infinite; }
-        @keyframes gridMove { 0% { transform: translateY(0) translateX(0); } 100% { transform: translateY(60px) translateX(60px); } }
-
-        /* --- NAVIGATION --- */
-        nav { position: fixed; top: 0; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 1rem 5%; background: var(--nav-bg); backdrop-filter: var(--glass-blur); z-index: 1000; border-bottom: 1px solid var(--border); }
-        .logo-box { height: 35px; overflow: hidden; width: 230px; }
-        .logo-wrap { animation: logoSlide 12s cubic-bezier(0.8, 0, 0.2, 1) infinite; }
-        .logo-item { font-size: 1.8rem; font-weight: 900; text-transform: uppercase; letter-spacing: 3px; height: 35px; line-height: 35px; }
-        .logo-item span { color: var(--accent); }
-        @keyframes logoSlide { 0%, 30% { transform: translateY(0); } 33%, 63% { transform: translateY(-35px); } 66%, 96% { transform: translateY(-70px); } 100% { transform: translateY(0); } }
-
-        /* --- HERO, 3D TILT & 3D GLOBE --- */
-        .hero { min-height: 100vh; display: flex; align-items: center; padding: 150px 5% 60px 5%; position: relative; perspective: 1500px; }
-        .tilt-wrapper { width: 100%; transition: transform 0.1s ease-out; transform-style: preserve-3d; z-index: 2; position: relative; }
-        
-        .badge { background: var(--surface); color: var(--text-main); padding: 8px 18px; border-radius: 100px; font-size: 0.75rem; font-weight: 800; border: 1px solid var(--border); display: inline-flex; align-items: center; gap: 8px; margin-bottom: 1.5rem; box-shadow: 0 0 20px rgba(0,0,0,0.2); animation: floatBadge 4s ease-in-out infinite; }
-        .pulse-dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; animation: pulseGlow 1.5s infinite alternate; }
-        
-        #globe-canvas { width: 40px; height: 40px; } 
-        
-        @keyframes pulseGlow { from { opacity: 0.5; box-shadow: 0 0 5px var(--accent); transform: scale(0.9); } to { opacity: 1; box-shadow: 0 0 15px var(--accent); transform: scale(1.2); } }
-        @keyframes floatBadge { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
-
-        .morph-box { height: clamp(70px, 10vw, 130px); overflow: hidden; margin-bottom: 2rem; width: 100%; }
-        .morph-list { animation: titleMorph 12s cubic-bezier(0.8, 0, 0.2, 1) infinite; }
-        .morph-item { font-size: clamp(2.2rem, 7vw, 6.5rem); font-weight: 900; line-height: 1.1; height: clamp(70px, 10vw, 130px); display: flex; align-items: center; white-space: nowrap; overflow-wrap: anywhere; text-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-
-        /* --- SPOTLIGHT CARDS --- */
-        section { padding: 80px 5%; max-width: 1400px; margin: 0 auto; width: 100%; position: relative; z-index: 2; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 3rem; }
-        
-        .card { 
-            background: var(--surface); 
-            backdrop-filter: var(--glass-blur); 
-            border: 1px solid var(--border); 
-            padding: 3rem; border-radius: 32px; 
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.4s; 
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1); 
-            height: 100%; position: relative; overflow: hidden; z-index: 1; 
-        }
-        .card::before { content: ""; position: absolute; inset: 0; border-radius: inherit; z-index: -1; background: radial-gradient(600px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(0, 240, 255, 0.1), transparent 40%); opacity: 0; transition: opacity 0.5s; pointer-events: none; }
-        .card:hover { transform: translateY(-12px); border-color: rgba(0, 240, 255, 0.3); }
-        .card:hover::before { opacity: 1; }
-        
-        .premium-card { border: 2px solid var(--accent); animation: borderPulse 3s infinite alternate; transform: scale(1.05); }
-        .premium-card:hover { transform: scale(1.08) translateY(-10px); }
-        @keyframes borderPulse { 0% { border-color: var(--accent); box-shadow: 0 0 10px var(--accent-glow); } 100% { border-color: var(--accent-sec); box-shadow: 0 0 30px rgba(176, 38, 255, 0.3); } }
-
-        /* --- HORIZONTAL SCROLL PORTFOLIO --- */
-        #portfolio-wrapper { height: 300vh; padding: 0; max-width: 100%; margin: 0; }
-        .sticky-portfolio { position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; justify-content: center; overflow: hidden; width: 100%; }
-        .h-scroll-title { padding: 0 5vw; margin-bottom: 3rem; text-align: left;}
-        .h-scroll-container { display: flex; gap: 3rem; width: max-content; padding: 0 5vw; will-change: transform; }
-        .h-scroll-card { width: 450px; flex-shrink: 0; cursor: pointer; }
-
-        /* --- NEW: DATA STREAM DIVIDER --- */
-        .data-stream-divider { width: 100%; padding: 40px 5%; overflow: hidden; position: relative; z-index: 2; margin-bottom: 2rem;}
-        .stream-track { width: 100%; height: 2px; background: rgba(255,255,255,0.05); position: relative; border-radius: 2px; }
-        .stream-pulse-1 { position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(90deg, transparent, var(--accent), transparent); animation: streamMove 2.5s linear infinite; }
-        .stream-pulse-2 { position: absolute; top: 0; right: -100%; width: 50%; height: 100%; background: linear-gradient(-90deg, transparent, var(--accent-sec), transparent); animation: streamMoveRev 3s linear infinite; }
-        .stream-text { display: flex; justify-content: space-between; margin: 15px 0; color: var(--text-light); font-family: monospace; font-size: 0.85rem; opacity: 0.7; }
-        @keyframes streamMove { 0% { left: -100%; } 100% { left: 200%; } }
-        @keyframes streamMoveRev { 0% { right: -100%; } 100% { right: 200%; } }
-
-        /* --- ROI & TECH --- */
-        .tech-stack { padding: 40px 5%; margin-bottom: 40px; position: relative; z-index: 2; }
-        .logo-row { display: flex; justify-content: center; align-items: center; gap: clamp(30px, 6vw, 80px); flex-wrap: wrap; opacity: 0.5; transition: 0.4s; }
-        .logo-row:hover { opacity: 1; text-shadow: 0 0 20px var(--accent-glow); }
-        .logo-row h2 { font-weight: 900; font-size: clamp(1.5rem, 3vw, 2.5rem); text-transform: lowercase; letter-spacing: -1px; }
-
-        .roi-container { background: var(--surface); backdrop-filter: var(--glass-blur); border: 1px solid var(--border); padding: 4rem; border-radius: 40px; text-align: center; margin-top: 3rem; position: relative; overflow: hidden; transition: 0.4s;}
-        .roi-container:hover { border-color: var(--accent-sec); box-shadow: 0 0 40px var(--accent-glow); }
-        input[type=range] { -webkit-appearance: none; width: 100%; max-width: 600px; background: transparent; margin: 2rem 0; }
-        input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 35px; width: 35px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent-sec)); cursor: pointer; margin-top: -15px; box-shadow: 0 0 20px var(--accent); transition: 0.3s; }
-        input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.2); box-shadow: 0 0 30px var(--accent-sec); }
-        input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 6px; background: var(--border); border-radius: 5px; }
-        .roi-numbers { display: flex; justify-content: center; gap: 4rem; flex-wrap: wrap; margin-top: 2rem; }
-
-        /* --- MODALS & MULTI-STEP FUNNEL INPUTS --- */
-        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); z-index: 100000; display: none; align-items: center; justify-content: center; opacity: 0; transition: 0.3s; overflow-y: auto;}
-        .modal-box { background: var(--surface); border: 1px solid var(--border); padding: 3rem; border-radius: 30px; text-align: center; max-width: 450px; width: 90%; transform: translateY(20px); transition: 0.3s; position: relative; overflow: hidden; margin: auto; }
-        .modal-box.large { max-width: 800px; text-align: left; }
-        .modal-active { display: flex; opacity: 1; }
-        .modal-active .modal-box { transform: translateY(0); }
-        
-        .input-glass { width: 100%; padding: 1.2rem; background: var(--input-bg); border: 1px solid var(--border); border-radius: 16px; color: var(--text-main); margin-bottom: 1.5rem; font-size: 1rem; outline: none; transition: 0.3s; }
-        .input-glass:focus { border-color: var(--accent); box-shadow: 0 0 15px var(--accent-glow); }
-        select.input-glass { appearance: none; cursor: pointer; }
-        select.input-glass option { background: #03030a; color: #fff; }
-
-        .form-step { display: none; animation: slideIn 0.4s forwards; }
-        .form-step.active { display: block; }
-        @keyframes slideIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
-        .progress-bar-bg { width: 100%; height: 6px; background: var(--border); border-radius: 3px; margin-bottom: 2rem; overflow: hidden; }
-        .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-sec)); width: 33%; transition: width 0.4s ease; }
-
-        /* --- LIVE OPERATIONS TERMINAL --- */
-        .terminal-container { background: #05050a; border-radius: 20px; border: 1px solid var(--border); overflow: hidden; max-width: 900px; margin: 0 auto; box-shadow: 0 15px 40px rgba(0,0,0,0.5); text-align: left; }
-        .terminal-header { background: rgba(255,255,255,0.05); padding: 12px 20px; display: flex; gap: 8px; border-bottom: 1px solid var(--border); align-items: center; }
-        .terminal-dot { width: 12px; height: 12px; border-radius: 50%; }
-        .terminal-body { padding: 20px; font-family: monospace; color: var(--accent); height: 200px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; font-size: 0.95rem; }
-        .term-line { opacity: 0; animation: fadeInTerm 0.2s forwards; }
-        @keyframes fadeInTerm { to { opacity: 1; } }
-
-        /* --- WIDGETS & TOAST --- */
-        .chat-widget { position: fixed; bottom: 30px; right: 30px; background: linear-gradient(135deg, var(--accent), var(--accent-sec)); color: white; width: 65px; height: 65px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; z-index: 999; box-shadow: 0 10px 30px var(--accent-glow); cursor: pointer; transition: 0.3s; border: none; }
-        .chat-widget:hover { transform: scale(1.1) translateY(-5px); box-shadow: 0 15px 40px rgba(176, 38, 255, 0.4); }
-        .chat-window { position: fixed; bottom: 110px; right: 30px; width: 350px; background: var(--surface); backdrop-filter: var(--glass-blur); border: 1px solid var(--border); border-radius: 25px; z-index: 999; display: none; flex-direction: column; overflow: hidden; opacity: 0; transform: translateY(20px); transition: 0.3s; box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
-        .chat-active { display: flex; opacity: 1; transform: translateY(0); }
-        .chat-header { background: linear-gradient(135deg, var(--accent), var(--accent-sec)); padding: 15px; color: white; font-weight: 800; display: flex; justify-content: space-between; align-items: center; }
-        
-        .toast-notification { position: fixed; bottom: 30px; left: 30px; background: var(--surface); border: 1px solid var(--accent); padding: 1rem 1.5rem; border-radius: 20px; display: flex; align-items: center; gap: 15px; z-index: 1000; box-shadow: 0 10px 30px var(--accent-glow); visibility: hidden; transform: translateY(150px); opacity: 0; pointer-events: none; transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        .toast-active { visibility: visible; transform: translateY(0); opacity: 1; pointer-events: auto; }
-        
-        .mobile-cta-bar { display: none; position: fixed; bottom: 0; left: 0; width: 100%; background: var(--surface); backdrop-filter: blur(15px); border-top: 1px solid var(--border); padding: 15px; z-index: 998; text-align: center; }
-
-        /* --- MARQUEE --- */
-        .marquee-container { background: var(--surface); padding: 30px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); overflow: hidden; display: flex; position: relative; z-index: 2;}
-        .marquee { display: flex; white-space: nowrap; animation: scroll 30s linear infinite; }
-        .marquee span { margin: 0 50px; font-weight: 800; font-size: 1.2rem; letter-spacing: 4px; transition: 0.3s;}
-        @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-
-        /* --- FAQ --- */
-        .faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; margin-bottom: 1rem; overflow: hidden; transition: 0.4s; position: relative; z-index: 1;}
-        .faq-question { padding: 1.5rem; font-weight: 800; font-size: 1.1rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: 0.3s;}
-        .faq-item:hover { border-color: var(--accent-glow); transform: translateX(5px); }
-        .faq-answer { padding: 0 1.5rem; max-height: 0; opacity: 0; transition: all 0.4s ease-in-out; color: var(--text-light); line-height: 1.6; }
-        .faq-item.active { border-color: var(--accent); box-shadow: 0 5px 20px var(--accent-glow); }
-        .faq-item.active .faq-answer { padding: 0 1.5rem 1.5rem 1.5rem; max-height: 300px; opacity: 1; }
-        
-        /* --- MAGNETIC BUTTONS --- */
-        .btn { 
-            padding: 1.2rem 2.5rem; border-radius: 16px; font-weight: 800; text-decoration: none; 
-            display: inline-block; border: none; font-size: 1rem; text-align: center; cursor: pointer; 
-            position: relative; overflow: hidden;
-            transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s; 
-        }
-        .btn-p { background: linear-gradient(135deg, var(--accent), var(--accent-sec)); color: #fff; box-shadow: 0 10px 30px var(--accent-glow); position: relative;}
-        .btn-p::after { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent); transform: skewX(-25deg); transition: left 0.6s ease; }
-        .btn-p:hover { box-shadow: 0 15px 40px rgba(176, 38, 255, 0.4); }
-        .btn-p:hover::after { left: 150%; }
-
-        /* --- CYBER CUTOUT VIDEO MASKS --- */
-        .vid-frame { 
-            height: 220px; 
-            background: #000; margin-bottom: 2rem; position: relative; 
-            clip-path: polygon(0 0, 90% 0, 100% 15%, 100% 100%, 10% 100%, 0 85%);
-            transition: 0.5s;
-        }
-        .vid-frame video { width: 100%; height: 100%; object-fit: cover; opacity: 0.6; transition: 0.5s; }
-        .card:hover .vid-frame { transform: scale(1.03); box-shadow: 0 10px 30px var(--accent-glow); }
-        .card:hover .vid-frame video { opacity: 1; }
-
-        footer { padding: 80px 5% 40px 5%; border-top: 1px solid var(--border); background: var(--nav-bg); position: relative; z-index: 2;}
-        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; max-width: 1400px; margin: 0 auto; margin-bottom: 3rem; }
-        .footer-links { list-style: none; line-height: 2; color: var(--text-light); }
-        .footer-links a { color: inherit; text-decoration: none; transition: 0.2s; }
-        .footer-links a:hover { color: var(--accent); text-shadow: 0 0 10px var(--accent-glow); }
-
-        /* Mobile Overrides */
-        @media (max-width: 768px) { 
-            body { padding-bottom: 80px; } 
-            .mobile-cta-bar { display: block; }
-            nav { padding: 1rem 5%; }
-            .logo-box { width: 180px; }
-            .hero { text-align: center; padding-top: 130px; perspective: none; } 
-            .tilt-wrapper { transform: none !important; }
-            .morph-item { font-size: 2.2rem; justify-content: center; margin-left: -10px; } 
-            section { padding: 60px 5%; }
-            .card { padding: 2rem; border-radius: 25px; }
+            --bg-color: #1a0a02; 
+            --bg-gradient: radial-gradient(circle at 50% 50%, #3b1b06 0%, #0a0401 100%);
+            --text-main: #f4eadd; 
+            --text-muted: #a68a6b; 
+            --accent: #d48a42; 
+            --layer-bg: rgba(255, 255, 255, 0.03);
             
-            #portfolio-wrapper { height: auto !important; position: relative !important; padding: 60px 0 !important; }
-            .sticky-portfolio { position: relative !important; height: auto !important; }
-            .h-scroll-container { flex-direction: column !important; width: 100% !important; padding: 0 5% !important; transform: none !important; gap: 2rem !important; }
-            .h-scroll-card { width: 100% !important; }
-
-            .roi-container { padding: 2rem; }
-            .chat-window { width: 90%; right: 5%; bottom: 160px; }
-            .toast-notification { left: 5%; bottom: 90px; width: 90%; transform: translateY(150px); }
-            .toast-active { transform: translateY(0); }
+            --glass-bg: rgba(20, 10, 5, 0.4);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-blur: blur(12px);
+            
+            --card-bg: rgba(17, 17, 17, 0.4);
+            --card-text: #fff;
+            --card-shadow: rgba(0,0,0,0.5);
+            --nav-dot: rgba(255,255,255,0.1);
         }
-    </style></head><body>
 
-    <a href="#main-content" class="skip-link">Skip to main content</a>
+        [data-theme="light"] {
+            --bg-color: #f4eadd; 
+            --bg-gradient: radial-gradient(circle at 50% 50%, #ffffff 0%, #e8dccb 100%);
+            --text-main: #2b1404; 
+            --text-muted: #735942; 
+            --accent: #c06c1a; 
+            --layer-bg: rgba(0, 0, 0, 0.04);
+            
+            --glass-bg: rgba(255, 255, 255, 0.4);
+            --glass-border: rgba(0, 0, 0, 0.08);
+            
+            --card-bg: rgba(255, 255, 255, 0.4);
+            --card-text: #1a0a02;
+            --card-shadow: rgba(0,0,0,0.1);
+            --nav-dot: rgba(0,0,0,0.15);
+        }
 
-    <canvas id="network-canvas"></canvas>
+        body, html {
+            margin: 0; padding: 0;
+            background-color: var(--bg-color);
+            background-image: var(--bg-gradient);
+            color: var(--text-main);
+            font-family: 'DM Mono', monospace;
+            overflow-x: hidden;
+            transition: background 0.5s ease, color 0.5s ease;
+        }
 
-    <div id="preloader" aria-hidden="true">
-        <div class="preloader-logo">ZELQ<span class="text-gradient">.</span></div>
-        <div class="loading-bar"></div>
+        /* ==========================================
+           SCROLL ANIMATIONS (NEW)
+           ========================================== */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(60px);
+            transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .scroll-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Stagger delays for grid items */
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+        .delay-4 { transition-delay: 0.4s; }
+        .delay-5 { transition-delay: 0.5s; }
+        .delay-6 { transition-delay: 0.6s; }
+
+        /* ==========================================
+           LOADER & NAV
+           ========================================== */
+        #loader {
+            position: fixed; inset: 0; 
+            background: rgba(10, 4, 1, 0.5);
+            backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px);
+            z-index: 9999; display: flex; align-items: center; justify-content: center;
+            transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), backdrop-filter 1s ease;
+        }
+        .loader-content { width: 300px; text-align: center; }
+        .loader-logo { font-family: 'Bebas Neue', sans-serif; font-size: 4rem; letter-spacing: 12px; color: #fff; margin-bottom: 20px; text-shadow: 0 0 20px rgba(212, 138, 66, 0.5); }
+        .loader-bar-container { width: 100%; height: 2px; background: rgba(255,255,255,0.1); position: relative; margin-bottom: 15px; overflow: hidden; border-radius: 2px;}
+        #loader-bar { height: 100%; width: 0%; background: var(--accent); transition: width 0.1s linear; box-shadow: 0 0 10px var(--accent);}
+        #loader-text { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: #fff; letter-spacing: 3px; text-transform: uppercase; opacity: 0.7;}
+
+        #top-bar {
+            position: fixed; top: 0; left: 0; width: 100%; display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 40px; box-sizing: border-box; z-index: 1000; 
+            background: var(--glass-bg); backdrop-filter: var(--glass-blur); border-bottom: 1px solid var(--glass-border);
+            transition: background 0.5s ease;
+        }
+
+        .logo { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; letter-spacing: 4px; color: var(--text-main); }
+        .nav-links { display: flex; gap: 30px; align-items: center; }
+        .nav-links a { color: var(--text-main); text-decoration: none; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; transition: color 0.3s; opacity: 0.8;}
+        .nav-links a:hover { color: var(--accent); opacity: 1;}
+
+        #theme-toggle {
+            background: var(--glass-bg); border: 1px solid var(--glass-border); color: var(--text-main);
+            padding: 8px 16px; border-radius: 20px; font-family: 'DM Mono', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; cursor: pointer;
+            backdrop-filter: var(--glass-blur); transition: all 0.3s ease;
+        }
+        #theme-toggle:hover { border-color: var(--accent); color: var(--accent); background: rgba(255,255,255,0.05);}
+
+        /* ==========================================
+           3D SCENE & TYPOGRAPHY
+           ========================================== */
+        h2 { font-family: 'Bebas Neue', sans-serif; font-size: 8rem; line-height: 0.85; margin: 0 0 1.5rem 0; letter-spacing: 2px; }
+        p { margin: 0; }
+        .layer-tag { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 2px; }
+        .layer-line { color: var(--text-muted); font-size: 1rem; line-height: 1.6; }
+
+        #fixed-ui { position: fixed; inset: 0; width: 100vw; height: 100vh; z-index: 10; will-change: transform; pointer-events: none; }
+        #hud { position: absolute; top: 100px; right: 40px; text-align: right; font-size: 0.75rem; color: var(--text-muted); }
+        .hud-title { display: inline-block; margin-bottom: 10px; letter-spacing: 2px; line-height: 1.4; }
+        .progress-bar { display: inline-block; width: 2px; height: 50px; background: var(--glass-border); margin-left: 20px; vertical-align: top; }
+        .progress-fill { width: 100%; height: 0%; background: var(--accent); transition: height 0.1s linear; }
+        .hud-label { display: block; margin-top: 10px; letter-spacing: 2px; }
+
+        #panel_nav { position: absolute; left: 40px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 15px; pointer-events: auto; }
+        .nav-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--glass-bg); border: 1px solid var(--glass-border); cursor: pointer; transition: all 0.3s ease; backdrop-filter: var(--glass-blur); }
+        .nav-dot.is-active { background: var(--accent); border-color: var(--accent); transform: scale(1.3); box-shadow: 0 0 10px var(--accent);}
+
+        .viewport { position: absolute; inset: 0; perspective: 1200px; overflow: hidden; pointer-events: none;}
+        .world { position: absolute; top: 50%; left: 50%; transform-style: preserve-3d; will-change: transform; }
+        .item { position: absolute; left: -50vw; top: -50vh; width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center; transform-origin: center center; opacity: 1; transition: opacity 0.1s, transform 0.1s; }
+        .panel-inner { width: 100%; padding: 0 10%; position: relative; z-index: 10; box-sizing: border-box;}
+        
+        .is-center { text-align: center; } .is-right { text-align: right; }
+        .align-center { margin: 0 auto; } .align-right { margin-left: auto; }
+        .panel-copy { max-width: 650px; }
+        .layer-bg { position: absolute; font-family: 'Bebas Neue', sans-serif; font-size: 25vw; color: var(--layer-bg); z-index: -1; left: 5%; top: 50%; transform: translateY(-50%); white-space: nowrap; }
+        .scroll-hint { margin-top: 3rem; color: var(--text-muted); font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; }
+
+        #proxy { width: 100%; position: relative; z-index: -1; }
+        
+        /* ==========================================
+           NORMAL PAGE SECTIONS 
+           ========================================== */
+        #final-page { position: relative; width: 100%; min-height: 100vh; z-index: 1; padding-bottom: 50px; }
+        #shader-bg { position: fixed; inset: 0; z-index: -1; opacity: 0; transition: opacity 0.5s ease; pointer-events: none; }
+
+        .final-content { position: relative; z-index: 2; padding: 100px 10% 50px 10%; max-width: 1300px; margin: 0 auto; pointer-events: auto; }
+        .section-title { font-family: 'Bebas Neue', sans-serif; font-size: 5rem; margin-bottom: 1rem; text-align: center; letter-spacing: 2px;}
+        .section-subtitle { text-align: center; color: var(--text-muted); font-size: 1rem; margin-bottom: 4rem; max-width: 650px; margin-left: auto; margin-right: auto; line-height: 1.6;}
+        .section-divider { margin-bottom: 8rem; border-top: 1px solid var(--glass-border); padding-top: 5rem; }
+
+        /* ADVANTAGE & SOFTWARE GRIDS (NEW) */
+        .advantage-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 4rem;}
+        .adv-card { background: var(--glass-bg); border: 1px solid var(--glass-border); padding: 2.5rem; border-radius: 1.5rem; backdrop-filter: var(--glass-blur); transition: transform 0.3s ease, border-color 0.3s ease; }
+        .adv-card:hover { transform: translateY(-5px); border-color: var(--accent); }
+        .adv-card h3 { font-size: 1.5rem; color: var(--card-text); margin-top: 0; margin-bottom: 1rem; }
+        .adv-card p { color: var(--text-main); font-size: 0.95rem; line-height: 1.6; opacity: 0.9; }
+        .adv-icon { font-size: 2.5rem; color: var(--accent); margin-bottom: 1.5rem; display: block;}
+
+        .software-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; margin-bottom: 2rem; }
+        .software-tag { 
+            background: rgba(17, 17, 17, 0.6); border: 1px solid var(--glass-border); color: var(--card-text);
+            padding: 15px 30px; border-radius: 50px; font-family: 'DM Mono', monospace; font-size: 1rem; font-weight: bold;
+            letter-spacing: 1px; backdrop-filter: blur(10px); transition: all 0.3s ease; display: flex; align-items: center; gap: 10px;
+        }
+        .software-tag:hover { background: var(--accent); border-color: var(--accent); color: #fff; transform: scale(1.05); box-shadow: 0 10px 20px rgba(212, 138, 66, 0.3); }
+
+        /* TEAM SECTION (NEW) */
+        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2.5rem; justify-content: center; }
+        .team-card { 
+            background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 1.5rem; 
+            padding: 3rem 2rem; text-align: center; backdrop-filter: var(--glass-blur); transition: all 0.4s ease;
+            position: relative; overflow: hidden;
+        }
+        .team-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: var(--accent); transform: scaleX(0); transition: transform 0.4s ease; transform-origin: left;}
+        .team-card:hover::before { transform: scaleX(1); }
+        .team-card:hover { transform: translateY(-10px); border-color: rgba(212, 138, 66, 0.4); box-shadow: 0 15px 30px rgba(0,0,0,0.4); }
+        .team-avatar { width: 100px; height: 100px; border-radius: 50%; background: var(--card-bg); border: 2px solid var(--glass-border); margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; color: var(--accent); }
+        .team-name { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--card-text); margin: 0 0 0.5rem 0; letter-spacing: 2px;}
+        .team-role { font-size: 0.85rem; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; margin: 0; font-weight: bold;}
+
+        /* SERVICES GRID */
+        .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-bottom: 6rem; }
+        .previewCard {
+            --gutter: 1.5rem; padding: var(--gutter); border-radius: var(--gutter); aspect-ratio: 4 / 3; width: 100%;
+            display: grid; justify-content: start; align-content: end; position: relative;
+            background: var(--card-bg); overflow: hidden; cursor: pointer;
+            transition: transform 250ms ease-in-out, background 0.5s ease, box-shadow 0.5s ease;
+            box-shadow: 0 10px 30px var(--card-shadow); border: 1px solid var(--glass-border);
+            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+        }
+        .previewCard svg, .previewCard .icon-plus { transition: transform 250ms ease-in-out; }
+        .previewCard:hover { transform: translateY(-5px); border-color: var(--accent); background: rgba(255,255,255,0.05);}
+        .previewCard:hover svg, .previewCard:hover .icon-plus { transform: scale(1.5) rotate(90deg); color: var(--accent); }
+        .previewCard .content { position: relative; z-index: 2; display: grid; bottom: 0; justify-content: start; align-content: end; gap: 0.5rem; color: var(--card-text); transition: color 0.5s ease; }
+        .previewCard .title { font-size: 1.4rem; margin: 0; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+        [data-theme="light"] .previewCard .title { text-shadow: none; font-weight: bold; }
+        .previewCard .category { text-transform: uppercase; font-weight: 600; letter-spacing: 0.1rem; opacity: 0.8; font-size: 0.75rem; color: var(--accent);}
+        .previewCard .description { font-size: 0.9rem; line-height: 1.35; display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; opacity: 0.9; }
+        .previewCard .description p { margin: 0; padding-right: 10px; }
+        .previewCard .description .icon-plus { transform: translateY(-0.1rem); font-size: 1.5rem; display: grid; place-items: center; width: 2rem; height: 2rem; font-weight: 300; }
+
+        /* VIDEO CARDS */
+        .video-card { padding: 0; aspect-ratio: 9 / 16; display: block; }
+        .video-card video { width: 100%; height: 100%; object-fit: cover; border-radius: var(--gutter); transition: transform 500ms ease-in-out; }
+        .video-card:hover video { transform: scale(1.05); }
+
+        /* REVIEWS SECTION */
+        .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 4rem; align-items: start;}
+        .review-card {
+            background: var(--glass-bg); border: 1px solid var(--glass-border); padding: 2.5rem 2rem; border-radius: 1.5rem; 
+            backdrop-filter: var(--glass-blur); transition: transform 0.3s ease, border-color 0.3s ease, opacity 0.5s ease;
+        }
+        .review-card:hover { transform: translateY(-5px); border-color: var(--accent); }
+        .stars { color: var(--accent); font-size: 1.2rem; margin-bottom: 1rem; letter-spacing: 3px;}
+        .review-text { font-size: 0.95rem; line-height: 1.7; color: var(--text-main); opacity: 0.9; margin-bottom: 1.5rem; font-style: italic; }
+        .reviewer-info { border-top: 1px solid var(--glass-border); padding-top: 1rem; }
+        .reviewer-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: var(--card-text); letter-spacing: 1px; margin: 0; }
+        .reviewer-role { font-size: 0.75rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin: 0; margin-top: 3px;}
+
+        /* FORMS */
+        .form-container { max-width: 600px; margin: 0 auto; padding: 3rem; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 1.5rem; box-shadow: 0 10px 40px var(--card-shadow); backdrop-filter: var(--glass-blur); }
+        .form-container.review-form-container { background: rgba(17, 17, 17, 0.3); border: 1px dashed var(--glass-border); box-shadow: none; padding: 2rem;}
+        .form-container h3 { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; margin-top: 0; margin-bottom: 0.5rem; color: var(--card-text); letter-spacing: 2px;}
+        .form-container p { color: var(--text-main); font-size: 0.9rem; margin-bottom: 2rem; line-height: 1.5; opacity: 0.8;}
+        .glass-form { display: flex; flex-direction: column; gap: 1.5rem; }
+        .glass-form input, .glass-form textarea, .glass-form select { width: 100%; box-sizing: border-box; padding: 15px 20px; background: var(--glass-bg); border: 1px solid var(--glass-border); color: var(--card-text); font-family: 'DM Mono', monospace; font-size: 0.9rem; border-radius: 8px; outline: none; transition: border-color 0.3s ease, background 0.3s ease; backdrop-filter: blur(8px); }
+        .glass-form select option { background: var(--bg-color); color: var(--text-main); }
+        .glass-form input:focus, .glass-form textarea:focus, .glass-form select:focus { border-color: var(--accent); background: rgba(255,255,255,0.1); }
+        .glass-form textarea { resize: vertical; min-height: 120px; }
+        .glass-form button { background: rgba(212, 138, 66, 0.2); border: 1px solid var(--accent); color: var(--card-text); padding: 15px; font-family: 'DM Mono', monospace; font-size: 1rem; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; backdrop-filter: blur(10px); }
+        .glass-form button:hover { background: var(--accent); color: #fff; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(212, 138, 66, 0.4);}
+
+        /* FOOTER */
+        .site-footer { border-top: 1px solid var(--glass-border); margin-top: 6rem; padding-top: 3rem; display: flex; flex-direction: column; align-items: center; gap: 2rem; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); width: 100%; gap: 2rem; text-align: left; }
+        .footer-col h4 { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 2px; color: var(--card-text); margin-bottom: 1rem; margin-top: 0;}
+        .footer-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.8rem; }
+        .footer-col ul li a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; transition: color 0.3s ease; }
+        .footer-col ul li a:hover { color: var(--accent); }
+        .footer-bottom { width: 100%; border-top: 1px solid var(--glass-border); padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: var(--text-muted); flex-wrap: wrap; gap: 1rem; }
+
+    </style>
+</head>
+<body>
+
+<div id="loader">
+    <div class="loader-content">
+        <div class="loader-logo">ZELQ.</div>
+        <div class="loader-bar-container"><div id="loader-bar"></div></div>
+        <div id="loader-text">INITIALIZING CREATIVE WORKSPACE... <span id="loader-percent">0%</span></div>
+    </div>
+</div>
+
+<header id="top-bar">
+    <div class="logo">ZELQ.</div>
+    <div class="nav-links">
+        <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">Vision</a>
+        <a href="#services-section" onclick="document.getElementById('services-section').scrollIntoView({behavior: 'smooth'}); return false;">Capabilities</a>
+        <a href="#work-section" onclick="document.getElementById('work-section').scrollIntoView({behavior: 'smooth'}); return false;">Our Work</a>
+        <a href="#team-section" onclick="document.getElementById('team-section').scrollIntoView({behavior: 'smooth'}); return false;">Leadership</a>
+        <a href="#contact-section" onclick="document.getElementById('contact-section').scrollIntoView({behavior: 'smooth'}); return false;">Contact</a>
+        <button id="theme-toggle">☀️ Light</button>
+    </div>
+</header>
+
+<div id="fixed-ui">
+    <div id="hud">
+        <span class="hud-title">DIGITAL<br>MARKETING<br>& EDITING</span>
+        <div class="progress-bar"><div id="progress_fill" class="progress-fill"></div></div>
+        <span id="hud_label" class="hud-label">VISION</span>
     </div>
 
-    <div class="cursor-dot"></div><div class="cursor-outline"></div><div id="progress-bar"></div>
-    <div class="bg-grid"></div>
-
-    <nav>
-        <div class="logo-box">
-            <div class="logo-wrap">
-                <div class="logo-item glitch" data-text="ZELQ." aria-label="Zelq Homepage">ZELQ<span class="text-gradient">.</span></div>
-                <div class="logo-item" style="font-size: 0.8rem; opacity: 0.7;">Growth Lab</div>
-                <div class="logo-item" style="font-size: 0.8rem; opacity: 0.7;">Infrastructure</div>
-            </div>
-        </div>
-        <div style="display: flex; gap: 15px; align-items: center;">
-            <div class="badge" style="margin-bottom: 0; display: none;"><div class="pulse-dot"></div>2/10 Slots Open</div>
-            <button onclick="openPortal()" class="btn hover-target audio-trigger" style="background:transparent; border:1px solid var(--border); color:inherit; padding: 0.6rem 1.2rem; font-size: 0.8rem;" aria-label="Open Client Portal">Client Portal</button>
-            <button onclick="toggleTheme()" class="hover-target audio-trigger" style="background:none; border:none; color:inherit; font-size:1.5rem; cursor:pointer;" aria-label="Toggle Theme">🌓</button>
-        </div>
+    <nav id="panel_nav" aria-label="Panels">
+        <button class="nav-dot is-active" data-index="0" title="Vision"></button>
+        <button class="nav-dot" data-index="1" title="Strategy"></button>
+        <button class="nav-dot" data-index="2" title="Editing"></button>
+        <button class="nav-dot" data-index="3" title="Growth"></button>
+        <button class="nav-dot" data-index="4" title="Launch"></button>
     </nav>
 
-    <div class="modal-overlay" id="caseModal1">
-        <div class="modal-box large">
-            <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Luxury Brand <span class="text-gradient">Media</span></h2>
-            <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 2rem;">
-                <div style="flex: 1; min-width: 250px;">
-                    <h4 style="color: var(--accent); margin-bottom: 5px;">The Problem</h4>
-                    <p style="color: var(--text-light); line-height: 1.6;">High-end apparel brand struggled to convert traffic due to slow, unoptimized imagery and broken UX.</p>
-                </div>
-                <div style="flex: 1; min-width: 250px;">
-                    <h4 style="color: #10b981; margin-bottom: 5px;">The Solution</h4>
-                    <p style="color: var(--text-light); line-height: 1.6;">Deployed cinematic 3D product renders and a headless CMS architecture for instant load times.</p>
-                </div>
-            </div>
-            <h3 style="font-size: 1.5rem; margin-bottom: 10px;">ROI: +60% CVR, ₹18L Generated in 14 Days.</h3>
-            <button onclick="closeCase(1)" class="btn hover-target audio-trigger" style="border:1px solid var(--border); background:var(--bg); color:inherit; margin-top: 1rem;">Close Report</button>
+    <div class="viewport">
+        <div class="world" id="world">
+            <div class="item layer-panel" data-label="VISION"><div class="panel-inner"><span class="layer-bg">CREATE</span><div class="panel-copy"><p class="layer-tag">Phase I · Vision · ↓ Scroll to initiate</p><h2>BOLD.<br>CREATIVE.</h2><p class="layer-line">Crafting your brand's story.<br>Dominating the algorithm.</p><div class="scroll-hint"><span>↓</span> scroll down to engage</div></div></div></div>
+            <div class="item layer-panel" data-label="STRATEGY"><div class="panel-inner is-right"><span class="layer-bg">TARGET</span><div class="panel-copy align-right"><p class="layer-tag">Phase II · Strategy</p><h2>ANALYZE.<br>EXECUTE.</h2><p class="layer-line">Data-driven marketing.<br>Precision audience targeting.</p></div></div></div>
+            <div class="item layer-panel" data-label="EDITING"><div class="panel-inner is-center"><span class="layer-bg">STUDIO</span><div class="panel-copy align-center"><p class="layer-tag">Phase III · Editing</p><h2>CUT.<br>COLOR.</h2><p class="layer-line">Elite video production.<br>High-retention visual formats.</p></div></div></div>
+            <div class="item layer-panel" data-label="GROWTH"><div class="panel-inner is-right"><span class="layer-bg">SCALE</span><div class="panel-copy align-right"><p class="layer-tag">Phase IV · Growth</p><h2>SCALE.<br>DOMINATE.</h2><p class="layer-line">Viral content strategies.<br>Massive audience expansion.</p></div></div></div>
+            <div class="item layer-panel" data-label="LAUNCH"><div class="panel-inner is-center"><span class="layer-bg">DEPLOY</span><div class="panel-copy align-center"><p class="layer-tag">Phase V · Launch</p><h2>THE CAMPAIGN.<br>LIVE.</h2><p class="layer-line">Full-stack digital deployment.<br>Unmatched brand presence.</p><div class="scroll-hint" style="margin-top: 4rem;"><span>↓</span> Keep Scrolling to Access Services</div></div></div></div>
         </div>
     </div>
-    <div class="modal-overlay" id="caseModal2">
-        <div class="modal-box large">
-            <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Automated <span class="text-gradient">Infrastructure</span></h2>
-            <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 2rem;">
-                <div style="flex: 1; min-width: 250px;">
-                    <h4 style="color: var(--accent); margin-bottom: 5px;">The Problem</h4>
-                    <p style="color: var(--text-light); line-height: 1.6;">B2B Agency wasting 40+ hours a week manually entering lead data from Meta ads to HubSpot.</p>
-                </div>
-                <div style="flex: 1; min-width: 250px;">
-                    <h4 style="color: #10b981; margin-bottom: 5px;">The Solution</h4>
-                    <p style="color: var(--text-light); line-height: 1.6;">Built a custom Python/AWS pipeline that categorizes, scores, and emails leads within 2 seconds of opt-in.</p>
-                </div>
-            </div>
-            <h3 style="font-size: 1.5rem; margin-bottom: 10px;">ROI: 0 Manual Hours, 100% Error Reduction.</h3>
-            <button onclick="closeCase(2)" class="btn hover-target audio-trigger" style="border:1px solid var(--border); background:var(--bg); color:inherit; margin-top: 1rem;">Close Report</button>
-        </div>
-    </div>
-    <div class="modal-overlay" id="caseModal3">
-        <div class="modal-box large">
-            <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Product <span class="text-gradient">Architecture</span></h2>
-            <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 2rem;">
-                <div style="flex: 1; min-width: 250px;">
-                    <h4 style="color: var(--accent); margin-bottom: 5px;">The Problem</h4>
-                    <p style="color: var(--text-light); line-height: 1.6;">SaaS platform had a high churn rate due to confusing onboarding and outdated dashboard UI.</p>
-                </div>
-                <div style="flex: 1; min-width: 250px;">
-                    <h4 style="color: #10b981; margin-bottom: 5px;">The Solution</h4>
-                    <p style="color: var(--text-light); line-height: 1.6;">Redesigned the entire UX flow using modern glassmorphism and integrated an AI chatbot for instant support.</p>
-                </div>
-            </div>
-            <h3 style="font-size: 1.5rem; margin-bottom: 10px;">ROI: Churn reduced by 45% in Q1.</h3>
-            <button onclick="closeCase(3)" class="btn hover-target audio-trigger" style="border:1px solid var(--border); background:var(--bg); color:inherit; margin-top: 1rem;">Close Report</button>
-        </div>
-    </div>
+</div>
 
-    <div class="modal-overlay" id="exitModal">
-        <div class="modal-box">
-            <h2 style="font-size: 2rem; margin-bottom: 1rem;">Wait! Don't Leave <span class="text-gradient">Growth</span> on the Table.</h2>
-            <p style="color:var(--text-light); margin-bottom: 2rem;">Get our free Python automation blueprint before you go.</p>
-            <input type="email" class="input-glass hover-target" placeholder="Where should we send it?" aria-label="Email for Blueprint">
-            <button class="btn btn-p hover-target audio-trigger" style="width: 100%; margin-bottom: 1rem;" onclick="document.getElementById('exitModal').classList.remove('modal-active'); alert('Blueprint sent!')">Send Blueprint</button>
-            <button onclick="document.getElementById('exitModal').classList.remove('modal-active')" class="hover-target" style="background:none; border:none; color:var(--text-light); cursor:pointer; text-decoration: underline;">No thanks</button>
-        </div>
-    </div>
+<div class="scroll-proxy" id="proxy"></div>
 
-    <div class="modal-overlay" id="portalModal">
-        <div class="modal-box">
-            <h2 style="font-size: 2rem; margin-bottom: 1rem;">Member <span class="text-gradient">Login</span></h2>
-            <p style="color:var(--text-light); margin-bottom: 2rem; font-size: 0.9rem;">Enter your premium email to access dashboards.</p>
-            <input type="email" id="portalEmail" class="input-glass hover-target" placeholder="Enter business email..." aria-label="Portal Login Email">
-            <button onclick="verifyLogin()" class="btn btn-p hover-target audio-trigger" style="width: 100%; margin-bottom: 1rem;" id="loginBtn">Access Portal</button>
-            <p id="loginMsg" style="color:var(--accent-sec); font-size: 0.85rem; display: none;">No active premium plan found.</p>
-            <button onclick="closePortal()" class="hover-target" style="background:none; border:none; color:var(--text-light); cursor:pointer; margin-top: 1rem; text-decoration: underline;">Cancel</button>
-        </div>
-    </div>
-
-    <div class="modal-overlay" id="feedbackModal">
-        <div class="modal-box">
-            <h2 style="font-size: 2rem; margin-bottom: 1rem;">Submit <span class="text-gradient">Feedback</span></h2>
-            <p style="color:var(--text-light); margin-bottom: 2rem; font-size: 0.9rem;">Verified 5-star reviews are published to the Vault.</p>
-            <input type="text" id="revCompany" class="input-glass hover-target" placeholder="Company Name">
-            <input type="text" id="revRole" class="input-glass hover-target" placeholder="Your Role">
-            <select id="revRating" class="input-glass hover-target">
-                <option value="5">★★★★★ - Exceptional Impact</option>
-                <option value="4">★★★★☆ - Great Results</option>
-                <option value="3">★★★☆☆ - Average</option>
-            </select>
-            <textarea id="revText" class="input-glass hover-target" placeholder="Describe the infrastructure we built..." style="height:100px;"></textarea>
-            <button onclick="submitReview()" class="btn btn-p hover-target audio-trigger" style="width: 100%; margin-bottom: 1rem;" id="submitRevBtn">Submit to Vault</button>
-            <button onclick="closeFeedback()" class="hover-target" style="background:none; border:none; color:var(--text-light); cursor:pointer; text-decoration: underline;">Cancel</button>
-        </div>
-    </div>
-
-    <main id="main-content">
-        <section class="hero hover-target" id="hero-section">
-            <div class="tilt-wrapper" id="tilt-wrapper">
-                <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 1.5rem;">
-                    <span class="badge" style="margin-bottom:0;"><div class="pulse-dot"></div>ESTABLISHED 2026 • GLOBAL OPERATIONS</span>
-                    <canvas id="globe-canvas"></canvas>
-                </div>
-                
-                <div class="morph-box">
-                    <div class="morph-list">
-                        <div class="morph-item">Dominate <span class="text-gradient" style="margin-left: 15px;">Growth.</span></div>
-                        <div class="morph-item">Scale <span class="text-gradient" style="margin-left: 15px;">Systems.</span></div>
-                        <div class="morph-item">Design <span class="text-gradient" style="margin-left: 15px;">Future.</span></div>
-                    </div>
-                </div>
-                <p style="font-size: clamp(1.1rem, 3vw, 1.5rem); color: var(--text-light); max-width: 800px; line-height: 1.6; margin-bottom: 3.5rem;">The world's most aggressive growth agency. We install the media, automation, and code required for total market dominance.</p>
-                <div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: flex-start;">
-                    <a href="#contact" class="btn btn-p hover-target audio-trigger">Apply for Partnership</a>
-                    <a href="#pricing" class="btn hover-target audio-trigger" style="border:1px solid var(--border); background:var(--surface); color:inherit;">View Pricing</a>
-                </div>
-            </div>
-        </section>
-
-        <div class="tech-stack" data-aos="fade-up">
-            <p style="text-align: center; color: var(--text-light); font-weight: 800; font-size: 0.85rem; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 2px;">Powered by Industry-Leading Infrastructure</p>
-            <div class="logo-row">
-                <h2>aws</h2><h2>python</h2><h2>meta</h2><h2>stripe</h2><h2>zapier</h2><h2>hubspot</h2>
+<section id="final-page">
+    <div id="shader-bg"></div>
+    
+    <div class="final-content">
+        
+        <div id="services-section" class="scroll-reveal">
+            <h1 class="section-title">AGENCY CAPABILITIES</h1>
+            <p class="section-subtitle">We deploy aggressive, data-backed strategies and hyper-optimized content to scale your brand past the competition.</p>
+            
+            <div class="cards">
+                <div class="previewCard scroll-reveal delay-1"><div class="content"><span class="category">Production</span><h3 class="title">Video Editing</h3><div class="description"><p>High-retention edits tailored for modern algorithms.</p><span class="icon-plus">+</span></div></div></div>
+                <div class="previewCard scroll-reveal delay-2"><div class="content"><span class="category">Advertising</span><h3 class="title">Paid Media Buying</h3><div class="description"><p>Aggressive ad frameworks on Meta, Google & TikTok.</p><span class="icon-plus">+</span></div></div></div>
+                <div class="previewCard scroll-reveal delay-3"><div class="content"><span class="category">Search</span><h3 class="title">SEO Strategy</h3><div class="description"><p>Dominating search results and ranking your brand.</p><span class="icon-plus">+</span></div></div></div>
+                <div class="previewCard scroll-reveal delay-4"><div class="content"><span class="category">Growth</span><h3 class="title">Social Management</h3><div class="description"><p>Full-scale posting, engagement, and community building.</p><span class="icon-plus">+</span></div></div></div>
+                <div class="previewCard scroll-reveal delay-5"><div class="content"><span class="category">Writing</span><h3 class="title">Copywriting</h3><div class="description"><p>Conversion-focused copy that turns readers into buyers.</p><span class="icon-plus">+</span></div></div></div>
+                <div class="previewCard scroll-reveal delay-6"><div class="content"><span class="category">Strategy</span><h3 class="title">Content Strategy</h3><div class="description"><p>Data-backed ideation, scripting, and content roadmaps.</p><span class="icon-plus">+</span></div></div></div>
             </div>
         </div>
 
-        <section id="industries">
-            <div style="text-align: center; margin-bottom: 4rem;" data-aos="fade-up">
-                <h2 style="font-size: clamp(2.5rem, 6vw, 3.5rem);">Industry <span class="text-gradient">Focus</span></h2>
-                <p style="color:var(--text-light); font-size: 1.1rem; margin-top: 10px;">Tailored infrastructure for high-growth sectors.</p>
+        <div class="section-divider scroll-reveal">
+            <h1 class="section-title">THE ZELQ ADVANTAGE</h1>
+            <p class="section-subtitle">Why settle for generic? We combine elite cinematic production with ruthless, data-driven marketing psychology.</p>
+            
+            <div class="advantage-grid">
+                <div class="adv-card scroll-reveal delay-1">
+                    <span class="adv-icon">📈</span>
+                    <h3>Data-Driven Psychology</h3>
+                    <p>We don't guess. Every frame we edit and every ad we run is engineered based on deep analytics, ensuring maximum audience retention and conversion rates.</p>
+                </div>
+                <div class="adv-card scroll-reveal delay-2">
+                    <span class="adv-icon">🎬</span>
+                    <h3>Cinema-Grade Quality</h3>
+                    <p>We bring Hollywood-level VFX and color grading to your daily content. When your brand looks this premium, you naturally attract high-ticket clients.</p>
+                </div>
+                <div class="adv-card scroll-reveal delay-3">
+                    <span class="adv-icon">⚡</span>
+                    <h3>Aggressive Scaling</h3>
+                    <p>We are a growth lab. Our organic and paid media pipelines are designed to flood your funnels with traffic, dominating your niche relentlessly.</p>
+                </div>
             </div>
-            <div class="grid">
-                <div class="card hover-target" data-aos="fade-up">
-                    <h3 style="font-size: 1.8rem; margin-bottom: 15px;">E-Commerce & Apparel</h3>
-                    <p style="color:var(--text-light); line-height: 1.6;">Automated inventory sync, high-conversion funnels, and VIP drop infrastructure for brands that need to handle massive traffic spikes.</p>
-                </div>
-                <div class="card hover-target" data-aos="fade-up" data-aos-delay="100">
-                    <h3 style="font-size: 1.8rem; margin-bottom: 15px;">Entertainment & Gaming</h3>
-                    <p style="color:var(--text-light); line-height: 1.6;">24/7 automated booking systems, customer loyalty loops, and immersive web experiences that keep players engaged.</p>
-                </div>
-                <div class="card hover-target" data-aos="fade-up" data-aos-delay="200">
-                    <h3 style="font-size: 1.8rem; margin-bottom: 15px;">B2B & SaaS Providers</h3>
-                    <p style="color:var(--text-light); line-height: 1.6;">Complex API integrations, cold outreach pipelines, and flawless CRM architecture to close high-ticket clients on autopilot.</p>
-                </div>
-            </div>
-        </section>
+        </div>
 
-        <section id="live-terminal" style="padding: 40px 5%; margin-bottom: 2rem;">
-            <div style="text-align: center; margin-bottom: 3rem;" data-aos="fade-up">
-                <h2 style="font-size: clamp(2.5rem, 6vw, 3.5rem);">Live <span class="text-gradient">Operations</span></h2>
-                <p style="color:var(--text-light); font-size: 1.1rem; margin-top: 10px;">Real-time infrastructure deployment tracking.</p>
+        <div class="section-divider scroll-reveal">
+            <h1 class="section-title">OUR ARSENAL</h1>
+            <p class="section-subtitle">Elite results require elite tools. Our post-production team operates on the industry's most powerful software stack.</p>
+            
+            <div class="software-grid">
+                <div class="software-tag scroll-reveal delay-1"><span>Pr</span> Adobe Premiere Pro</div>
+                <div class="software-tag scroll-reveal delay-2"><span>Ae</span> Adobe After Effects</div>
+                <div class="software-tag scroll-reveal delay-3"><span>Ps</span> Adobe Photoshop</div>
+                <div class="software-tag scroll-reveal delay-4"><span>Ai</span> Adobe Illustrator</div>
+                <div class="software-tag scroll-reveal delay-5"><span>Lr</span> Adobe Lightroom</div>
+                <div class="software-tag scroll-reveal delay-6"><span>☢️</span> Foundry Nuke</div>
+                <div class="software-tag scroll-reveal delay-1"><span>🎬</span> DaVinci Resolve Studio</div>
             </div>
-            <div class="terminal-container hover-target" data-aos="zoom-in">
-                <div class="terminal-header">
-                    <div class="terminal-dot" style="background:#ef4444;"></div>
-                    <div class="terminal-dot" style="background:#f59e0b;"></div>
-                    <div class="terminal-dot" style="background:#10b981;"></div>
-                    <div style="margin-left: 15px; color: var(--text-light); font-size: 0.8rem; font-family: monospace;">root@zelq-server:~</div>
-                </div>
-                <div class="terminal-body" id="term-body">
-                    </div>
-            </div>
-        </section>
+        </div>
 
-        <section id="vsl" style="padding-top: 40px;">
-            <div style="text-align: center; margin-bottom: 3rem;" data-aos="fade-up">
-                <h2 style="font-size: clamp(2.5rem, 6vw, 3.5rem);">The <span class="text-gradient glitch" data-text="System">System</span> Explained</h2>
-                <p style="color:var(--text-light); font-size: 1.1rem; margin-top: 10px;">Watch how we deploy infrastructure to scale your revenue.</p>
-            </div>
-            <div class="card hover-target" data-aos="zoom-in" style="padding: 1rem; border-radius: 30px; max-width: 1000px; margin: 0 auto;">
-                <div class="vid-frame" style="height: auto; aspect-ratio: 16/9; margin-bottom: 0;">
-                    <video controls preload="none" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; opacity: 1;" poster="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2">
-                        <source src="https://videos.pexels.com/video-files/3129957/3129957-uhd_2560_1440_25fps.mp4" type="video/mp4">
+        <div class="section-divider scroll-reveal" id="work-section">
+            <h1 class="section-title">OUR WORK</h1>
+            <p class="section-subtitle">A glimpse into the high-retention content we produce for our elite clients.</p>
+            
+            <div class="cards" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+                <div class="previewCard video-card scroll-reveal delay-1">
+                    <video autoplay loop muted playsinline>
+                        <source src="video1.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="previewCard video-card scroll-reveal delay-2">
+                    <video autoplay loop muted playsinline>
+                        <source src="video2.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="previewCard video-card scroll-reveal delay-3">
+                    <video autoplay loop muted playsinline>
+                        <source src="video3.mp4" type="video/mp4">
                     </video>
                 </div>
             </div>
-        </section>
-
-        <div class="marquee-container hover-target">
-            <div class="marquee">
-                <span class="text-stroke">PYTHON AUTOMATION</span><span>CINEMATIC VFX</span><span class="text-stroke">FULL-STACK ARCHITECTURE</span><span>CRM SCALING</span><span class="text-stroke">AI DEPLOYMENT</span>
-                <span class="text-stroke">PYTHON AUTOMATION</span><span>CINEMATIC VFX</span><span class="text-stroke">FULL-STACK ARCHITECTURE</span><span>CRM SCALING</span><span class="text-stroke">AI DEPLOYMENT</span>
-            </div>
         </div>
 
-        <section id="roi">
-            <div data-aos="fade-up" style="text-align: center;">
-                <h2 style="font-size: clamp(2.5rem, 6vw, 4rem);">Proof in <span class="text-gradient">Numbers</span></h2>
-                <p style="color:var(--text-light); margin-top: 10px; font-size: 1.1rem;">Calculate how much money our automations save you annually.</p>
-            </div>
-            <div class="roi-container" data-aos="zoom-in">
-                <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">Hours spent on manual data entry per week:</h3>
-                <h1 id="hoursValue" class="text-gradient" style="font-size: 4rem; margin-bottom: 1rem;">20 hrs</h1>
-                <input type="range" id="hourSlider" class="hover-target audio-trigger" min="5" max="100" value="20" step="5" aria-label="Manual hours slider">
-                <div class="roi-numbers">
-                    <div class="roi-stat">
-                        <h4>Money Wasted / Yr</h4>
-                        <h2 id="wastedVal" style="color: #ef4444;">₹4,80,000</h2>
-                    </div>
-                    <div class="roi-stat">
-                        <h4>Zelq Automation Cost</h4>
-                        <h2 style="color: var(--accent);">₹0 (Automated)</h2>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <div class="section-divider scroll-reveal" id="team-section">
+            <h1 class="section-title">EXECUTIVE LEADERSHIP</h1>
+            <p class="section-subtitle">The visionaries orchestrating your brand's digital dominance.</p>
 
-        <section id="leadership">
-            <div style="text-align: center; margin-bottom: 5rem;" data-aos="fade-up">
-                <h2 style="font-size: clamp(2.5rem, 8vw, 4.5rem); font-weight: 900;">Founding <span class="text-gradient">Leadership</span></h2>
-            </div>
-            <div class="grid">
-                <div class="card hover-target" data-aos="fade-up">
-                    <h3 style="font-size: clamp(2rem, 5vw, 2.8rem); margin-bottom: 1rem; line-height: 1.2;">Vrishmanyu <br>Pratap Singh</h3>
-                    <p style="color:var(--accent); font-weight: 800; margin-bottom: 2rem; letter-spacing: 1px;">FOUNDER & HEAD OF OPS</p>
-                    <ul style="list-style: none; line-height: 2.5; color: var(--text-light); font-weight: 600;">
-                        <li>⚡ CRM Architecture</li>
-                        <li>⚡ Python Scripting</li>
-                        <li>⚡ Financial Strategy</li>
-                        <li>⚡ Future Planning</li>
-                    </ul>
-                </div>
-                <div class="card hover-target" data-aos="fade-up" data-aos-delay="100">
-                    <h3 style="font-size: clamp(2rem, 5vw, 2.8rem); margin-bottom: 1rem; line-height: 1.2;">Shaurya <br>Saksena</h3>
-                    <p style="color:var(--accent); font-weight: 800; margin-bottom: 2rem; letter-spacing: 1px;">FOUNDER & HEAD OF TECH</p>
-                    <ul style="list-style: none; line-height: 2.5; color: var(--text-light); font-weight: 600;">
-                        <li>⚡ Full-Stack Architecture</li>
-                        <li>⚡ Cinematic VFX & Colorist</li>
-                        <li>⚡ UI/UX Psychology</li>
-                        <li>⚡ Media Infrastructure</li>
-                    </ul>
-                </div>
-                <div class="card hover-target" data-aos="fade-up" data-aos-delay="200">
-                    <h3 style="font-size: clamp(2rem, 5vw, 2.8rem); margin-bottom: 1rem; line-height: 1.2;">Atharva <br>Mishra</h3>
-                    <p style="color:var(--accent-sec); font-weight: 800; margin-bottom: 2rem; letter-spacing: 1px;">CO-FOUNDER / STRATEGY</p>
-                    <ul style="list-style: none; line-height: 2.5; color: var(--text-light); font-weight: 600;">
-                        <li>⚡ Elite Communication</li>
-                        <li>⚡ Future Planning</li>
-                        <li>⚡ Content Strategy</li>
-                        <li>⚡ Deep Research</li>
-                    </ul>
-                </div>
-                <div class="card hover-target" data-aos="fade-up" data-aos-delay="300">
-                    <h3 style="font-size: clamp(2rem, 5vw, 2.8rem); margin-bottom: 1rem; line-height: 1.2;">Tanmay <br>Khare</h3>
-                    <p style="color:var(--accent-sec); font-weight: 800; margin-bottom: 2rem; letter-spacing: 1px;">CO-FOUNDER / DATA & AI</p>
-                    <ul style="list-style: none; line-height: 2.5; color: var(--text-light); font-weight: 600;">
-                        <li>⚡ Advanced AI Prompting</li>
-                        <li>⚡ Data Analysis</li>
-                        <li>⚡ Financial Architecture</li>
-                        <li>⚡ System Optimization</li>
-                    </ul>
-                </div>
-                <div class="card hover-target" data-aos="fade-up" data-aos-delay="400">
-                    <h3 style="font-size: clamp(2rem, 5vw, 2.8rem); margin-bottom: 1rem; line-height: 1.2;">Prakhar <br>Prabhakar</h3>
-                    <p style="color:var(--accent-sec); font-weight: 800; margin-bottom: 2rem; letter-spacing: 1px;">CO-FOUNDER / MEDIA</p>
-                    <ul style="list-style: none; line-height: 2.5; color: var(--text-light); font-weight: 600;">
-                        <li>⚡ Cinematic Editing</li>
-                        <li>⚡ VFX & SFX Artist</li>
-                        <li>⚡ Content Planning</li>
-                        <li>⚡ Visual Architecture</li>
-                    </ul>
-                </div>
-                <div class="card hover-target" data-aos="fade-up" data-aos-delay="500" style="border-color: var(--accent);">
-                    <h3 style="font-size: clamp(2rem, 5vw, 2.8rem); margin-bottom: 1rem; line-height: 1.2;">Zelq-Core <br>AI Engine</h3>
-                    <p style="color:var(--accent); font-weight: 800; margin-bottom: 2rem; letter-spacing: 1px;">AUTONOMOUS SYSTEM</p>
-                    <ul style="list-style: none; line-height: 2.5; color: var(--text-light); font-weight: 600;">
-                        <li>⚡ Machine Learning Models</li>
-                        <li>⚡ 24/7 Predictive Routing</li>
-                        <li>⚡ Scalable Data Parsing</li>
-                        <li>⚡ Zero Error Rate</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <section id="portfolio-wrapper">
-            <div class="sticky-portfolio">
-                <div class="h-scroll-title" data-aos="fade-up">
-                    <h2 style="font-size: clamp(2.5rem, 6vw, 3.5rem);">The <span class="text-gradient">Vault</span></h2>
-                    <p style="color:var(--text-light); font-size: 1.1rem; margin-top: 10px;">Technical and creative precision in motion. (Click cards to view case studies)</p>
+            <div class="team-grid">
+                <div class="team-card scroll-reveal delay-1">
+                    <div class="team-avatar">V</div>
+                    <h3 class="team-name">Vrishmanyu Pratap Singh</h3>
+                    <p class="team-role">Chief Executive Officer</p>
                 </div>
                 
-                <div class="h-scroll-container" id="h-scroll">
-                    <div class="card h-scroll-card hover-target audio-trigger" onclick="openCase(1)">
-                        <div class="vid-frame"><video autoplay muted loop playsinline loading="lazy"><source src="https://videos.pexels.com/video-files/3130182/3130182-uhd_2560_1440_30fps.mp4" type="video/mp4"></video></div>
-                        <h3 style="font-size: 1.5rem; margin-bottom: 10px;">Luxury Brand Media</h3>
-                        <p style="color:var(--text-light); line-height: 1.6;">Cinematic color grading and CGI for high-end product launches. Click to view ROI.</p>
-                    </div>
-                    <div class="card h-scroll-card hover-target audio-trigger" onclick="openCase(2)">
-                        <div class="vid-frame"><video autoplay muted loop playsinline loading="lazy"><source src="https://videos.pexels.com/video-files/3129957/3129957-uhd_2560_1440_25fps.mp4" type="video/mp4"></video></div>
-                        <h3 style="font-size: 1.5rem; margin-bottom: 10px;">Automated Infrastructure</h3>
-                        <p style="color:var(--text-light); line-height: 1.6;">Python-driven CRM sync and data engines that run 24/7 without manual input. Click to view ROI.</p>
-                    </div>
-                    <div class="card h-scroll-card hover-target audio-trigger" onclick="openCase(3)">
-                        <div class="vid-frame"><video autoplay muted loop playsinline loading="lazy"><source src="https://videos.pexels.com/video-files/4069480/4069480-uhd_2560_1440_25fps.mp4" type="video/mp4"></video></div>
-                        <h3 style="font-size: 1.5rem; margin-bottom: 10px;">Product Architecture</h3>
-                        <p style="color:var(--text-light); line-height: 1.6;">Mobile-first web platforms built for speed, conversion, and global scaling. Click to view ROI.</p>
-                    </div>
-                    <div style="width: 5vw; flex-shrink: 0;"></div>
+                <div class="team-card scroll-reveal delay-2">
+                    <div class="team-avatar">S</div>
+                    <h3 class="team-name">Shaurya Saksena</h3>
+                    <p class="team-role">Chief Operating Officer</p>
                 </div>
-            </div>
-        </section>
 
-        <section class="data-stream-divider">
-            <div class="stream-track">
-                <div class="stream-pulse-1"></div>
+                <div class="team-card scroll-reveal delay-3">
+                    <div class="team-avatar">C</div>
+                    <h3 class="team-name">[Your CFO Name]</h3>
+                    <p class="team-role">Chief Financial Officer</p>
+                </div>
             </div>
-            <div class="stream-text">
-                <span>ENCRYPTED CONNECTION</span>
-                <span class="glitch" data-text="NODE: ACTIVE">NODE: ACTIVE</span>
-                <span>LATENCY: 12ms</span>
-            </div>
-            <div class="stream-track">
-                <div class="stream-pulse-2"></div>
-            </div>
-        </section>
+        </div>
 
-        <section id="outcomes">
-            <div style="text-align: center; margin-bottom: 4rem;" data-aos="fade-up">
-                <h2 style="font-size: clamp(2.5rem, 6vw, 3.5rem);">System <span class="text-gradient">Outcomes</span></h2>
-            </div>
-            <div class="grid">
-                <div class="card hover-target" data-aos="fade-up">
-                    <div class="text-gradient" style="font-size: 3.5rem; font-weight: 900; margin-bottom: 1rem;">+<span class="counter" data-target="34">0</span>%</div>
-                    <h3 style="margin-bottom: 10px;">E-Commerce Lead Conversion</h3>
-                    <p style="color:var(--text-light); margin-bottom: 1.5rem;">Deployed a seamless UX architecture and automated abandoned cart recovery sequences.</p>
-                    <div style="font-weight: 800; color: var(--accent);">✓ ₹12L Additional Revenue / Quarter</div>
-                </div>
-                <div class="card hover-target" data-aos="fade-up" data-aos-delay="100">
-                    <div class="text-gradient" style="font-size: 3.5rem; font-weight: 900; margin-bottom: 1rem;"><span class="counter" data-target="40">0</span> hrs</div>
-                    <h3 style="margin-bottom: 10px;">Weekly Time Reclaimed</h3>
-                    <p style="color:var(--text-light); margin-bottom: 1.5rem;">Built a custom Python pipeline to completely eliminate manual CRM data entry for a B2B firm.</p>
-                    <div style="font-weight: 800; color: var(--accent);">✓ 100% Error Reduction</div>
-                </div>
-                <div class="card hover-target" data-aos="fade-up" data-aos-delay="200">
-                    <div class="text-gradient" style="font-size: 3.5rem; font-weight: 900; margin-bottom: 1rem;"><span class="counter" data-target="99">0</span>.9%</div>
-                    <h3 style="margin-bottom: 10px;">System Uptime</h3>
-                    <p style="color:var(--text-light); margin-bottom: 1.5rem;">Flawless server reliability ensuring your funnels and pipelines never crash during high-traffic drops.</p>
-                    <div style="font-weight: 800; color: var(--accent);">✓ Absolute Stability</div>
-                </div>
-            </div>
-        </section>
-
-        <section id="reviews">
-            <div style="text-align: center; margin-bottom: 4rem;" data-aos="fade-up">
-                <h2 style="font-size: clamp(2.5rem, 6vw, 3.5rem);">Client <span class="text-gradient">Voices</span></h2>
-                <button onclick="openFeedback()" class="btn hover-target audio-trigger" style="margin-top: 15px; border: 1px solid var(--border); background: var(--surface); color: var(--text-main);">Leave a Review</button>
-            </div>
+        <div class="section-divider scroll-reveal" id="reviews-section">
+            <h1 class="section-title">CLIENT VOICE</h1>
+            <p class="section-subtitle">Don't just take our word for it. Hear from the brands and creators we've helped scale to the top of their industries.</p>
             
-            <div class="grid" id="reviewGrid">
-                <div class="card hover-target" data-aos="fade-up">
-                    <div style="color: var(--accent); font-size: 1.5rem; margin-bottom: 1rem;">★★★★★</div>
-                    <p style="font-size: 1.1rem; line-height: 1.6; font-style: italic; margin-bottom: 1.5rem;">"Zelq completely rewired our backend. The Python infrastructure they deployed saved us hundreds of hours and scaled our operations effortlessly."</p>
-                    <h4 style="font-weight: 800;">Director of Operations</h4>
-                    <p style="color:var(--text-light); font-size: 0.85rem; margin-top: 5px;">EVNEK</p>
+            <div class="reviews-grid" id="dynamic-reviews-grid">
+                <div class="review-card scroll-reveal delay-1">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-text">"ZELQ completely elevated our streetwear drops. Their viral video edits sold out our latest collection in under 24 hours. Absolute game changers."</p>
+                    <div class="reviewer-info"><p class="reviewer-name">Rizz Mode</p><p class="reviewer-role">Streetwear Apparel</p></div>
                 </div>
-                <div class="card hover-target" data-aos="fade-up" data-aos-delay="100">
-                    <div style="color: var(--accent); font-size: 1.5rem; margin-bottom: 1rem;">★★★★★</div>
-                    <p style="font-size: 1.1rem; line-height: 1.6; font-style: italic; margin-bottom: 1.5rem;">"The cinematic VFX and branding assets Shaurya's team created put us in a different league. Brand Charm Company has seen a 40% bump in premium lead conversions."</p>
-                    <h4 style="font-weight: 800;">Chief Marketing Officer</h4>
-                    <p style="color:var(--text-light); font-size: 0.85rem; margin-top: 5px;">BCC (Brand Charm Company)</p>
+                <div class="review-card scroll-reveal delay-2">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-text">"The paid media strategy ZELQ implemented gave us a massive ROAS. Our brand visibility in the urban fashion scene exploded thanks to their campaigns."</p>
+                    <div class="reviewer-info"><p class="reviewer-name">xxlent</p><p class="reviewer-role">Streetwear Shop</p></div>
                 </div>
-                <div class="card hover-target" data-aos="fade-up" data-aos-delay="200">
-                    <div style="color: var(--accent); font-size: 1.5rem; margin-bottom: 1rem;">★★★★★</div>
-                    <p style="font-size: 1.1rem; line-height: 1.6; font-style: italic; margin-bottom: 1.5rem;">"Zelq scaled our streetwear brand to the next level. Their automated CRM and slick web architecture brought our drop sellouts from days down to minutes."</p>
-                    <h4 style="font-weight: 800;">Founder</h4>
-                    <p style="color:var(--text-light); font-size: 0.85rem; margin-top: 5px;">The Rizz Mode</p>
+                <div class="review-card scroll-reveal delay-3">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-text">"Their content strategy made our dishes look irresistible. We've seen a huge spike in foot traffic and reservations since ZELQ took over our socials."</p>
+                    <div class="reviewer-info"><p class="reviewer-name">Flavours</p><p class="reviewer-role">Restaurant</p></div>
                 </div>
-                <div class="card hover-target" data-aos="fade-up" data-aos-delay="300">
-                    <div style="color: var(--accent); font-size: 1.5rem; margin-bottom: 1rem;">★★★★★</div>
-                    <p style="font-size: 1.1rem; line-height: 1.6; font-style: italic; margin-bottom: 1.5rem;">"Insane infrastructure. They built a custom booking and loyalty bot for our gaming lounge that runs 24/7. Game Verse is fully automated now."</p>
-                    <h4 style="font-weight: 800;">Operations Lead</h4>
-                    <p style="color:var(--text-light); font-size: 0.85rem; margin-top: 5px;">Game Verse</p>
+                <div class="review-card scroll-reveal delay-4">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-text">"ZELQ helped us showcase our styling transformations beautifully. Our localized search rankings and appointment bookings are at an all-time high."</p>
+                    <div class="reviewer-info"><p class="reviewer-name">Jawed Habib</p><p class="reviewer-role">Professional Salon</p></div>
+                </div>
+                <div class="review-card scroll-reveal delay-5">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-text">"They made our cafe look like the ultimate gamer's paradise. The community engagement and event turnouts have been phenomenal since we partnered up!"</p>
+                    <div class="reviewer-info"><p class="reviewer-name">Gameverse</p><p class="reviewer-role">Gaming Cafe</p></div>
                 </div>
             </div>
-        </section>
 
-        <section id="roadmap">
-            <div style="text-align:center; margin-bottom: 4rem;" data-aos="fade-up">
-                <h2 style="font-size: clamp(2.5rem, 6vw, 3.5rem);">The <span class="text-gradient">Roadmap</span></h2>
+            <div class="form-container review-form-container scroll-reveal">
+                <h3 style="font-size: 1.8rem;">SUBMIT A REVIEW</h3>
+                <p style="margin-bottom: 1.5rem;">Have you worked with ZELQ? Share your experience with our team.</p>
+                <form class="glass-form" id="client-review-form">
+                    <div style="display: flex; gap: 15px;">
+                        <input type="text" id="rev-name" placeholder="Your Name or Business" required>
+                        <input type="text" id="rev-role" placeholder="Your Industry / Niche" required>
+                    </div>
+                    <textarea id="rev-text" placeholder="Write your review here..." style="min-height: 80px;" required></textarea>
+                    <button type="submit">Post Review</button>
+                </form>
             </div>
-            <div class="grid">
-                <div class="card hover-target"><h1 class="text-gradient glitch" data-text="01" style="opacity:0.3; font-size: 3rem;">01</h1><h3 style="margin: 10px 0;">Infrastructure Audit</h3><p style="font-size:0.95rem; color:var(--text-light);">We find the tech and financial leaks in your current funnel.</p></div>
-                <div class="card hover-target"><h1 class="text-gradient glitch" data-text="02" style="opacity:0.3; font-size: 3rem;">02</h1><h3 style="margin: 10px 0;">System Deployment</h3><p style="font-size:0.95rem; color:var(--text-light);">Python bots installed to automate 100% of your daily manual tasks.</p></div>
-                <div class="card hover-target"><h1 class="text-gradient glitch" data-text="03" style="opacity:0.3; font-size: 3rem;">03</h1><h3 style="margin: 10px 0;">Visual Authority</h3><p style="font-size:0.95rem; color:var(--text-light);">High-ticket VFX assets that build instant brand trust and authority.</p></div>
-                <div class="card hover-target"><h1 class="text-gradient glitch" data-text="04" style="opacity:0.3; font-size: 3rem;">04</h1><h3 style="margin: 10px 0;">Predictable Scale</h3><p style="font-size:0.95rem; color:var(--text-light);">Financial strategy and roadmap execution for long-term dominance.</p></div>
-            </div>
-        </section>
+        </div>
 
-        <section id="faq">
-            <div style="text-align: center; margin-bottom: 4rem;" data-aos="fade-up">
-                <h2 style="font-size: clamp(2.5rem, 6vw, 3.5rem);">Client <span class="text-gradient">Intelligence</span></h2>
-            </div>
-            <div style="max-width: 800px; margin: 0 auto;">
-                <div class="faq-item hover-target audio-trigger" onclick="this.classList.toggle('active')" data-aos="fade-up">
-                    <div class="faq-question">What exactly does "Python Automation" mean for my business? <span style="color:var(--accent); font-size:1.5rem;">+</span></div>
-                    <div class="faq-answer">It means eliminating human error and manual work. We write custom code that automatically moves leads from your ads into your CRM, sends welcome emails, and updates your spreadsheets instantly while you sleep.</div>
-                </div>
-                <div class="faq-item hover-target audio-trigger" onclick="this.classList.toggle('active')" data-aos="fade-up" data-aos-delay="100">
-                    <div class="faq-question">Why should I choose the Premium Plan over a standard agency? <span style="color:var(--accent); font-size:1.5rem;">+</span></div>
-                    <div class="faq-answer">Standard agencies charge for hours and templates. The Premium Plan gives you direct access to our founders to build custom software, cinematic-grade video assets, and elite web architecture designed specifically for high-ticket scaling.</div>
-                </div>
-            </div>
-        </section>
+        <div class="form-container scroll-reveal" id="contact-section">
+            <h3>START YOUR PROJECT</h3>
+            <p>Ready to dominate your market with elite editing and data-driven marketing? Drop your details below.</p>
+            
+            <form class="glass-form" action="https://formspree.io/f/YOUR_FORMSPREE_ENDPOINT" method="POST">
+                <input type="text" name="name" placeholder="Full Name / Brand Name" required>
+                <input type="email" name="email" placeholder="Business Email Address" required>
+                <select name="service" required>
+                    <option value="" disabled selected>Select Primary Service Needed...</option>
+                    <option value="video-editing">High-End Video Editing</option>
+                    <option value="paid-ads">Paid Media & Ads</option>
+                    <option value="social-media">Social Media Management</option>
+                    <option value="other">Full Stack / Multiple Services</option>
+                </select>
+                <textarea name="message" placeholder="Tell us about your brand goals..." required></textarea>
+                <button type="submit">Submit Request</button>
+            </form>
+        </div>
 
-        <section id="pricing">
-            <div style="text-align: center; margin-bottom: 4rem;" data-aos="fade-up">
-                <h2 style="font-size: clamp(2.5rem, 6vw, 3.5rem);">Pricing <span class="text-gradient">Infrastructure</span></h2>
-            </div>
-            <div class="grid">
-                <div class="card hover-target" data-aos="fade-up">
-                    <h3 style="font-size: 2rem;">Basic</h3>
-                    <div style="font-size: 3rem; font-weight: 900; margin: 1rem 0;">₹1,799<span style="font-size: 1rem; color:var(--text-light)">/wk</span></div>
-                    <ul style="list-style:none; line-height:2.5; color:var(--text-light); margin-bottom: 2rem;">
-                        <li>✓ Social Media Content</li>
-                        <li>✓ CRM Lead Setup</li>
-                        <li>✓ Weekly Data Sync</li>
+        <footer class="site-footer scroll-reveal">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>ZELQ.</h4>
+                    <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.5; margin-top: 0;">An elite digital marketing and editing agency dedicated to crafting high-retention content and scaling dominant brands.</p>
+                </div>
+                <div class="footer-col">
+                    <h4 style="font-size: 1.2rem;">Quick Links</h4>
+                    <ul>
+                        <li><a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">Back to Top</a></li>
+                        <li><a href="#services-section">Our Capabilities</a></li>
+                        <li><a href="#team-section">Leadership</a></li>
                     </ul>
-                    <a href="#contact" class="btn hover-target audio-trigger" style="border: 1px solid var(--border); width: 100%; color:inherit;">Select Basic</a>
                 </div>
-                <div class="card hover-target" data-aos="fade-up" data-aos-delay="100">
-                    <h3 style="font-size: 2rem;">Pro</h3>
-                    <div style="font-size: 3rem; font-weight: 900; margin: 1rem 0;">₹3,199<span style="font-size: 1rem; color:var(--text-light)">/wk</span></div>
-                    <ul style="list-style:none; line-height:2.5; color:var(--text-light); margin-bottom: 2rem;">
-                        <li>✓ Python Automation Suite</li>
-                        <li>✓ UI/UX Architecture</li>
-                        <li>✓ Strategic Roadmap</li>
+                <div class="footer-col">
+                    <h4 style="font-size: 1.2rem;">Legal & Policy</h4>
+                    <ul>
+                        <li><a href="#terms">Terms of Service</a></li>
+                        <li><a href="#privacy">Privacy Policy</a></li>
                     </ul>
-                    <a href="#contact" class="btn hover-target audio-trigger" style="border: 1px solid var(--border); width: 100%; color:inherit;">Select Pro</a>
-                </div>
-                <div class="card premium-card hover-target" data-aos="zoom-in" data-aos-delay="200">
-                    <span class="badge" style="border:none; padding: 4px 12px; background: linear-gradient(135deg, var(--accent), var(--accent-sec)); color: white;">MOST POPULAR</span>
-                    <h3 style="font-size: 2.5rem; margin-top: 0.5rem;">Premium</h3>
-                    <div class="text-gradient glitch" data-text="₹3,999" style="font-size: 3.5rem; font-weight: 900; margin: 1rem 0;">₹3,999<span style="font-size: 1rem; color:var(--text-light); -webkit-text-fill-color: var(--text-light);">/wk</span></div>
-                    <ul style="list-style:none; line-height:2.5; color:var(--text-light); margin-bottom: 2rem;">
-                        <li>✓ <strong>High-End VFX & Video</strong></li>
-                        <li>✓ <strong>Full-Stack App Dev</strong></li>
-                        <li>✓ <strong>24/7 Founder Access</strong></li>
-                    </ul>
-                    <a href="#contact" class="btn btn-p hover-target audio-trigger" style="width: 100%;">Claim Slot</a>
                 </div>
             </div>
-        </section>
-
-        <section id="contact">
-            <div class="grid">
-                <div data-aos="fade-right">
-                    <h2 style="font-size: clamp(3rem, 8vw, 5rem); line-height: 0.9; margin-bottom: 2rem;">Ready to <br><span class="text-gradient">Win?</span></h2>
-                    <p style="margin-bottom: 2.5rem; color:var(--text-light); font-size: 1.2rem;">We only accept 10 clients at a time. Secure your position by applying below.</p>
-                    <div onclick="navigator.clipboard.writeText('support@zelq.in'); alert('Copied!')" class="hover-target audio-trigger" style="font-weight: 800; font-size: 1.1rem; margin-bottom: 10px;">✉️ support@zelq.in</div>
-                    <div onclick="navigator.clipboard.writeText('+91 7880032340'); alert('Copied!')" class="hover-target audio-trigger" style="font-weight: 800; font-size: 1.1rem;">📞 +91 7880032340</div>
+            <div class="footer-bottom">
+                <div>&copy; 2026 ZELQ Digital Marketing & Editing. All rights reserved.</div>
+                <div style="display: flex; gap: 15px;">
+                    <a href="#">Instagram</a>
+                    <a href="#">Twitter/X</a>
+                    <a href="#">LinkedIn</a>
                 </div>
-                <div class="card hover-target" data-aos="fade-left">
-                    <div class="progress-bar-bg"><div class="progress-fill" id="formProgress"></div></div>
+            </div>
+        </footer>
+
+    </div>
+</section>
+
+<script>
+    // --- 0. SMOOTH GLASS LOADER LOGIC ---
+    document.addEventListener("DOMContentLoaded", () => {
+        let loadProgress = 0;
+        const loaderBar = document.getElementById('loader-bar');
+        const loaderPercent = document.getElementById('loader-percent');
+        const loader = document.getElementById('loader');
+
+        document.body.style.overflow = 'hidden';
+
+        const interval = setInterval(() => {
+            loadProgress += Math.floor(Math.random() * 15) + 5;
+            if (loadProgress >= 100) {
+                loadProgress = 100;
+                clearInterval(interval);
+                
+                setTimeout(() => {
+                    loader.style.opacity = '0';
+                    loader.style.backdropFilter = 'blur(0px)';
+                    loader.style.webkitBackdropFilter = 'blur(0px)';
                     
-                    <form action="#" method="POST" id="multiStepForm" onsubmit="event.preventDefault(); submitApplication();">
-                        <div class="form-step active" id="f-step-1">
-                            <h3 style="margin-bottom: 15px;">Step 1: Introduction</h3>
-                            <input type="text" id="app_name" placeholder="Full Name" class="input-glass hover-target" required>
-                            <input type="email" id="app_email" placeholder="Business Email" class="input-glass hover-target" required>
-                            <button type="button" class="btn btn-p hover-target audio-trigger" style="width:100%;" onclick="nextStep(2)">Continue</button>
-                        </div>
-                        <div class="form-step" id="f-step-2">
-                            <h3 style="margin-bottom: 15px;">Step 2: Business Scale</h3>
-                            <select id="app_revenue" class="input-glass hover-target">
-                                <option value="" disabled selected>Current Monthly Revenue?</option>
-                                <option value="Under 1L">Under ₹1L</option>
-                                <option value="1L - 5L">₹1L - ₹5L</option>
-                                <option value="10L+">₹10L+</option>
-                            </select>
-                            <div style="display:flex; gap:10px;">
-                                <button type="button" class="btn hover-target audio-trigger" style="flex:1; border:1px solid var(--border); background:transparent; color:inherit;" onclick="nextStep(1)">Back</button>
-                                <button type="button" class="btn btn-p hover-target audio-trigger" style="flex:2;" onclick="nextStep(3)">Continue</button>
-                            </div>
-                        </div>
-                        <div class="form-step" id="f-step-3">
-                            <h3 style="margin-bottom: 15px;">Step 3: Primary Bottleneck</h3>
-                            <textarea id="app_message" placeholder="What is stopping you from scaling right now?" class="input-glass hover-target" style="height:100px;" required></textarea>
-                            <div style="display:flex; gap:10px;">
-                                <button type="button" class="btn hover-target audio-trigger" style="flex:1; border:1px solid var(--border); background:transparent; color:inherit;" onclick="nextStep(2)">Back</button>
-                                <button type="submit" class="btn btn-p hover-target audio-trigger" style="flex:2;" id="appSubmitBtn">Submit Application</button>
-                            </div>
-                        </div>
-                        <div class="form-step" id="f-step-4" style="text-align:center; padding: 2rem 0;">
-                            <div style="font-size: 3rem; color:#10b981; margin-bottom:1rem;">✓</div>
-                            <h3>Application Received</h3>
-                            <p style="color:var(--text-light); margin-top:10px;">Our founders will review your submission and contact you within 24 hours.</p>
-                        </div>
-                    </form>
+                    setTimeout(() => {
+                        loader.style.visibility = 'hidden';
+                        document.body.style.overflow = ''; 
+                    }, 1000); 
+                }, 500);
+            }
+            loaderBar.style.width = loadProgress + '%';
+            loaderPercent.innerText = loadProgress + '%';
+        }, 120);
+    });
+
+    // --- NEW: INTERSECTION OBSERVER FOR SCROLL ANIMATIONS ---
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.15 // Triggers when 15% of the element is visible
+    };
+
+    const scrollObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                // Optional: Stop observing once it has animated in
+                // observer.unobserve(entry.target); 
+            }
+        });
+    }, observerOptions);
+
+    // Give it a tiny delay to ensure the DOM is ready, then observe all elements with .scroll-reveal
+    setTimeout(() => {
+        document.querySelectorAll('.scroll-reveal').forEach((el) => {
+            scrollObserver.observe(el);
+        });
+    }, 500);
+
+    // --- 1. THEME TOGGLE LOGIC ---
+    const themeBtn = document.getElementById('theme-toggle');
+    let isDarkMode = true;
+
+    themeBtn.addEventListener('click', () => {
+        isDarkMode = !isDarkMode;
+        if (isDarkMode) {
+            document.body.removeAttribute('data-theme');
+            themeBtn.innerText = '☀️ Light';
+            updateShaderColors('#1a0000', '#8a0a00', '#ff4d00', '#ffea00'); 
+        } else {
+            document.body.setAttribute('data-theme', 'light');
+            themeBtn.innerText = '🌙 Dark';
+            updateShaderColors('#ffffff', '#e0f7fa', '#b2ebf2', '#4dd0e1'); 
+        }
+    });
+
+    // --- 2. ZOOM-IN SCROLL & 3D LOGIC ---
+    const world = document.getElementById('world');
+    const proxy = document.getElementById('proxy');
+    const fixedUI = document.getElementById('fixed-ui');
+    const shaderBg = document.getElementById('shader-bg');
+    const panels = document.querySelectorAll('.layer-panel');
+    const navDots = document.querySelectorAll('.nav-dot');
+    const hudLabel = document.getElementById('hud_label');
+    const progressFill = document.getElementById('progress_fill');
+
+    const zStep = 2500; 
+    
+    panels.forEach((panel, index) => { 
+        panel.style.transform = `translateZ(-${index * zStep}px) scale(1)`; 
+    });
+
+    const maxScrollDepth = (panels.length - 1) * zStep;
+    proxy.style.height = `${maxScrollDepth + window.innerHeight}px`;
+
+    window.addEventListener('scroll', () => {
+        const scrollY = window.scrollY;
+        
+        if (scrollY <= maxScrollDepth) {
+            world.style.transform = `translateZ(${scrollY}px)`;
+            fixedUI.style.transform = `translateY(0px)`;
+            shaderBg.style.opacity = '0'; 
+            
+            let progress = (scrollY / maxScrollDepth) * 100;
+            progressFill.style.height = `${Math.min(100, Math.max(0, progress))}%`;
+
+            let activeIndex = Math.round(scrollY / zStep);
+            activeIndex = Math.min(panels.length - 1, Math.max(0, activeIndex));
+
+            navDots.forEach(dot => dot.classList.remove('is-active'));
+            navDots[activeIndex].classList.add('is-active');
+            hudLabel.innerText = panels[activeIndex].getAttribute('data-label');
+
+            panels.forEach((panel, index) => {
+                const distance = scrollY - (index * zStep);
+                let scale = 1;
+                let opacity = 1;
+
+                if (distance > 0) {
+                    scale = 1 + (distance * 0.005); 
+                    opacity = 1 - (distance / 600); 
+                } else {
+                    opacity = 1 - (Math.abs(distance) / 1500); 
+                }
+
+                panel.style.transform = `translateZ(-${index * zStep}px) scale(${Math.max(0, scale)})`;
+                panel.style.opacity = Math.max(0, opacity);
+            });
+            
+        } else {
+            world.style.transform = `translateZ(${maxScrollDepth}px)`;
+            const overflow = scrollY - maxScrollDepth;
+            fixedUI.style.transform = `translateY(-${overflow}px)`; 
+            shaderBg.style.opacity = '1'; 
+        }
+    });
+
+    navDots.forEach(dot => {
+        dot.addEventListener('click', (e) => {
+            const index = e.target.getAttribute('data-index');
+            window.scrollTo({ top: index * zStep, behavior: 'smooth' });
+        });
+    });
+
+    // --- 3. DYNAMIC REVIEW SUBMISSION LOGIC ---
+    const reviewForm = document.getElementById('client-review-form');
+    const reviewsGrid = document.getElementById('dynamic-reviews-grid');
+
+    if(reviewForm) {
+        reviewForm.addEventListener('submit', function(e) {
+            e.preventDefault(); 
+
+            const name = document.getElementById('rev-name').value;
+            const role = document.getElementById('rev-role').value;
+            const text = document.getElementById('rev-text').value;
+
+            const newCard = document.createElement('div');
+            newCard.className = 'review-card scroll-reveal visible delay-1'; // Ensure it's instantly visible
+            
+            newCard.style.opacity = '0';
+            newCard.style.transform = 'translateY(30px)';
+
+            newCard.innerHTML = `
+                <div class="stars">★★★★★</div>
+                <p class="review-text">"${text}"</p>
+                <div class="reviewer-info">
+                    <p class="reviewer-name">${name}</p>
+                    <p class="reviewer-role">${role}</p>
                 </div>
-            </div>
-        </section>
-    </main>
+            `;
 
-    <div class="mobile-cta-bar">
-        <a href="#contact" class="btn btn-p audio-trigger" style="width: 100%; padding: 1rem; font-size: 1.1rem;">Apply Now</a>
-    </div>
+            reviewsGrid.prepend(newCard);
 
-    <footer>
-        <div class="footer-grid">
-            <div>
-                <div style="font-size: 1.8rem; font-weight: 900; letter-spacing: 2px; margin-bottom: 1rem;">ZELQ<span class="text-gradient">.</span></div>
-                <p style="color:var(--text-light); font-weight: 600; line-height: 1.6;">Aggressive growth infrastructure and automation for high-ticket businesses.</p>
-            </div>
-            <div>
-                <h4 style="margin-bottom: 1.2rem; font-weight: 800;">Navigation</h4>
-                <ul class="footer-links">
-                    <li><a href="#vsl" class="hover-target audio-trigger">The System</a></li>
-                    <li><a href="#portfolio-wrapper" class="hover-target audio-trigger">The Vault</a></li>
-                    <li><a href="#pricing" class="hover-target audio-trigger">Pricing Plans</a></li>
-                    <li><a href="#faq" class="hover-target audio-trigger">Client Intel</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4 style="margin-bottom: 1.2rem; font-weight: 800;">Legal & Social</h4>
-                <ul class="footer-links">
-                    <li><a href="#" class="hover-target audio-trigger">Privacy Policy</a></li>
-                    <li><a href="#" class="hover-target audio-trigger">LinkedIn</a></li>
-                    <li><a href="#" class="hover-target audio-trigger">Instagram</a></li>
-                </ul>
-            </div>
-        </div>
-        <div style="text-align: center; color:var(--text-light); font-weight: 600; padding-top: 2rem; border-top: 1px solid var(--border);">
-            © <span id="year">2026</span> Zelq Growth Agency. All Rights Reserved.
-        </div>
-    </footer>
-
-    <button class="chat-widget hover-target audio-trigger" aria-label="Open Live Chat" onclick="toggleChat()">💬</button>
-    <div class="chat-window" id="chatWindow">
-        <div class="chat-header">
-            <span>Zelq Support ⚡</span>
-            <button class="hover-target audio-trigger" aria-label="Close Chat" onclick="toggleChat()" style="background:none; border:none; color:white; font-size:1.5rem; cursor:pointer;">×</button>
-        </div>
-        <div style="padding: 20px; text-align: center; min-height: 150px; display: flex; flex-direction: column; justify-content: center;">
-            <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 1rem;">Our founders are currently executing roadmaps for clients.</p>
-            <p style="font-size: 0.9rem; font-weight: 800;">Please use the <a href="#contact" class="text-gradient hover-target audio-trigger" style="text-decoration:none;">Contact Form</a>.</p>
-        </div>
-    </div>
-
-    <div class="toast-notification" id="toast">
-        <div class="pulse-dot"></div>
-        <div>
-            <p style="font-size: 0.8rem; color: var(--text-light);">Just now</p>
-            <p style="font-weight: 800; font-size: 0.95rem;">A founder in Mumbai booked a <span class="text-gradient">Premium</span> slot.</p>
-        </div>
-    </div>
-
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        AOS.init({ duration: 800, once: true });
-
-        function initTheme() { const savedTheme = localStorage.getItem('zelqTheme') || 'dark'; document.documentElement.setAttribute('data-theme', savedTheme); }
-        initTheme();
-        function toggleTheme() { const html = document.documentElement; const newTheme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'; html.setAttribute('data-theme', newTheme); localStorage.setItem('zelqTheme', newTheme); }
-
-        window.onload = () => {
             setTimeout(() => {
-                document.getElementById('preloader').style.opacity = '0';
-                setTimeout(() => document.getElementById('preloader').style.display = 'none', 800);
-            }, 1000);
-            document.getElementById("year").innerHTML = new Date().getFullYear();
-        };
+                newCard.style.opacity = '1';
+                newCard.style.transform = 'translateY(0)';
+            }, 50);
 
-        // --- CUSTOM UI AUDIO SYNTHESIZER ---
-        let audioCtx;
-        function initAudio() { if(!audioCtx) { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } if(audioCtx.state === 'suspended') audioCtx.resume(); }
-        document.body.addEventListener('click', initAudio, {once:true}); 
-        
-        function playHoverSound() {
-            if(!audioCtx || audioCtx.state !== 'running') return;
-            const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain();
-            osc.type = 'sine'; osc.frequency.setValueAtTime(800, audioCtx.currentTime); osc.frequency.exponentialRampToValueAtTime(1200, audioCtx.currentTime + 0.05);
-            gain.gain.setValueAtTime(0.02, audioCtx.currentTime); gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.05);
-            osc.connect(gain); gain.connect(audioCtx.destination); osc.start(); osc.stop(audioCtx.currentTime + 0.05);
-        }
-        function playClickSound() {
-            if(!audioCtx || audioCtx.state !== 'running') return;
-            const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain();
-            osc.type = 'triangle'; osc.frequency.setValueAtTime(400, audioCtx.currentTime); osc.frequency.exponentialRampToValueAtTime(50, audioCtx.currentTime + 0.1);
-            gain.gain.setValueAtTime(0.1, audioCtx.currentTime); gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.1);
-            osc.connect(gain); gain.connect(audioCtx.destination); osc.start(); osc.stop(audioCtx.currentTime + 0.1);
-        }
-
-        // --- GLOBAL MOUSE TRACKING ---
-        let mouseX = 0; let mouseY = 0;
-        const cursorDot = document.querySelector('.cursor-dot'); const cursorOutline = document.querySelector('.cursor-outline');
-        window.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX; mouseY = e.clientY;
-            cursorDot.style.left = cursorOutline.style.left = `${mouseX}px`; cursorDot.style.top = cursorOutline.style.top = `${mouseY}px`;
+            reviewForm.reset();
         });
-        
-        document.querySelectorAll('.hover-target').forEach(el => {
-            el.addEventListener('mouseenter', () => { document.body.classList.add('cursor-hover'); });
-            el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
-        });
-        document.querySelectorAll('.audio-trigger').forEach(el => {
-            el.addEventListener('mouseenter', playHoverSound); el.addEventListener('click', playClickSound);
-        });
+    }
 
-        // --- INTERACTIVE WEBGL/CANVAS SPIDERWEB ---
-        const canvas = document.getElementById('network-canvas'); const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth; canvas.height = window.innerHeight; let particlesArray = [];
-        class Particle {
-            constructor(x, y, directionX, directionY, size, color) { this.x = x; this.y = y; this.directionX = directionX; this.directionY = directionY; this.size = size; this.color = color; }
-            draw() { ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false); ctx.fillStyle = this.color; ctx.fill(); }
-            update() {
-                if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
-                if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
-                this.x += this.directionX; this.y += this.directionY; this.draw();
-            }
-        }
-        function initCanvas() {
-            particlesArray = []; let numberOfParticles = (canvas.height * canvas.width) / 12000;
-            for (let i = 0; i < numberOfParticles; i++) {
-                let size = (Math.random() * 2) + 1; let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2); let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
-                let directionX = (Math.random() * 1) - 0.5; let directionY = (Math.random() * 1) - 0.5; let color = i % 2 === 0 ? '#00f0ff' : '#b026ff';
-                particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
-            }
-        }
-        function connectParticles() {
-            let opacityValue = 1;
-            for (let a = 0; a < particlesArray.length; a++) {
-                for (let b = a; b < particlesArray.length; b++) {
-                    let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) + ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
-                    if (distance < (canvas.width / 7) * (canvas.height / 7)) {
-                        opacityValue = 1 - (distance / 20000); ctx.strokeStyle = 'rgba(0, 240, 255,' + opacityValue * 0.2 + ')'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(particlesArray[a].x, particlesArray[a].y); ctx.lineTo(particlesArray[b].x, particlesArray[b].y); ctx.stroke();
-                    }
-                }
-                if(mouseX != null && mouseY != null) {
-                    let dx = mouseX - particlesArray[a].x; let dy = mouseY - particlesArray[a].y; let distance = dx*dx + dy*dy;
-                    if(distance < 25000) { ctx.strokeStyle = 'rgba(176, 38, 255,' + (1 - distance/25000) * 0.5 + ')'; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(particlesArray[a].x, particlesArray[a].y); ctx.lineTo(mouseX, mouseY); ctx.stroke(); }
-                }
-            }
-        }
-        function animateCanvas() { requestAnimationFrame(animateCanvas); ctx.clearRect(0, 0, innerWidth, innerHeight); for (let i = 0; i < particlesArray.length; i++) particlesArray[i].update(); connectParticles(); }
-        initCanvas(); animateCanvas(); window.addEventListener('resize', function(){ canvas.width = innerWidth; canvas.height = innerHeight; initCanvas(); });
+    // --- 4. THREE.JS FLUID SHADER LOGIC ---
+    const scene = new THREE.Scene();
+    const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.1, 10);
+    camera.position.z = 1;
 
-        // --- 3D WIREFRAME GLOBE CANVAS ---
-        const globeCanvas = document.getElementById('globe-canvas'); const gCtx = globeCanvas.getContext('2d');
-        const gWidth = 40; const gHeight = 40; globeCanvas.width = gWidth; globeCanvas.height = gHeight;
-        let nodes = []; let angleX = 0; let angleY = 0;
-        for(let i=0; i<=10; i++) {
-            let lat = Math.PI * i / 10 - Math.PI / 2;
-            for(let j=0; j<=10; j++) {
-                let lon = 2 * Math.PI * j / 10;
-                let x = Math.cos(lat) * Math.cos(lon); let y = Math.sin(lat); let z = Math.cos(lat) * Math.sin(lon);
-                nodes.push({x: x, y: y, z: z});
-            }
-        }
-        function drawGlobe() {
-            gCtx.clearRect(0,0,gWidth,gHeight); angleY += 0.02; gCtx.strokeStyle = 'rgba(0, 240, 255, 0.6)'; gCtx.lineWidth = 0.5;
-            for(let i=0; i<nodes.length; i++) {
-                let p = nodes[i];
-                let x1 = p.x * Math.cos(angleY) - p.z * Math.sin(angleY); let z1 = p.x * Math.sin(angleY) + p.z * Math.cos(angleY);
-                let y1 = p.y * Math.cos(0.2) - z1 * Math.sin(0.2); let z2 = p.y * Math.sin(0.2) + z1 * Math.cos(0.2);
-                let scale = 15 / (15 - z2); let x2d = (x1 * scale * 10) + gWidth/2; let y2d = (y1 * scale * 10) + gHeight/2;
-                if(z2 < 0) { gCtx.fillStyle = '#00f0ff'; gCtx.beginPath(); gCtx.arc(x2d, y2d, 0.8, 0, Math.PI*2); gCtx.fill(); }
-            }
-            requestAnimationFrame(drawGlobe);
-        }
-        drawGlobe();
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    shaderBg.appendChild(renderer.domElement); 
 
-        // --- TERMINAL TYPING LOGIC ---
-        const termLines = [
-            "> Initializing Zelq Deployment Protocol...",
-            "> [PYTHON] Connecting to client CRM...",
-            "> [PYTHON] Syncing 14,203 data points... [SUCCESS]",
-            "> [AWS] Scaling server clusters... [OK]",
-            "> [VFX] Rendering 3D assets in background... 100%",
-            "> [SYS] Routing new leads to sales team...",
-            "> [AI] Chatbot engaged with 12 active users...",
-            "> [SYS] All systems nominal. Growth trajectory locked."
-        ];
-        let termIdx = 0;
-        function typeTerminal() {
-            const termBody = document.getElementById('term-body');
-            if(!termBody) return;
-            if(termIdx >= termLines.length) { termBody.innerHTML = ''; termIdx = 0; }
-            const line = document.createElement('div'); line.className = 'term-line'; line.innerText = termLines[termIdx];
-            termBody.appendChild(line); termBody.scrollTop = termBody.scrollHeight;
-            termIdx++; setTimeout(typeTerminal, Math.random() * 1200 + 600);
-        }
-        setTimeout(typeTerminal, 2000);
+    const vertexShader = `varying vec2 vUv; void main() { vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }`;
 
-        // --- 3D HERO TILT EFFECT ---
-        const heroSection = document.getElementById('hero-section'); const tiltWrapper = document.getElementById('tilt-wrapper');
-        heroSection.addEventListener('mousemove', (e) => {
-            if (window.innerWidth > 768) { const xAxis = (window.innerWidth / 2 - e.pageX) / 40; const yAxis = (window.innerHeight / 2 - e.pageY) / 40; tiltWrapper.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`; }
-        });
-        heroSection.addEventListener('mouseleave', () => { if (window.innerWidth > 768) tiltWrapper.style.transform = `rotateY(0deg) rotateX(0deg)`; });
+    const fragmentShader = `
+        varying vec2 vUv; uniform float uTime; uniform vec2 uResolution;
+        uniform vec3 uColor1; uniform vec3 uColor2; uniform vec3 uColor3; uniform vec3 uColor4;
+        uniform vec3 uLightPos; uniform float uDepth; uniform float uSpeed; uniform float uNoiseScale;
+        uniform float uWarpAmount; uniform float uFoldFrequency; uniform float uAngle;
+        uniform float uConnections; uniform float uShadowWidth;
 
-        // --- MAGNETIC BUTTONS LOGIC ---
-        document.querySelectorAll('.btn').forEach(btn => {
-            btn.addEventListener('mousemove', (e) => {
-                const rect = btn.getBoundingClientRect(); const x = (e.clientX - rect.left - rect.width / 2) * 0.3; const y = (e.clientY - rect.top - rect.height / 2) * 0.3;
-                btn.style.transform = `translate(${x}px, ${y}px) scale(1.05)`;
-            });
-            btn.addEventListener('mouseleave', () => { btn.style.transform = `translate(0px, 0px) scale(1)`; });
-        });
+        vec3 mod289(vec3 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
+        vec4 mod289(vec4 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
+        vec4 permute(vec4 x) { return mod289(((x*34.0)+1.0)*x); }
+        vec4 taylorInvSqrt(vec4 r) { return 1.79284291400159 - 0.85373472095314 * r; }
 
-        // --- ANIMATED NUMBER COUNTERS LOGIC ---
-        const counters = document.querySelectorAll('.counter');
-        const counterObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if(entry.isIntersecting) {
-                    const target = +entry.target.getAttribute('data-target'); let count = 0;
-                    const updateCount = () => {
-                        const increment = target / 40; 
-                        if(count < target) { count += increment; entry.target.innerText = Math.ceil(count); setTimeout(updateCount, 30); } else { entry.target.innerText = target; }
-                    };
-                    updateCount(); counterObserver.unobserve(entry.target); 
-                }
-            });
-        }, { threshold: 0.5 });
-        counters.forEach(counter => counterObserver.observe(counter));
-
-        // --- HORIZONTAL SCROLL FOR PORTFOLIO ---
-        const portWrapper = document.getElementById('portfolio-wrapper'); const hScroll = document.getElementById('h-scroll');
-        document.querySelectorAll('.card').forEach(card => {
-            card.addEventListener('mousemove', e => {
-                const rect = card.getBoundingClientRect(); const x = e.clientX - rect.left; const y = e.clientY - rect.top;
-                card.style.setProperty('--mouse-x', `${x}px`); card.style.setProperty('--mouse-y', `${y}px`);
-            });
-        });
-        window.addEventListener('scroll', () => {
-            let winScroll = document.body.scrollTop || document.documentElement.scrollTop; let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            document.getElementById("progress-bar").style.width = (winScroll / height) * 100 + "%";
-            if (window.innerWidth > 768 && portWrapper && hScroll) {
-                const rect = portWrapper.getBoundingClientRect(); const viewHeight = window.innerHeight;
-                if (rect.top <= 0 && rect.bottom >= viewHeight) {
-                    const totalScroll = rect.height - viewHeight; const scrolled = Math.abs(rect.top); let progress = scrolled / totalScroll;
-                    const maxTranslate = hScroll.scrollWidth - window.innerWidth; hScroll.style.transform = `translateX(-${progress * maxTranslate}px)`;
-                } else if (rect.top > 0) { hScroll.style.transform = `translateX(0px)`;
-                } else if (rect.bottom < viewHeight) { const maxTranslate = hScroll.scrollWidth - window.innerWidth; hScroll.style.transform = `translateX(-${maxTranslate}px)`; }
-            }
-        });
-
-        // --- MULTI-STEP FUNNEL LOGIC ---
-        function nextStep(step) {
-            if(step === 2 && (!document.getElementById('app_name').value || !document.getElementById('app_email').value)) { alert("Please fill out your Name and Email to continue."); return; }
-            document.querySelectorAll('.form-step').forEach(el => el.classList.remove('active'));
-            document.getElementById('f-step-' + step).classList.add('active');
-            let progress = 33; if(step === 2) progress = 66; if(step === 3) progress = 100; if(step === 4) progress = 100;
-            document.getElementById('formProgress').style.width = progress + '%';
-        }
-        function submitApplication() {
-            const btn = document.getElementById('appSubmitBtn'); btn.innerHTML = "Processing...";
-            setTimeout(() => { nextStep(4); }, 1500); 
+        float snoise(vec3 v) {
+            const vec2 C = vec2(1.0/6.0, 1.0/3.0); const vec4 D = vec4(0.0, 0.5, 1.0, 2.0);
+            vec3 i = floor(v + dot(v, C.yyy)); vec3 x0 = v - i + dot(i, C.xxx);
+            vec3 g = step(x0.yzx, x0.xyz); vec3 l = 1.0 - g;
+            vec3 i1 = min(g.xyz, l.zxy); vec3 i2 = max(g.xyz, l.zxy);
+            vec3 x1 = x0 - i1 + C.xxx; vec3 x2 = x0 - i2 + C.yyy; vec3 x3 = x0 - D.yyy;
+            i = mod289(i); vec4 p = permute(permute(permute(i.z + vec4(0.0, i1.z, i2.z, 1.0)) + i.y + vec4(0.0, i1.y, i2.y, 1.0)) + i.x + vec4(0.0, i1.x, i2.x, 1.0));
+            float n_ = 0.142857142857; vec3 ns = n_ * D.wyz - D.xzx;
+            vec4 j = p - 49.0 * floor(p * ns.z * ns.z);
+            vec4 x_ = floor(j * ns.z); vec4 y_ = floor(j - 7.0 * x_);
+            vec4 x = x_ * ns.x + ns.yyyy; vec4 y = y_ * ns.x + ns.yyyy;
+            vec4 h = 1.0 - abs(x) - abs(y); vec4 b0 = vec4(x.xy, y.xy); vec4 b1 = vec4(x.zw, y.zw);
+            vec4 s0 = floor(b0) * 2.0 + 1.0; vec4 s1 = floor(b1) * 2.0 + 1.0;
+            vec4 sh = -step(h, vec4(0.0));
+            vec4 a0 = b0.xzyw + s0.xzyw * sh.xxyy; vec4 a1 = b1.xzyw + s1.xzyw * sh.zzww;
+            vec3 p0 = vec3(a0.xy, h.x); vec3 p1 = vec3(a0.zw, h.y); vec3 p2 = vec3(a1.xy, h.z); vec3 p3 = vec3(a1.zw, h.w);
+            vec4 norm = taylorInvSqrt(vec4(dot(p0,p0), dot(p1,p1), dot(p2, p2), dot(p3,p3)));
+            p0 *= norm.x; p1 *= norm.y; p2 *= norm.z; p3 *= norm.w;
+            vec4 m = max(0.5 - vec4(dot(x0,x0), dot(x1,x1), dot(x2,x2), dot(x3,x3)), 0.0);
+            return 105.0 * dot(m*m, vec4(dot(p0,x0), dot(p1,x1), dot(p2,x2), dot(p3,x3)));
         }
 
-        // Exit intent modal
-        let exitIntentTriggered = false;
-        document.addEventListener('mouseleave', (e) => {
-            if (e.clientY < 0 && !exitIntentTriggered) { document.getElementById('exitModal').classList.add('modal-active'); playClickSound(); exitIntentTriggered = true; }
-        });
-
-        const slider = document.getElementById("hourSlider");
-        slider.oninput = function() {
-            document.getElementById("hoursValue").innerHTML = this.value + " hrs"; document.getElementById("wastedVal").innerHTML = "₹" + (this.value * 4 * 12 * 500).toLocaleString('en-IN');
+        float getSurface(vec2 p) {
+            float c = cos(uAngle), s = sin(uAngle); mat2 rot = mat2(c, -s, s, c); vec2 rp = rot * p;
+            float n1 = snoise(vec3(rp * uNoiseScale * 0.25, uTime * uSpeed * 0.7));
+            float n2 = snoise(vec3(rp * uNoiseScale * 0.25 + vec2(21.4, 15.2), uTime * uSpeed * 0.9));
+            float trig1 = sin(rp.x * uNoiseScale * 0.5 + uTime * uSpeed) * 0.3;
+            float trig2 = cos(rp.y * uNoiseScale * 0.5 - uTime * uSpeed) * 0.3;
+            vec2 flow = vec2(n1 + trig1, n2 + trig2); vec2 wp = rp + flow * (uWarpAmount * 0.12);
+            float freq = uFoldFrequency * 0.5; float phase = sin(wp.y * freq + flow.y * 2.0) * uConnections;
+            float mainWave = sin(wp.x * freq + phase * uWarpAmount * 0.3);
+            float n3 = snoise(vec3(wp * 0.5, uTime * uSpeed * 0.5));
+            return (mainWave * 0.85 + n3 * 0.15) * 0.5;
         }
 
-        // Modals & Chat
-        function openPortal() { document.getElementById('portalModal').classList.add('modal-active'); }
-        function closePortal() { document.getElementById('portalModal').classList.remove('modal-active'); }
-        function openFeedback() { document.getElementById('feedbackModal').classList.add('modal-active'); }
-        function closeFeedback() { document.getElementById('feedbackModal').classList.remove('modal-active'); }
-        function openCase(id) { document.getElementById('caseModal' + id).classList.add('modal-active'); playClickSound(); }
-        function closeCase(id) { document.getElementById('caseModal' + id).classList.remove('modal-active'); playHoverSound(); }
-        function toggleChat() { document.getElementById('chatWindow').classList.toggle('chat-active'); }
-
-        function verifyLogin() {
-            const btn = document.getElementById('loginBtn'); btn.innerHTML = "Authenticating...";
-            setTimeout(() => {
-                const email = document.getElementById('portalEmail').value.toLowerCase().trim();
-                if(email.includes("@")) { 
-                    btn.style.background = "var(--accent)"; btn.innerHTML = "Access Granted."; playClickSound();
-                    setTimeout(() => { alert("Welcome to the Zelq Premium Dashboard."); closePortal(); btn.style.background = ""; btn.innerHTML = "Access Portal"; }, 1500);
-                } else { btn.innerHTML = "Access Portal"; document.getElementById('loginMsg').style.display = 'block'; }
-            }, 1200);
+        void main() {
+            vec2 uv = gl_FragCoord.xy / uResolution.xy; vec2 p = uv * 2.0 - 1.0; p.x *= uResolution.x / uResolution.y;
+            vec2 e = vec2(0.09, 0.0);
+            float dx = (getSurface(p + e.xy) - getSurface(p - e.xy)) / (2.0 * e.x);
+            float dy = (getSurface(p + e.yx) - getSurface(p - e.yx)) / (2.0 * e.x);
+            float safeDepth = max(uDepth, 0.02);
+            vec3 normal = normalize(vec3(-dx, -dy, safeDepth)); vec3 lightDir = normalize(uLightPos);
+            float diffuse = dot(normal, lightDir) * 0.5 + 0.5;
+            float t = clamp(diffuse + getSurface(p) * 0.04, 0.0, 1.0);
+            t = t * t * (3.0 - 2.0 * t);
+            vec3 color = mix(uColor1, uColor2, smoothstep(0.0, uShadowWidth + 0.15, t));
+            color = mix(color, uColor3, smoothstep(uShadowWidth + 0.05, 0.65, t));
+            color = mix(color, uColor4, smoothstep(0.55, 1.05, t));
+            float grain = fract(sin(dot(uv.xy, vec2(12.9898,78.233))) * 43758.5453); color += (grain - 0.5) * 0.03;
+            gl_FragColor = vec4(color, 1.0);
         }
+    `;
 
-        function submitReview() {
-            const btn = document.getElementById('submitRevBtn'); btn.innerHTML = "Verifying...";
-            setTimeout(() => { alert("Thank you. Your feedback has been sent for verification."); closeFeedback(); btn.innerHTML = "Submit to Vault"; }, 1200);
+    const material = new THREE.ShaderMaterial({
+        vertexShader, fragmentShader,
+        uniforms: {
+            uTime: { value: 0 }, uResolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
+            uColor1: { value: new THREE.Color('#1a0000') }, uColor2: { value: new THREE.Color('#8a0a00') },
+            uColor3: { value: new THREE.Color('#ff4d00') }, uColor4: { value: new THREE.Color('#ffea00') },
+            uDepth: { value: 0.04 }, uLightPos: { value: new THREE.Vector3(0.968, -0.36, 1.0) },
+            uSpeed: { value: 0.1148 }, uNoiseScale: { value: 0.714 }, uWarpAmount: { value: 4.0 },
+            uFoldFrequency: { value: 1.865 }, uAngle: { value: 1.08699 }, uConnections: { value: 0.8715 },
+            uShadowWidth: { value: 0.01 }
         }
+    });
 
-        setTimeout(() => {
-            const toast = document.getElementById('toast'); toast.classList.add('toast-active'); playHoverSound();
-            setTimeout(() => toast.classList.remove('toast-active'), 6000);
-        }, 12000); 
-    </script></body></html>
+    scene.add(new THREE.Mesh(new THREE.PlaneGeometry(2, 2), material));
+
+    function updateShaderColors(c1, c2, c3, c4) {
+        material.uniforms.uColor1.value.set(c1);
+        material.uniforms.uColor2.value.set(c2);
+        material.uniforms.uColor3.value.set(c3);
+        material.uniforms.uColor4.value.set(c4);
+    }
+
+    window.addEventListener('resize', () => {
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        material.uniforms.uResolution.value.set(window.innerWidth, window.innerHeight);
+    });
+
+    const clock = new THREE.Clock();
+    function animate() { requestAnimationFrame(animate); material.uniforms.uTime.value = clock.getElapsedTime(); renderer.render(scene, camera); }
+    animate();
+</script>
+</body>
+</html>
